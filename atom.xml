@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-06T11:35:18.591Z</updated>
+  <updated>2024-03-06T11:37:16.743Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://example.com/2024/03/06/kubernetes%E7%B3%BB%E5%88%97-%E6%9E%B6%E6%9E%84/"/>
     <id>http://example.com/2024/03/06/kubernetes%E7%B3%BB%E5%88%97-%E6%9E%B6%E6%9E%84/</id>
     <published>2024-03-06T11:28:34.000Z</published>
-    <updated>2024-03-06T11:35:18.591Z</updated>
+    <updated>2024-03-06T11:37:16.743Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="了解架构"><a href="#了解架构" class="headerlink" title="了解架构"></a>了解架构</h1><ul><li>kubernetes控制平面<ul><li>etcd分布式持久化存储</li><li>API服务器</li><li>调度器</li><li>控制器管理器</li></ul></li><li>工作节点<ul><li>kubelet</li><li>kube-proxy</li><li>容器时运行时</li></ul></li><li>附加组件<ul><li>仪表板</li><li>Ingress控制器</li><li>Heapster</li><li>容器网络接口插件</li></ul></li></ul><h3 id="组件是如何运行的"><a href="#组件是如何运行的" class="headerlink" title="组件是如何运行的"></a>组件是如何运行的</h3>]]></content>
+    <content type="html"><![CDATA[<h1 id="了解架构"><a href="#了解架构" class="headerlink" title="了解架构"></a>了解架构</h1><ul><li>kubernetes控制平面<ul><li>etcd分布式持久化存储</li><li>API服务器</li><li>调度器</li><li>控制器管理器</li></ul></li><li>工作节点<ul><li>kubelet</li><li>kube-proxy</li><li>容器时运行时</li></ul></li><li>附加组件<ul><li>仪表板</li><li>Ingress控制器</li><li>Heapster</li><li>容器网络接口插件</li></ul></li></ul><h3 id="组件是如何运行的"><a href="#组件是如何运行的" class="headerlink" title="组件是如何运行的"></a>组件是如何运行的</h3><p>控制平面的组件以及proxy可以直接部署在系统上，或者作为pod来运行</p>]]></content>
     
     
       
