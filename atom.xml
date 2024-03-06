@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-06T06:29:21.631Z</updated>
+  <updated>2024-03-06T09:57:41.104Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,19 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="http://example.com/2024/03/06/test/"/>
+    <id>http://example.com/2024/03/06/test/</id>
+    <published>2024-03-06T09:57:41.000Z</published>
+    <updated>2024-03-06T09:57:41.104Z</updated>
+    
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>qiskit安装与使用</title>
