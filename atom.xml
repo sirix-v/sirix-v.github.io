@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-03-06T11:37:16.743Z</updated>
+  <updated>2024-03-15T07:55:45.637Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,48 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Grover算法详解</title>
+    <link href="http://example.com/2024/03/15/Grover%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/"/>
+    <id>http://example.com/2024/03/15/Grover%E7%AE%97%E6%B3%95%E8%AF%A6%E8%A7%A3/</id>
+    <published>2024-03-15T07:47:25.000Z</published>
+    <updated>2024-03-15T07:55:45.637Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id=""><a href="#" class="headerlink" title=""></a></h3>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h3&gt;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>qiskit使用教程</title>
+    <link href="http://example.com/2024/03/07/qiskit%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/"/>
+    <id>http://example.com/2024/03/07/qiskit%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</id>
+    <published>2024-03-07T01:58:41.000Z</published>
+    <updated>2024-03-08T06:05:10.025Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install qiskit</span><br><span class="line">pip install qiskit-ibm-runtime</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h3 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h3&gt;&lt;figure class=&quot;highlight shell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span </summary>
+      
+    
+    
+    
+    
+    <category term="量子计算" scheme="http://example.com/tags/%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97/"/>
+    
+  </entry>
   
   <entry>
     <title>kubernetes系列--架构</title>
