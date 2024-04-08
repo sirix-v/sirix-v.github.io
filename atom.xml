@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  
+  <link href="http://example.com/atom.xml" rel="self"/>
+  
+  <link href="http://example.com/"/>
+  <updated>2024-04-08T09:14:49.976Z</updated>
+  <id>http://example.com/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>kubernetes教程</title>
+    <link href="http://example.com/2024/04/08/kubernetes%E6%95%99%E7%A8%8B/"/>
+    <id>http://example.com/2024/04/08/kubernetes%E6%95%99%E7%A8%8B/</id>
+    <published>2024-04-08T09:09:12.000Z</published>
+    <updated>2024-04-08T09:14:49.976Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h2><h2 id="文档解读"><a href="#文档解读" class="headerlink" title="文档解读"></a>文档解读</h2><p>测试</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;整体架构&quot;&gt;&lt;a href=&quot;#整体架构&quot; class=&quot;headerlink&quot; title=&quot;整体架构&quot;&gt;&lt;/a&gt;整体架构&lt;/h2&gt;&lt;h2 id=&quot;文档解读&quot;&gt;&lt;a href=&quot;#文档解读&quot; class=&quot;headerlink&quot; title=&quot;文档解读&quot;&gt;&lt;/a</summary>
+      
+    
+    
+    
+    
+    <category term="kubernetes" scheme="http://example.com/tags/kubernetes/"/>
+    
+  </entry>
+  
+</feed>
