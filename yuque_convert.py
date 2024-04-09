@@ -65,7 +65,3 @@ if __name__ == "__main__":
         img_list = get_image(md_file)
         img_download(img_list)
         new_md(md_file,"test.md",domain)
-
-
-    
-
