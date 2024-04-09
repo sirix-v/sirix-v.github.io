@@ -208,7 +208,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Apr 09 2024 09:10:28 GMT+0800">2024-04-09 09:10:28</span>
+                <span class="datetime" data-updated="Tue Apr 09 2024 09:12:48 GMT+0800">2024-04-09 09:12:48</span>
             </span>
         
 
@@ -282,7 +282,7 @@
 
 <h4 id="Operator类的属性"><a href="#Operator类的属性" class="headerlink" title="Operator类的属性"></a>Operator类的属性</h4><p>Operator对象存储底层矩阵以及子系统的输入和输出维度。</p>
 <p>data：要访问底层 Numpy 数组，我们可以使用 Operator.data 属性。<br>dims：要返回运算符的总输入和输出维度，我们可以使用 Operator.dim 属性。注意：输出返回的是一个元组（input_dim, output_dim），与底层矩阵的形状相反。</p>
-<h4 id="输入和输出维度"><a href="#输入和输出维度" class="headerlink" title="输入和输出维度"></a>输入和输出维度</h4><p>运算符类还会跟踪子系统维度，这些维度可用于将运算符组合在一起。可以使用 input_dims 和 output_dims 函数访问这些信息。对于一个<img   src="https://cdn.nlark.com/yuque/__latex/5d01f6753072ece742ea154409d7a8c0.svg"  alt="img">的operator，将自动假定输入和输出维度分别为 M 量子比特和 N 量子比特。</p>
+<h4 id="输入和输出维度"><a href="#输入和输出维度" class="headerlink" title="输入和输出维度"></a>输入和输出维度</h4><p>运算符类还会跟踪子系统维度，这些维度可用于将运算符组合在一起。可以使用 input_dims 和 output_dims 函数访问这些信息。对于一个2^m*2^n的operator，将自动假定输入和输出维度分别为 M 量子比特和 N 量子比特。</p>
 <h4 id="将别的类转换为operator"><a href="#将别的类转换为operator" class="headerlink" title="将别的类转换为operator"></a>将别的类转换为operator</h4><p>有三种可以转换为operator的类</p>
 <ul>
 <li>Pauli对象</li>
