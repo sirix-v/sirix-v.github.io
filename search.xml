@@ -86,12 +86,11 @@
 <p>此外，Qiskit还提供了一些模拟器，如QasmSimulator和statevector_simulator，你可以使用这些模拟器来运行QuantumCircuit并获取结果</p>
 <p>在量子力学中，观测量是一个可以在一个量子系统上进行测量的物理量，比如位置、动量、自旋等。在Qiskit中，观测量通常表示为一个算符，这个算符作用在一个量子态上，可以给出一个实数结果。</p>
 <p>SparsePauliOp可以用作观测量，因为它是一个量子算符，可以用来描述一个量子系统的物理性质。当我们对一个量子系统进行测量时，我们实际上是在查看这个算符在特定量子态下的期望值。例如，如果我们有一个量子态</p>
-<p><img   src="https://cdn.nlark.com/yuque/__latex/9a959d50961ff6d077ec648bbb5bb720.svg"  alt="img"></p>
+<p><img   src="https://raw.githubusercontent.com/miller-star/picture/master/XiaojunScreenshot2024-04-09%2014.29.35.png" ></p>
 <p>和一个观测量</p>
-<p><img   src="https://cdn.nlark.com/yuque/__latex/7b1415efd6f3f1605dd2ab4e89761827.svg"  alt="img"></p>
+<p><img   src="https://raw.githubusercontent.com/miller-star/picture/master/XiaojunScreenshot2024-04-09%2014.29.41.png" ></p>
 <p>，那么这个观测量在这个量子态下的期望值可以表示为</p>
-<p><img   src="https://cdn.nlark.com/yuque/__latex/02c7d59d144ceaa8d23ead7cf6d7b9ba.svg"  alt="img"></p>
-<p>。</p>
+<p><img   src="https://raw.githubusercontent.com/miller-star/picture/master/XiaojunScreenshot2024-04-09%2014.29.45.png" ></p>
 <p><a class="link"   href="https://zhuanlan.zhihu.com/p/484552880" >在Qiskit中，我们可以使用~StateFn来创建一个对偶向量，即ket对应的bra<i class="fas fa-external-link-alt"></i></a><a class="link"   href="https://zhuanlan.zhihu.com/p/484552880" >1<i class="fas fa-external-link-alt"></i></a><a class="link"   href="https://zhuanlan.zhihu.com/p/484552880" >。然后，我们可以使用@操作符来计算一个量子态和一个观测量之间的内积，得到观测量的期望值<i class="fas fa-external-link-alt"></i></a><a class="link"   href="https://zhuanlan.zhihu.com/p/484552880" >1<i class="fas fa-external-link-alt"></i></a>。</p>
 <h2 id="创建service与backend"><a href="#创建service与backend" class="headerlink" title="创建service与backend"></a>创建service与backend</h2><p>首先查看后端类型</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Initialize your account</span><br><span class="line">from qiskit_ibm_runtime import QiskitRuntimeService</span><br><span class="line">service = QiskitRuntimeService()</span><br><span class="line">service.backends()</span><br></pre></td></tr></table></figure>
@@ -107,6 +106,14 @@
 ]]></content>
       <tags>
         <tag>量子计算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kubernetes学习</title>
+    <url>/2024/04/09/kubernetes%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="了解架构"><a href="#了解架构" class="headerlink" title="了解架构"></a>了解架构</h2>]]></content>
+      <tags>
+        <tag>kubernetes</tag>
       </tags>
   </entry>
 </search>
