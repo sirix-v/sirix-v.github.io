@@ -1,14 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>kubernetes学习</title>
-    <url>/2024/04/09/kubernetes%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h2 id="了解架构"><a href="#了解架构" class="headerlink" title="了解架构"></a>了解架构</h2>]]></content>
-      <tags>
-        <tag>kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>qiskit使用教程</title>
     <url>/2024/04/09/qiskit%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install qiskit</span><br><span class="line">pip install qiskit-ibm-runtime</span><br></pre></td></tr></table></figure>
@@ -112,6 +104,14 @@
 ]]></content>
       <tags>
         <tag>量子计算</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kubernetes学习</title>
+    <url>/2024/04/09/kubernetes%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="了解架构"><a href="#了解架构" class="headerlink" title="了解架构"></a>了解架构</h2>]]></content>
+      <tags>
+        <tag>kubernetes</tag>
       </tags>
   </entry>
 </search>
