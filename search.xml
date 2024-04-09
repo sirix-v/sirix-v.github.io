@@ -11,8 +11,7 @@
   <entry>
     <title>qiskit使用教程</title>
     <url>/2024/04/09/qiskit%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="python安装"><a href="#python安装" class="headerlink" title="python安装"></a>python安装</h3><p>windows系统参考：<a class="link"   href="https://zhuanlan.zhihu.com/p/636134381" >https://zhuanlan.zhihu.com/p/636134381<i class="fas fa-external-link-alt"></i></a></p>
-<h3 id="安装qiskit"><a href="#安装qiskit" class="headerlink" title="安装qiskit"></a>安装qiskit</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install qiskit</span><br><span class="line">pip install qiskit-ibm-runtime</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">pip install qiskit</span><br><span class="line">pip install qiskit-ibm-runtime</span><br></pre></td></tr></table></figure>
 
 <h2 id="qiskit框架代码编写流程"><a href="#qiskit框架代码编写流程" class="headerlink" title="qiskit框架代码编写流程"></a>qiskit框架代码编写流程</h2><ul>
 <li>构建</li>
