@@ -42,7 +42,9 @@
 
 <h4 id="组合operator"><a href="#组合operator" class="headerlink" title="组合operator"></a>组合operator</h4><h4 id="张量积"><a href="#张量积" class="headerlink" title="张量积"></a>张量积</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">A = Operator(Pauli(<span class="string">&#x27;X&#x27;</span>))</span><br><span class="line">B = Operator(Pauli(<span class="string">&#x27;Z&#x27;</span>))</span><br><span class="line">A.tensor(B)</span><br><span class="line">A.expend(B)</span><br></pre></td></tr></table></figure>
 
-<p>张量积，<img   src="https://cdn.nlark.com/yuque/__latex/ffa6d2f50d5ca82892caeee5880860f2.svg"  alt="img"></p>
+<p>张量积:</p>
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/XiaojunScreenshot2024-04-09%2014.51.16.png"   style="zoom:50%;" >
+
 <h5 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">A = Operator(Pauli(<span class="string">&#x27;X&#x27;</span>))</span><br><span class="line">B = Operator(Pauli(<span class="string">&#x27;Z&#x27;</span>))</span><br><span class="line">A.compose(B, front=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
 <p>矩阵乘法，B.A</p>
@@ -86,11 +88,14 @@
 <p>此外，Qiskit还提供了一些模拟器，如QasmSimulator和statevector_simulator，你可以使用这些模拟器来运行QuantumCircuit并获取结果</p>
 <p>在量子力学中，观测量是一个可以在一个量子系统上进行测量的物理量，比如位置、动量、自旋等。在Qiskit中，观测量通常表示为一个算符，这个算符作用在一个量子态上，可以给出一个实数结果。</p>
 <p>SparsePauliOp可以用作观测量，因为它是一个量子算符，可以用来描述一个量子系统的物理性质。当我们对一个量子系统进行测量时，我们实际上是在查看这个算符在特定量子态下的期望值。例如，如果我们有一个量子态</p>
-<p><img   src="https://raw.githubusercontent.com/miller-star/picture/master/XiaojunScreenshot2024-04-09%2014.29.35.png" ></p>
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/XiaojunScreenshot2024-04-09%2014.29.35.png"   style="zoom:50%;" >
+
 <p>和一个观测量</p>
-<p><img   src="https://raw.githubusercontent.com/miller-star/picture/master/XiaojunScreenshot2024-04-09%2014.29.41.png" ></p>
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/XiaojunScreenshot2024-04-09%2014.29.41.png"   style="zoom:50%;" >
+
 <p>，那么这个观测量在这个量子态下的期望值可以表示为</p>
-<p><img   src="https://raw.githubusercontent.com/miller-star/picture/master/XiaojunScreenshot2024-04-09%2014.29.45.png" ></p>
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/XiaojunScreenshot2024-04-09%2014.29.45.png"   style="zoom:50%;" >
+
 <p><a class="link"   href="https://zhuanlan.zhihu.com/p/484552880" >在Qiskit中，我们可以使用~StateFn来创建一个对偶向量，即ket对应的bra<i class="fas fa-external-link-alt"></i></a><a class="link"   href="https://zhuanlan.zhihu.com/p/484552880" >1<i class="fas fa-external-link-alt"></i></a><a class="link"   href="https://zhuanlan.zhihu.com/p/484552880" >。然后，我们可以使用@操作符来计算一个量子态和一个观测量之间的内积，得到观测量的期望值<i class="fas fa-external-link-alt"></i></a><a class="link"   href="https://zhuanlan.zhihu.com/p/484552880" >1<i class="fas fa-external-link-alt"></i></a>。</p>
 <h2 id="创建service与backend"><a href="#创建service与backend" class="headerlink" title="创建service与backend"></a>创建service与backend</h2><p>首先查看后端类型</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># Initialize your account</span><br><span class="line">from qiskit_ibm_runtime import QiskitRuntimeService</span><br><span class="line">service = QiskitRuntimeService()</span><br><span class="line">service.backends()</span><br></pre></td></tr></table></figure>
