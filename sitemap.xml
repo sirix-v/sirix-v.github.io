@@ -2,9 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/tags/index.html</loc>
+    <loc>http://example.com/2024/04/09/qiskit%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B/</loc>
     
-    <lastmod>2024-04-08</lastmod>
+    <lastmod>2024-04-09</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -19,10 +19,19 @@
     <priority>0.6</priority>
   </url>
   
+  <url>
+    <loc>http://example.com/tags/index.html</loc>
+    
+    <lastmod>2024-04-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
 
   <url>
     <loc>http://example.com/</loc>
-    <lastmod>2024-04-08</lastmod>
+    <lastmod>2024-04-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -30,21 +39,21 @@
   
   <url>
     <loc>http://example.com/tags/kubernetes%E7%B3%BB%E5%88%97/</loc>
-    <lastmod>2024-04-08</lastmod>
+    <lastmod>2024-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97/</loc>
-    <lastmod>2024-04-08</lastmod>
+    <lastmod>2024-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>http://example.com/tags/kubernetes/</loc>
-    <lastmod>2024-04-08</lastmod>
+    <lastmod>2024-04-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
