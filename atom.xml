@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-04-09T03:12:19.080Z</updated>
+  <updated>2024-04-11T07:18:13.922Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,14 +21,18 @@
     <link href="http://example.com/2024/04/09/kubernetes%E5%AD%A6%E4%B9%A0/"/>
     <id>http://example.com/2024/04/09/kubernetes%E5%AD%A6%E4%B9%A0/</id>
     <published>2024-04-09T02:44:09.000Z</published>
-    <updated>2024-04-09T03:12:19.080Z</updated>
+    <updated>2024-04-11T07:18:13.922Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="了解架构"><a href="#了解架构" class="headerlink" title="了解架构"></a>了解架构</h2>]]></content>
+    <content type="html"><![CDATA[<h2 id="了解架构"><a href="#了解架构" class="headerlink" title="了解架构"></a>了解架构</h2><ul><li><p>控制平面</p><ul><li>etcd分布式持久化存储</li><li>API Server</li><li>controller manager</li><li>调度器</li></ul></li><li><p>工作节点</p><ul><li>kubelet</li><li>kubelet服务代理</li><li>容器运行时（如docker、rkt）</li></ul></li><li><p>附加组件</p><ul><li>kubernetes DNS服务器</li><li>仪表板</li><li>Ingress控制器</li><li>Heapster（容器集群监控）</li><li>容器网络接口插件</li></ul></li></ul><img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240410102847.png"   style="zoom:50%;" ><p>可以通过</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get componentstatuses</span><br></pre></td></tr></table></figure><p>获取各个控制平面组件的健康状态</p><h2 id="API服务器的作用"><a href="#API服务器的作用" class="headerlink" title="API服务器的作用"></a>API服务器的作用</h2><h3 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h3><img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240411145447.png"   style="zoom:50%;" ><p>认证插件：首先， API 服务器需要认证发送请求的客户端。 这是通过配置在 API 服务器上 的一个或多个认证插件来实现的。 API 服务器会轮流调用这些插件， 直到有一个能 确认是谁发送了该请求。 这是通过检查HTTP请求实现的。</p><p>授权插件：除了认证插件， API 服务器还可以配置使用一个或多个授权插件。 它们的作用 是决定认证的用户是否可以对请求资源执行请求操作。 例如， 当创建 pod 时， API 服务器会轮询所有的授权插件， 来确认该用户是否可以在请求命名空间创建 pod。 一旦插件确认了用户可以执行该操作， API 服务器会继续下一步操作。</p><p>准入插件：如果请求尝试创建、 修改或者删除一个资源，请求需要经过准入控制插件的验证。（注意：如果仅是读取资源，不会经过准入插件）</p><p>请求通过了所有的准入控制插件后， API 服务器会验证存储到 etcd 的对象， 然 后返回一个响应给客户端。</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;了解架构&quot;&gt;&lt;a href=&quot;#了解架构&quot; class=&quot;headerlink&quot; title=&quot;了解架构&quot;&gt;&lt;/a&gt;了解架构&lt;/h2&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;了解架构&quot;&gt;&lt;a href=&quot;#了解架构&quot; class=&quot;headerlink&quot; title=&quot;了解架构&quot;&gt;&lt;/a&gt;了解架构&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;控制平面&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;etcd分布式持久化存储&lt;/li&gt;
+&lt;li&gt;API Server&lt;/l</summary>
       
     
     
