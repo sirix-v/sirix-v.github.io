@@ -1,5 +1,9 @@
+http://example.com/2024/07/09/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5-md/
 http://example.com/2024/04/09/kubernetes%E5%AD%A6%E4%B9%A0/
+http://example.com/2024/06/14/beego%E5%AE%9E%E8%B7%B5-md/
 http://example.com/tags/index.html
 http://example.com/
 http://example.com/tags/%E9%87%8F%E5%AD%90%E8%AE%A1%E7%AE%97/
 http://example.com/tags/kubernetes/
+http://example.com/tags/web-beego/
+http://example.com/tags/Gin-Web/

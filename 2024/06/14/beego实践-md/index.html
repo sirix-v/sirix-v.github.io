@@ -9,7 +9,7 @@
     
     <title>
         
-            kubernetes学习 |
+            beego简单介绍.md |
         
         Sirius的博客
     </title>
@@ -183,7 +183,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        kubernetes学习
+                        beego简单介绍.md
                     </div>
                 
 
@@ -211,12 +211,12 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-04-09 10:44:09</span>
+                <span class="datetime">2024-06-14 09:58:48</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Thu Jul 11 2024 19:41:25 GMT+0800">2024-07-11 19:41:25</span>
+                <span class="datetime" data-updated="Thu Jul 11 2024 19:41:11 GMT+0800">2024-07-11 19:41:11</span>
             </span>
         
 
@@ -226,7 +226,7 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/kubernetes/">kubernetes</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/web-beego/">web beego</a></li>
                         
                     
                 </ul>
@@ -236,7 +236,7 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>517 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>186 字</span>
             </span>
         
         
@@ -262,47 +262,26 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <h2 id="了解架构"><a href="#了解架构" class="headerlink" title="了解架构"></a>了解架构</h2><ul>
-<li><p>控制平面</p>
-<ul>
-<li>etcd分布式持久化存储</li>
-<li>API Server</li>
-<li>controller manager</li>
-<li>调度器</li>
-</ul>
-</li>
-<li><p>工作节点</p>
-<ul>
-<li>kubelet</li>
-<li>kubelet服务代理</li>
-<li>容器运行时（如docker、rkt）</li>
-</ul>
-</li>
-<li><p>附加组件</p>
-<ul>
-<li>kubernetes DNS服务器</li>
-<li>仪表板</li>
-<li>Ingress控制器</li>
-<li>Heapster（容器集群监控）</li>
-<li>CNI插件</li>
-</ul>
-</li>
-</ul>
-<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240410102847.png"   style="zoom:50%;" >
+                    <h2 id="简单安装与入门"><a href="#简单安装与入门" class="headerlink" title="简单安装与入门"></a>简单安装与入门</h2><h3 id="安装命令行工具bee"><a href="#安装命令行工具bee" class="headerlink" title="安装命令行工具bee"></a>安装命令行工具bee</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go install github.com/beego/bee/v2@latest</span><br></pre></td></tr></table></figure>
 
-<p>可以通过</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kubectl get componentstatuses</span><br></pre></td></tr></table></figure>
+<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bee new beego-Admin</span><br></pre></td></tr></table></figure>
 
-<p>获取各个控制平面组件的健康状态</p>
-<h2 id="API服务器的作用"><a href="#API服务器的作用" class="headerlink" title="API服务器的作用"></a>API服务器的作用</h2><h3 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h3><img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240411145447.png"   style="zoom:50%;">
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100255.png"   style="zoom:50%;" >
 
-<p>认证插件：首先， API 服务器需要认证发送请求的客户端。 这是通过配置在 API 服务器上 的一个或多个认证插件来实现的。 API 服务器会轮流调用这些插件， 直到有一个能 确认是谁发送了该请求。 这是通过检查HTTP请求实现的。</p>
-<p>授权插件：除了认证插件， API 服务器还可以配置使用一个或多个授权插件。 它们的作用 是决定认证的用户是否可以对请求资源执行请求操作。 例如， 当创建 pod 时， API 服务器会轮询所有的授权插件， 来确认该用户是否可以在请求命名空间创建 pod。 一旦插件确认了用户可以执行该操作， API 服务器会继续下一步操作。</p>
-<p>准入插件：如果请求尝试创建、 修改或者删除一个资源，请求需要经过准入控制插件的验证。（注意：如果仅是读取资源，不会经过准入插件）</p>
-<p>请求通过了所有的准入控制插件后， API 服务器会验证存储到 etcd 的对象， 然 后返回一个响应给客户端。</p>
-<h3 id="通知客户端资源变更"><a href="#通知客户端资源变更" class="headerlink" title="通知客户端资源变更"></a>通知客户端资源变更</h3><p>API服务器的作用是启动控制器以及其他组件来监控已经部署资源的变更。</p>
-<h2 id="调度器"><a href="#调度器" class="headerlink" title="调度器"></a>调度器</h2><h2 id="控制器管理器中运行的控制器"><a href="#控制器管理器中运行的控制器" class="headerlink" title="控制器管理器中运行的控制器"></a>控制器管理器中运行的控制器</h2><p>由于使用监听机制并不保证控制器不会漏掉时间， 所以 仍然需要定期执行重列举操作来确保不会丢掉什么。</p>
-<h2 id="kubelet"><a href="#kubelet" class="headerlink" title="kubelet"></a>kubelet</h2><p>未完待续。。。。</p>
+<p>目录结构如上图所示，是一个典型的MVC架构，M（models 目录）、V（views 目录）和 C（controllers 目录）的结构， <code>main.go</code> 是入口文件。</p>
+<h3 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bee run</span><br></pre></td></tr></table></figure>
+
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100629.png"   style="zoom:50%;" >
+
+<p>这样，一个简单的demo就运行起来了</p>
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100843.png"   style="zoom:50%;" >
+
+<h2 id="框架解析"><a href="#框架解析" class="headerlink" title="框架解析"></a>框架解析</h2><h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><img     src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/architecture.png"   style="zoom:75%;" >
+
+<p>beego 是基于八大独立的模块构建的，是一个高度解耦的框架。当初设计 beego 的时候就是考虑功能模块化，用户即使不使用 beego 的 HTTP 逻辑，也依旧可以使用这些独立模块。</p>
+<h3 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h3><p><img   src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/init.png" ></p>
+<h2 id="开发实践"><a href="#开发实践" class="headerlink" title="开发实践"></a>开发实践</h2><p>beego官方给出了几个demo项目</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/beego/samples" >https://github.com/beego/samples<i class="fas fa-external-link-alt"></i></a></p>
 
                 </div>
                 
@@ -313,7 +292,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/kubernetes/">kubernetes</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/web-beego/">web beego</a>
                                     </li>
                                 
                             </ul>
@@ -332,19 +311,35 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2024/06/14/beego%E5%AE%9E%E8%B7%B5-md/"
-                                   title="beego简单介绍.md"
+                                   href="/2024/07/09/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5-md/"
+                                   title="golang-gin框架实践(一)|请求与Context.md"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">beego简单介绍.md</span>
+                                        <span class="post-nav-title-item text-ellipsis">golang-gin框架实践(一)|请求与Context.md</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
                             </div>
                         
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/04/09/kubernetes%E5%AD%A6%E4%B9%A0/"
+                                   title="kubernetes学习"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">kubernetes学习</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
                         
                     </div>
                 
@@ -447,7 +442,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">了解架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">API服务器的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C"><span class="nav-number">2.1.</span> <span class="nav-text">校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%9F%A5%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B5%84%E6%BA%90%E5%8F%98%E6%9B%B4"><span class="nav-number">2.2.</span> <span class="nav-text">通知客户端资源变更</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">调度器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%AD%E8%BF%90%E8%A1%8C%E7%9A%84%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">控制器管理器中运行的控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kubelet"><span class="nav-number">5.</span> <span class="nav-text">kubelet</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">简单安装与入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7bee"><span class="nav-number">1.1.</span> <span class="nav-text">安装命令行工具bee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.2.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.3.</span> <span class="nav-text">运行项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">框架解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">路由设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">开发实践</span></a></li></ol>
     </div>
 </div>
 
@@ -629,7 +624,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E6%9E%B6%E6%9E%84"><span class="nav-number">1.</span> <span class="nav-text">了解架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#API%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">API服务器的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%A1%E9%AA%8C"><span class="nav-number">2.1.</span> <span class="nav-text">校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E7%9F%A5%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%B5%84%E6%BA%90%E5%8F%98%E6%9B%B4"><span class="nav-number">2.2.</span> <span class="nav-text">通知客户端资源变更</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E5%BA%A6%E5%99%A8"><span class="nav-number">3.</span> <span class="nav-text">调度器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E5%99%A8%E7%AE%A1%E7%90%86%E5%99%A8%E4%B8%AD%E8%BF%90%E8%A1%8C%E7%9A%84%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="nav-number">4.</span> <span class="nav-text">控制器管理器中运行的控制器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#kubelet"><span class="nav-number">5.</span> <span class="nav-text">kubelet</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">简单安装与入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7bee"><span class="nav-number">1.1.</span> <span class="nav-text">安装命令行工具bee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.2.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.3.</span> <span class="nav-text">运行项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">框架解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">路由设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">开发实践</span></a></li></ol>
     </div>
 </div>
 

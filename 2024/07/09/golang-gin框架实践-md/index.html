@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Sirius">
+    
+    <title>
+        
+            golang-gin框架实践(一)|请求与Context.md |
+        
+        Sirius的博客
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.svg">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+        
+            
+                
+<link rel="stylesheet" href="/css/custom.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"example.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"Sirius的博客","author":"Sirius","avatar":"/images/touxiang.jpg","logo":"/images/logo.svg","favicon":"/images/logo.svg"},"menu":{"home":"/","archives":"/archives","tags":"/tags"},"first_screen":{"enable":true,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Hope is a good thing","hitokoto":false},"social_contact":{"enable":false,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":false,"hide_header":true},"home":{"announcement":null,"category":false,"tag":false,"post_datetime":"updated"},"post":{"author_badge":{"enable":true,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":false,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":"aF2b1QW8tfdGNRnl079taPGd-gzGzoHsz","appkey":"qOPglgXp13rU82B9Vm5wyDE2","server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":false},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2020,"word_count":false,"icp":{"enable":false,"record_code":null,"url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":true,"css":["/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.1"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.svg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Sirius的博客
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        golang-gin框架实践(一)|请求与Context.md
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/touxiang.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Sirius</span>
+                                
+                                    <span class="author-badge">Lv1</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-07-09 19:36:47</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Thu Jul 11 2024 20:29:27 GMT+0800">2024-07-11 20:29:27</span>
+            </span>
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Gin-Web/">Gin Web</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.9k 字</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>16 分钟</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <p>gin是一个简洁高效的web框架，自然而然就肯定会有与请求信息相关的处理逻辑。本文从这个角度来看下gin框架是怎么做的。</p>
+<p>目录如下：</p>
+<ul>
+<li>RestAPI</li>
+<li>Gin中处理请求的接口</li>
+</ul>
+<h2 id="Restful-API"><a href="#Restful-API" class="headerlink" title="Restful API"></a>Restful API</h2><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://restfulapi.cn/" >https://restfulapi.cn/<i class="fas fa-external-link-alt"></i></a>  ！！！！必看</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://aws.amazon.com/cn/what-is/restful-api/" >https://aws.amazon.com/cn/what-is/restful-api/<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2360813" >https://cloud.tencent.com/developer/article/2360813<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>表征状态传输 (REST) 是一种软件架构，决定了 API 的工作条件。REST 最初作为管理复杂网络（例如互联网）上的通信的指南而建立。您可以使用基于 REST 的架构为高性能和可靠的大规模通信提供支持。您可以轻松应用和修改此种架构，为任何 API 系统带来可见性和跨平台可能性。</p>
+<h3 id="Restful-API风格"><a href="#Restful-API风格" class="headerlink" title="Restful API风格"></a>Restful API风格</h3><p>传统url接口与Restful风格接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">客户端请求						传统url接口				REST ful风格接口</span><br><span class="line">查询所有用户					/user/findAll				GET /users</span><br><span class="line">查询编号为1的用户		 	/user/findById?id=1				 GET /user/1         </span><br><span class="line">新增一个用户				   /user/save				 POST /user</span><br><span class="line">修改编号为1的用户		    /user/update				PUT /user/1</span><br><span class="line">删除编号为1的用户		    /user/delete?id=1				DELETE /user/1</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="left">HTTP Method</th>
+<th align="left">资源操作</th>
+<th align="left">CRUD操作</th>
+<th align="left">安全性</th>
+<th align="left">幂等性</th>
+<th align="left">解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">GET</td>
+<td align="left">SELECT</td>
+<td align="left">SELECT</td>
+<td align="left">安全</td>
+<td align="left">幂等</td>
+<td align="left">读操作安全，查询一次多次结果一致</td>
+</tr>
+<tr>
+<td align="left">POST</td>
+<td align="left">INSERT</td>
+<td align="left">CREATE</td>
+<td align="left">非安全</td>
+<td align="left">非幂等</td>
+<td align="left">写操作非安全，每多插入一次都会出现新结果</td>
+</tr>
+<tr>
+<td align="left">PUT</td>
+<td align="left">UPDATE</td>
+<td align="left">UPDATE</td>
+<td align="left">非安全</td>
+<td align="left">幂等</td>
+<td align="left">写操作非安全，一次和多次更新结果一致</td>
+</tr>
+<tr>
+<td align="left">DELETE</td>
+<td align="left">DELETE</td>
+<td align="left">DELETE</td>
+<td align="left">非安全</td>
+<td align="left">幂等</td>
+<td align="left">写操作非安全，一次和多次删除结果一致</td>
+</tr>
+</tbody></table>
+<p>Restful API设计遵循以下几个规范：</p>
+<ul>
+<li>使用HTTP Method动词来表达操作</li>
+<li>使用名词来表示资源</li>
+<li>使用URL来定位资源</li>
+<li>使用查询参数来过滤和分页</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">获取前10个用户：		GET /users?limit=10</span><br><span class="line">获取第二页的用户：		GET /users?page=2&amp;limit=10</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>使用HTTP状态码来表示请求结果</p>
+</li>
+<li><p>使用json或xml来表示数据</p>
+</li>
+<li><p>使用版本号来管理API</p>
+</li>
+<li><p>提供清晰的错误信息</p>
+</li>
+<li><p>使用标准的HTTP头部</p>
+<p>使用HTTP头部中的<strong>Accept</strong>和<strong>Content-Type</strong>字段进行内容协商，以确定客户端期望的表示形式和服务器返回的表示形式。</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">接受JSON格式的响应：Accept: application/json</span><br><span class="line">发送JSON格式的请求体：Content-Type: application/json</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Gin中处理请求的接口"><a href="#Gin中处理请求的接口" class="headerlink" title="Gin中处理请求的接口"></a>Gin中处理请求的接口</h2><p>主要通过context结构体中的相关方法来处理请求</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Context is the most important part of gin. It allows us to pass variables between middleware,</span></span><br><span class="line"><span class="comment">// manage the flow, validate the JSON of a request and render a JSON response for example.</span></span><br><span class="line"><span class="keyword">type</span> Context <span class="keyword">struct</span> &#123;</span><br><span class="line">	writermem responseWriter</span><br><span class="line">	Request   *http.Request</span><br><span class="line">	Writer    ResponseWriter</span><br><span class="line"></span><br><span class="line">	Params   Params</span><br><span class="line">	handlers HandlersChain</span><br><span class="line">	index    <span class="type">int8</span></span><br><span class="line"></span><br><span class="line">	engine *Engine</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Keys is a key/value pair exclusively for the context of each request.</span></span><br><span class="line">	Keys <span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Errors is a list of errors attached to all the handlers/middlewares who used this context.</span></span><br><span class="line">	Errors errorMsgs</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Accepted defines a list of manually accepted formats for content negotiation.</span></span><br><span class="line">	Accepted []<span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>context类型的全部方法如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/************************************/</span></span><br><span class="line"><span class="comment">/************ INPUT DATA ************/</span></span><br><span class="line"><span class="comment">/************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Param returns the value of the URL param.</span></span><br><span class="line"><span class="comment">// It is a shortcut for c.Params.ByName(key)</span></span><br><span class="line"><span class="comment">//     router.GET(&quot;/user/:id&quot;, func(c *gin.Context) &#123;</span></span><br><span class="line"><span class="comment">//         // a GET request to /user/john</span></span><br><span class="line"><span class="comment">//         id := c.Param(&quot;id&quot;) // id == &quot;john&quot;</span></span><br><span class="line"><span class="comment">//     &#125;)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Param(key <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.Params.ByName(key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Query returns the keyed url query value if it exists,</span></span><br><span class="line"><span class="comment">// otherwise it returns an empty string `(&quot;&quot;)`.</span></span><br><span class="line"><span class="comment">// It is shortcut for `c.Request.URL.Query().Get(key)`</span></span><br><span class="line"><span class="comment">//     GET /path?id=1234&amp;name=Manu&amp;value=</span></span><br><span class="line"><span class="comment">// 	   c.Query(&quot;id&quot;) == &quot;1234&quot;</span></span><br><span class="line"><span class="comment">// 	   c.Query(&quot;name&quot;) == &quot;Manu&quot;</span></span><br><span class="line"><span class="comment">// 	   c.Query(&quot;value&quot;) == &quot;&quot;</span></span><br><span class="line"><span class="comment">// 	   c.Query(&quot;wtf&quot;) == &quot;&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Query(key <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	value, _ := c.GetQuery(key)</span><br><span class="line">	<span class="keyword">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DefaultQuery returns the keyed url query value if it exists,</span></span><br><span class="line"><span class="comment">// otherwise it returns the specified defaultValue string.</span></span><br><span class="line"><span class="comment">// See: Query() and GetQuery() for further information.</span></span><br><span class="line"><span class="comment">//     GET /?name=Manu&amp;lastname=</span></span><br><span class="line"><span class="comment">//     c.DefaultQuery(&quot;name&quot;, &quot;unknown&quot;) == &quot;Manu&quot;</span></span><br><span class="line"><span class="comment">//     c.DefaultQuery(&quot;id&quot;, &quot;none&quot;) == &quot;none&quot;</span></span><br><span class="line"><span class="comment">//     c.DefaultQuery(&quot;lastname&quot;, &quot;none&quot;) == &quot;&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> DefaultQuery(key, defaultValue <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> value, ok := c.GetQuery(key); ok &#123;</span><br><span class="line">		<span class="keyword">return</span> value</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> defaultValue</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetQuery is like Query(), it returns the keyed url query value</span></span><br><span class="line"><span class="comment">// if it exists `(value, true)` (even when the value is an empty string),</span></span><br><span class="line"><span class="comment">// otherwise it returns `(&quot;&quot;, false)`.</span></span><br><span class="line"><span class="comment">// It is shortcut for `c.Request.URL.Query().Get(key)`</span></span><br><span class="line"><span class="comment">//     GET /?name=Manu&amp;lastname=</span></span><br><span class="line"><span class="comment">//     (&quot;Manu&quot;, true) == c.GetQuery(&quot;name&quot;)</span></span><br><span class="line"><span class="comment">//     (&quot;&quot;, false) == c.GetQuery(&quot;id&quot;)</span></span><br><span class="line"><span class="comment">//     (&quot;&quot;, true) == c.GetQuery(&quot;lastname&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetQuery(key <span class="type">string</span>) (<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> values, ok := c.GetQueryArray(key); ok &#123;</span><br><span class="line">		<span class="keyword">return</span> values[<span class="number">0</span>], ok</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;&quot;</span>, <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// QueryArray returns a slice of strings for a given query key.</span></span><br><span class="line"><span class="comment">// The length of the slice depends on the number of params with the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> QueryArray(key <span class="type">string</span>) []<span class="type">string</span> &#123;</span><br><span class="line">	values, _ := c.GetQueryArray(key)</span><br><span class="line">	<span class="keyword">return</span> values</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetQueryArray returns a slice of strings for a given query key, plus</span></span><br><span class="line"><span class="comment">// a boolean value whether at least one value exists for the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetQueryArray(key <span class="type">string</span>) ([]<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> values, ok := c.Request.URL.Query()[key]; ok &amp;&amp; <span class="built_in">len</span>(values) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> values, <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> []<span class="type">string</span>&#123;&#125;, <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// QueryMap returns a map for a given query key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> QueryMap(key <span class="type">string</span>) <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span> &#123;</span><br><span class="line">	dicts, _ := c.GetQueryMap(key)</span><br><span class="line">	<span class="keyword">return</span> dicts</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetQueryMap returns a map for a given query key, plus a boolean value</span></span><br><span class="line"><span class="comment">// whether at least one value exists for the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetQueryMap(key <span class="type">string</span>) (<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> c.get(c.Request.URL.Query(), key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// PostForm returns the specified key from a POST urlencoded form or multipart form</span></span><br><span class="line"><span class="comment">// when it exists, otherwise it returns an empty string `(&quot;&quot;)`.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> PostForm(key <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	value, _ := c.GetPostForm(key)</span><br><span class="line">	<span class="keyword">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DefaultPostForm returns the specified key from a POST urlencoded form or multipart form</span></span><br><span class="line"><span class="comment">// when it exists, otherwise it returns the specified defaultValue string.</span></span><br><span class="line"><span class="comment">// See: PostForm() and GetPostForm() for further information.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> DefaultPostForm(key, defaultValue <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> value, ok := c.GetPostForm(key); ok &#123;</span><br><span class="line">		<span class="keyword">return</span> value</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> defaultValue</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetPostForm is like PostForm(key). It returns the specified key from a POST urlencoded</span></span><br><span class="line"><span class="comment">// form or multipart form when it exists `(value, true)` (even when the value is an empty string),</span></span><br><span class="line"><span class="comment">// otherwise it returns (&quot;&quot;, false).</span></span><br><span class="line"><span class="comment">// For example, during a PATCH request to update the user&#x27;s email:</span></span><br><span class="line"><span class="comment">//     email=mail@example.com  --&gt;  (&quot;mail@example.com&quot;, true) := GetPostForm(&quot;email&quot;) // set email to &quot;mail@example.com&quot;</span></span><br><span class="line"><span class="comment">// 	   email=                  --&gt;  (&quot;&quot;, true) := GetPostForm(&quot;email&quot;) // set email to &quot;&quot;</span></span><br><span class="line"><span class="comment">//                             --&gt;  (&quot;&quot;, false) := GetPostForm(&quot;email&quot;) // do nothing with email</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetPostForm(key <span class="type">string</span>) (<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> values, ok := c.GetPostFormArray(key); ok &#123;</span><br><span class="line">		<span class="keyword">return</span> values[<span class="number">0</span>], ok</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;&quot;</span>, <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// PostFormArray returns a slice of strings for a given form key.</span></span><br><span class="line"><span class="comment">// The length of the slice depends on the number of params with the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> PostFormArray(key <span class="type">string</span>) []<span class="type">string</span> &#123;</span><br><span class="line">	values, _ := c.GetPostFormArray(key)</span><br><span class="line">	<span class="keyword">return</span> values</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetPostFormArray returns a slice of strings for a given form key, plus</span></span><br><span class="line"><span class="comment">// a boolean value whether at least one value exists for the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetPostFormArray(key <span class="type">string</span>) ([]<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	req := c.Request</span><br><span class="line">	<span class="keyword">if</span> err := req.ParseMultipartForm(c.engine.MaxMultipartMemory); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err != http.ErrNotMultipart &#123;</span><br><span class="line">			debugPrint(<span class="string">&quot;error on parse multipart form array: %v&quot;</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> values := req.PostForm[key]; <span class="built_in">len</span>(values) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> values, <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> []<span class="type">string</span>&#123;&#125;, <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// PostFormMap returns a map for a given form key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> PostFormMap(key <span class="type">string</span>) <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span> &#123;</span><br><span class="line">	dicts, _ := c.GetPostFormMap(key)</span><br><span class="line">	<span class="keyword">return</span> dicts</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetPostFormMap returns a map for a given form key, plus a boolean value</span></span><br><span class="line"><span class="comment">// whether at least one value exists for the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetPostFormMap(key <span class="type">string</span>) (<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	req := c.Request</span><br><span class="line">	<span class="keyword">if</span> err := req.ParseMultipartForm(c.engine.MaxMultipartMemory); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err != http.ErrNotMultipart &#123;</span><br><span class="line">			debugPrint(<span class="string">&quot;error on parse multipart form map: %v&quot;</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> c.get(req.PostForm, key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get is an internal method and returns a map which satisfy conditions.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> get(m <span class="keyword">map</span>[<span class="type">string</span>][]<span class="type">string</span>, key <span class="type">string</span>) (<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	dicts := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>)</span><br><span class="line">	exist := <span class="literal">false</span></span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> m &#123;</span><br><span class="line">		<span class="keyword">if</span> i := strings.IndexByte(k, <span class="string">&#x27;[&#x27;</span>); i &gt;= <span class="number">1</span> &amp;&amp; k[<span class="number">0</span>:i] == key &#123;</span><br><span class="line">			<span class="keyword">if</span> j := strings.IndexByte(k[i+<span class="number">1</span>:], <span class="string">&#x27;]&#x27;</span>); j &gt;= <span class="number">1</span> &#123;</span><br><span class="line">				exist = <span class="literal">true</span></span><br><span class="line">				dicts[k[i+<span class="number">1</span>:][:j]] = v[<span class="number">0</span>]</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dicts, exist</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// FormFile returns the first file for the provided form key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> FormFile(name <span class="type">string</span>) (*multipart.FileHeader, <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> c.Request.MultipartForm == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err := c.Request.ParseMultipartForm(c.engine.MaxMultipartMemory); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	_, fh, err := c.Request.FormFile(name)</span><br><span class="line">	<span class="keyword">return</span> fh, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MultipartForm is the parsed multipart form, including file uploads.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> MultipartForm() (*multipart.Form, <span class="type">error</span>) &#123;</span><br><span class="line">	err := c.Request.ParseMultipartForm(c.engine.MaxMultipartMemory)</span><br><span class="line">	<span class="keyword">return</span> c.Request.MultipartForm, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// SaveUploadedFile uploads the form file to specific dst.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> SaveUploadedFile(file *multipart.FileHeader, dst <span class="type">string</span>) <span class="type">error</span> &#123;</span><br><span class="line">	src, err := file.Open()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> src.Close()</span><br><span class="line"></span><br><span class="line">	out, err := os.Create(dst)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> out.Close()</span><br><span class="line"></span><br><span class="line">	_, err = io.Copy(out, src)</span><br><span class="line">	<span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bind checks the Content-Type to select a binding engine automatically,</span></span><br><span class="line"><span class="comment">// Depending the &quot;Content-Type&quot; header different bindings are used:</span></span><br><span class="line"><span class="comment">//     &quot;application/json&quot; --&gt; JSON binding</span></span><br><span class="line"><span class="comment">//     &quot;application/xml&quot;  --&gt; XML binding</span></span><br><span class="line"><span class="comment">// otherwise --&gt; returns an error.</span></span><br><span class="line"><span class="comment">// It parses the request&#x27;s body as JSON if Content-Type == &quot;application/json&quot; using JSON or XML as a JSON input.</span></span><br><span class="line"><span class="comment">// It decodes the json payload into the struct specified as a pointer.</span></span><br><span class="line"><span class="comment">// It writes a 400 error and sets Content-Type header &quot;text/plain&quot; in the response if input is not valid.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Bind(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	b := binding.Default(c.Request.Method, c.ContentType())</span><br><span class="line">	<span class="keyword">return</span> c.MustBindWith(obj, b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BindJSON is a shortcut for c.MustBindWith(obj, binding.JSON).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> BindJSON(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.MustBindWith(obj, binding.JSON)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BindXML is a shortcut for c.MustBindWith(obj, binding.BindXML).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> BindXML(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.MustBindWith(obj, binding.XML)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BindQuery is a shortcut for c.MustBindWith(obj, binding.Query).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> BindQuery(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.MustBindWith(obj, binding.Query)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BindYAML is a shortcut for c.MustBindWith(obj, binding.YAML).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> BindYAML(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.MustBindWith(obj, binding.YAML)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BindUri binds the passed struct pointer using binding.Uri.</span></span><br><span class="line"><span class="comment">// It will abort the request with HTTP 400 if any error occurs.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> BindUri(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err := c.ShouldBindUri(obj); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) <span class="comment">// nolint: errcheck</span></span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MustBindWith binds the passed struct pointer using the specified binding engine.</span></span><br><span class="line"><span class="comment">// It will abort the request with HTTP 400 if any error occurs.</span></span><br><span class="line"><span class="comment">// See the binding package.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> MustBindWith(obj <span class="keyword">interface</span>&#123;&#125;, b binding.Binding) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err := c.ShouldBindWith(obj, b); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) <span class="comment">// nolint: errcheck</span></span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBind checks the Content-Type to select a binding engine automatically,</span></span><br><span class="line"><span class="comment">// Depending the &quot;Content-Type&quot; header different bindings are used:</span></span><br><span class="line"><span class="comment">//     &quot;application/json&quot; --&gt; JSON binding</span></span><br><span class="line"><span class="comment">//     &quot;application/xml&quot;  --&gt; XML binding</span></span><br><span class="line"><span class="comment">// otherwise --&gt; returns an error</span></span><br><span class="line"><span class="comment">// It parses the request&#x27;s body as JSON if Content-Type == &quot;application/json&quot; using JSON or XML as a JSON input.</span></span><br><span class="line"><span class="comment">// It decodes the json payload into the struct specified as a pointer.</span></span><br><span class="line"><span class="comment">// Like c.Bind() but this method does not set the response status code to 400 and abort if the json is not valid.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBind(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	b := binding.Default(c.Request.Method, c.ContentType())</span><br><span class="line">	<span class="keyword">return</span> c.ShouldBindWith(obj, b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindJSON is a shortcut for c.ShouldBindWith(obj, binding.JSON).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindJSON(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.ShouldBindWith(obj, binding.JSON)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindXML is a shortcut for c.ShouldBindWith(obj, binding.XML).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindXML(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.ShouldBindWith(obj, binding.XML)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindQuery is a shortcut for c.ShouldBindWith(obj, binding.Query).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindQuery(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.ShouldBindWith(obj, binding.Query)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindYAML is a shortcut for c.ShouldBindWith(obj, binding.YAML).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindYAML(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.ShouldBindWith(obj, binding.YAML)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindUri binds the passed struct pointer using the specified binding engine.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindUri(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>][]<span class="type">string</span>)</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> c.Params &#123;</span><br><span class="line">		m[v.Key] = []<span class="type">string</span>&#123;v.Value&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> binding.Uri.BindUri(m, obj)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindWith binds the passed struct pointer using the specified binding engine.</span></span><br><span class="line"><span class="comment">// See the binding package.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindWith(obj <span class="keyword">interface</span>&#123;&#125;, b binding.Binding) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> b.Bind(c.Request, obj)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindBodyWith is similar with ShouldBindWith, but it stores the request</span></span><br><span class="line"><span class="comment">// body into the context, and reuse when it is called again.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// <span class="doctag">NOTE:</span> This method reads the body before binding. So you should use</span></span><br><span class="line"><span class="comment">// ShouldBindWith for better performance if you need to call only once.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindBodyWith(obj <span class="keyword">interface</span>&#123;&#125;, bb binding.BindingBody) (err <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> body []<span class="type">byte</span></span><br><span class="line">	<span class="keyword">if</span> cb, ok := c.Get(BodyBytesKey); ok &#123;</span><br><span class="line">		<span class="keyword">if</span> cbb, ok := cb.([]<span class="type">byte</span>); ok &#123;</span><br><span class="line">			body = cbb</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> body == <span class="literal">nil</span> &#123;</span><br><span class="line">		body, err = ioutil.ReadAll(c.Request.Body)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line">		c.Set(BodyBytesKey, body)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> bb.BindBody(body, obj)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ClientIP implements a best effort algorithm to return the real client IP, it parses</span></span><br><span class="line"><span class="comment">// X-Real-IP and X-Forwarded-For in order to work properly with reverse-proxies such us: nginx or haproxy.</span></span><br><span class="line"><span class="comment">// Use X-Forwarded-For before X-Real-Ip as nginx uses X-Real-Ip with the proxy&#x27;s IP.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ClientIP() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> c.engine.ForwardedByClientIP &#123;</span><br><span class="line">		clientIP := c.requestHeader(<span class="string">&quot;X-Forwarded-For&quot;</span>)</span><br><span class="line">		clientIP = strings.TrimSpace(strings.Split(clientIP, <span class="string">&quot;,&quot;</span>)[<span class="number">0</span>])</span><br><span class="line">		<span class="keyword">if</span> clientIP == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			clientIP = strings.TrimSpace(c.requestHeader(<span class="string">&quot;X-Real-Ip&quot;</span>))</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> clientIP != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> clientIP</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> c.engine.AppEngine &#123;</span><br><span class="line">		<span class="keyword">if</span> addr := c.requestHeader(<span class="string">&quot;X-Appengine-Remote-Addr&quot;</span>); addr != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> addr</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ip, _, err := net.SplitHostPort(strings.TrimSpace(c.Request.RemoteAddr)); err == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> ip</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ContentType returns the Content-Type header of the request.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ContentType() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> filterFlags(c.requestHeader(<span class="string">&quot;Content-Type&quot;</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// IsWebsocket returns true if the request headers indicate that a websocket</span></span><br><span class="line"><span class="comment">// handshake is being initiated by the client.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> IsWebsocket() <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> strings.Contains(strings.ToLower(c.requestHeader(<span class="string">&quot;Connection&quot;</span>)), <span class="string">&quot;upgrade&quot;</span>) &amp;&amp;</span><br><span class="line">		strings.ToLower(c.requestHeader(<span class="string">&quot;Upgrade&quot;</span>)) == <span class="string">&quot;websocket&quot;</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> requestHeader(key <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.Request.Header.Get(key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+                </div>
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Gin-Web/">Gin Web</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/06/14/beego%E5%AE%9E%E8%B7%B5-md/"
+                                   title="beego简单介绍.md"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">beego简单介绍.md</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="valine-container">
+        <div id="vcomments"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/valine@latest/dist/Valine.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initValine = () => {
+            const config = {
+              el: '#vcomments',
+              appId: 'aF2b1QW8tfdGNRnl079taPGd-gzGzoHsz',
+              appKey: 'qOPglgXp13rU82B9Vm5wyDE2',
+              meta: ['nick', 'mail', 'link'],
+              avatar: 'wavatar',
+              enableQQ: true,
+              placeholder: '',
+              lang: 'zh-CN'.toLowerCase()
+            }
+
+            if ('') {
+              config.serverURLs = ''
+            }
+
+            if (window?.Valine) {
+              new Valine(config)
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initValine()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initValine()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initValine)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Restful-API"><span class="nav-number">1.</span> <span class="nav-text">Restful API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restful-API%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.1.</span> <span class="nav-text">Restful API风格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gin%E4%B8%AD%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">Gin中处理请求的接口</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2020</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Sirius</a>
+                
+            </div>
+
+            <div class="theme-info info-item default">
+                由&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;驱动&nbsp;&&nbsp;主题&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+            </div>
+
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+                <span class="count-box border-box uv">
+                    <span class="item-type border-box">访客数</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-box border-box pv">
+                    <span class="item-type border-box">访问量</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Restful-API"><span class="nav-number">1.</span> <span class="nav-text">Restful API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restful-API%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.1.</span> <span class="nav-text">Restful API风格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gin%E4%B8%AD%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">Gin中处理请求的接口</span></a></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+
+</body>
+</html>
