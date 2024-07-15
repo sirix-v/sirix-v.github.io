@@ -161,6 +161,18 @@
 <p>使用HTTP头部中的<strong>Accept</strong>和<strong>Content-Type</strong>字段进行内容协商，以确定客户端期望的表示形式和服务器返回的表示形式。</p>
 <figure class="highlight text"><table><tr><td class="code"><pre><span class="line">接受JSON格式的响应：Accept: application/json</span><br><span class="line">发送JSON格式的请求体：Content-Type: application/json</span><br></pre></td></tr></table></figure></li>
 </ul>
+<h2 id="Gin中请求的流转"><a href="#Gin中请求的流转" class="headerlink" title="Gin中请求的流转"></a>Gin中请求的流转</h2><blockquote>
+<p><a class="link"   href="https://www.cnblogs.com/yuanwebpage/p/16818047.html" >https://www.cnblogs.com/yuanwebpage/p/16818047.html<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>gin框架的底层采用golang原生网络库net&#x2F;http，遵循one connection per goroutine的原则。因此在讲解gin处理request之前，我们需要看看go的原生网络库net&#x2F;http是怎么处理请求的。</p>
+<h3 id="net-http如何处理请求"><a href="#net-http如何处理请求" class="headerlink" title="net&#x2F;http如何处理请求"></a>net&#x2F;http如何处理请求</h3><p>利用net&#x2F;http处理请求的代码如下：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    http.HandleFunc(<span class="string">&quot;/hello&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(rw http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">        io.WriteString(rw, <span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    &#125;) <span class="comment">// 注册路由</span></span><br><span class="line">    http.ListenAndServe(<span class="string">&quot;localhost:8000&quot;</span>, <span class="literal">nil</span>) <span class="comment">// 启动服务</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，http.HandleFunc()用于注册路由。所谓路由，就是给定一个URL地址，要找到处理该URL的函数，自然最理想的结构就是map，map的key保存URL地址，value保存处理URL的响应函数(handler)，这样就能根据URL，快速定位函数并执行调用。http.HandleFunc()将这个路由map保存到了默认的服务端实例DefaultServeMux（ServeMux结构体对象）上，ServeMux的结构如下:</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> ServeMux <span class="keyword">struct</span> &#123;</span><br><span class="line">    mu    sync.RWMutex  <span class="comment">// 读写锁，用于并发访问路由map时加锁保护</span></span><br><span class="line">    m     <span class="keyword">map</span>[<span class="type">string</span>]muxEntry <span class="comment">// 保存路由的map</span></span><br><span class="line">    es    []muxEntry <span class="comment">// slice of entries sorted from longest to shortest. 基于路径保存的handler列表</span></span><br><span class="line">    hosts <span class="type">bool</span>       <span class="comment">// whether any patterns contain hostnames</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> muxEntry <span class="keyword">struct</span> &#123;</span><br><span class="line">    h       Handler <span class="comment">// Handler是go的标准网络处理函数，任何实现了ServeHTTP(ResponseWriter, *Request)的函数都可以作为Handler</span></span><br><span class="line">    pattern <span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>http.HandleFunc()具体功能就是将用户定义的Handler函数保存到DefaultServeMux.m中，原理较为简单，在此不再赘述。</p>
+<p><img   src="https://img2022.cnblogs.com/blog/1951229/202210/1951229-20221023100944302-1862362530.png" ></p>
 <h2 id="Gin中处理请求的接口"><a href="#Gin中处理请求的接口" class="headerlink" title="Gin中处理请求的接口"></a>Gin中处理请求的接口</h2><p>主要通过context结构体中的相关方法来处理请求</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Context is the most important part of gin. It allows us to pass variables between middleware,</span></span><br><span class="line"><span class="comment">// manage the flow, validate the JSON of a request and render a JSON response for example.</span></span><br><span class="line"><span class="keyword">type</span> Context <span class="keyword">struct</span> &#123;</span><br><span class="line">	writermem responseWriter</span><br><span class="line">	Request   *http.Request</span><br><span class="line">	Writer    ResponseWriter</span><br><span class="line"></span><br><span class="line">	Params   Params</span><br><span class="line">	handlers HandlersChain</span><br><span class="line">	index    <span class="type">int8</span></span><br><span class="line"></span><br><span class="line">	engine *Engine</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Keys is a key/value pair exclusively for the context of each request.</span></span><br><span class="line">	Keys <span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Errors is a list of errors attached to all the handlers/middlewares who used this context.</span></span><br><span class="line">	Errors errorMsgs</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Accepted defines a list of manually accepted formats for content negotiation.</span></span><br><span class="line">	Accepted []<span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -170,6 +182,43 @@
 ]]></content>
       <tags>
         <tag>Gin Web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Orbstack虚拟机安装docker.md</title>
+    <url>/2024/07/15/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker-md/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>centos9安装mysql服务端教程.md</title>
+    <url>/2024/07/13/centos%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%95%99%E7%A8%8B-md/</url>
+    <content><![CDATA[<p>安装的主要流程：<a class="link"   href="https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/" >https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/<i class="fas fa-external-link-alt"></i></a></p>
+<p>之后，远程登录的时候，会报错：</p>
+<p>mysql -h ‘安装mysql服务端机器的IP’ -u root</p>
+<p>ERROR 1130 (HY000): Host ‘客户端的IP’ is not allowed to connect to this MySQL server这个错误什么原因导致的。</p>
+<p>这通常是由于 MySQL 的权限设置导致的。</p>
+<p>MySQL 的权限系统允许数据库管理员指定哪些用户可以从哪些主机连接到服务器。在这个案例中，尽管你使用了 <code>root</code> 用户，但可能 <code>root</code> 用户没有从 <code>198.19.249.3</code> 这个 IP 地址连接到服务器的权限。</p>
+<p>在 MySQL 中，<code>GRANT</code> 语句用于分配权限，但是 <code>IDENTIFIED BY</code> 子句用于创建用户或更改用户密码，并不应该在 <code>GRANT</code> 语句中使用。因此，你遇到的错误是因为语法不正确。</p>
+<p>你应该首先确保用户 <code>root</code>@<code>198.19.249.3</code> 存在，如果不存在，你需要先创建这个用户，然后再分配权限。以下是正确的步骤：</p>
+<ol>
+<li>创建用户（如果尚不存在）：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;198.19.249.3&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;WingKin45@&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>分配权限：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;198.19.249.3&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>使权限更改生效：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<p>按照这些步骤操作后，<code>root</code> 用户应该能够从 IP 地址 <code>198.19.249.3</code> 连接到 MySQL 服务器，并拥有所有数据库和表的权限。如果你仍然遇到问题，请检查 MySQL 服务器的配置文件（如 <code>my.cnf</code> 或 <code>my.ini</code>），确保没有限制远程连接的设置。</p>
+]]></content>
+      <tags>
+        <tag>运维</tag>
       </tags>
   </entry>
 </search>

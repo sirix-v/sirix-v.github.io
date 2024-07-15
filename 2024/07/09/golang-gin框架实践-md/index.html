@@ -216,7 +216,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Thu Jul 11 2024 20:29:27 GMT+0800">2024-07-11 20:29:27</span>
+                <span class="datetime" data-updated="Sun Jul 14 2024 14:52:59 GMT+0800">2024-07-14 14:52:59</span>
             </span>
         
 
@@ -236,12 +236,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.9k 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>3.3k 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>16 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>18 分钟</span>
             </span>
         
         
@@ -343,6 +343,18 @@
 <p>使用HTTP头部中的<strong>Accept</strong>和<strong>Content-Type</strong>字段进行内容协商，以确定客户端期望的表示形式和服务器返回的表示形式。</p>
 <figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">接受JSON格式的响应：Accept: application/json</span><br><span class="line">发送JSON格式的请求体：Content-Type: application/json</span><br></pre></td></tr></table></figure></li>
 </ul>
+<h2 id="Gin中请求的流转"><a href="#Gin中请求的流转" class="headerlink" title="Gin中请求的流转"></a>Gin中请求的流转</h2><blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/yuanwebpage/p/16818047.html" >https://www.cnblogs.com/yuanwebpage/p/16818047.html<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>gin框架的底层采用golang原生网络库net&#x2F;http，遵循one connection per goroutine的原则。因此在讲解gin处理request之前，我们需要看看go的原生网络库net&#x2F;http是怎么处理请求的。</p>
+<h3 id="net-http如何处理请求"><a href="#net-http如何处理请求" class="headerlink" title="net&#x2F;http如何处理请求"></a>net&#x2F;http如何处理请求</h3><p>利用net&#x2F;http处理请求的代码如下：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    http.HandleFunc(<span class="string">&quot;/hello&quot;</span>, <span class="function"><span class="keyword">func</span><span class="params">(rw http.ResponseWriter, r *http.Request)</span></span> &#123;</span><br><span class="line">        io.WriteString(rw, <span class="string">&quot;hello world&quot;</span>)</span><br><span class="line">    &#125;) <span class="comment">// 注册路由</span></span><br><span class="line">    http.ListenAndServe(<span class="string">&quot;localhost:8000&quot;</span>, <span class="literal">nil</span>) <span class="comment">// 启动服务</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，http.HandleFunc()用于注册路由。所谓路由，就是给定一个URL地址，要找到处理该URL的函数，自然最理想的结构就是map，map的key保存URL地址，value保存处理URL的响应函数(handler)，这样就能根据URL，快速定位函数并执行调用。http.HandleFunc()将这个路由map保存到了默认的服务端实例DefaultServeMux（ServeMux结构体对象）上，ServeMux的结构如下:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> ServeMux <span class="keyword">struct</span> &#123;</span><br><span class="line">    mu    sync.RWMutex  <span class="comment">// 读写锁，用于并发访问路由map时加锁保护</span></span><br><span class="line">    m     <span class="keyword">map</span>[<span class="type">string</span>]muxEntry <span class="comment">// 保存路由的map</span></span><br><span class="line">    es    []muxEntry <span class="comment">// slice of entries sorted from longest to shortest. 基于路径保存的handler列表</span></span><br><span class="line">    hosts <span class="type">bool</span>       <span class="comment">// whether any patterns contain hostnames</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> muxEntry <span class="keyword">struct</span> &#123;</span><br><span class="line">    h       Handler <span class="comment">// Handler是go的标准网络处理函数，任何实现了ServeHTTP(ResponseWriter, *Request)的函数都可以作为Handler</span></span><br><span class="line">    pattern <span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>http.HandleFunc()具体功能就是将用户定义的Handler函数保存到DefaultServeMux.m中，原理较为简单，在此不再赘述。</p>
+<p><img   src="https://img2022.cnblogs.com/blog/1951229/202210/1951229-20221023100944302-1862362530.png" ></p>
 <h2 id="Gin中处理请求的接口"><a href="#Gin中处理请求的接口" class="headerlink" title="Gin中处理请求的接口"></a>Gin中处理请求的接口</h2><p>主要通过context结构体中的相关方法来处理请求</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Context is the most important part of gin. It allows us to pass variables between middleware,</span></span><br><span class="line"><span class="comment">// manage the flow, validate the JSON of a request and render a JSON response for example.</span></span><br><span class="line"><span class="keyword">type</span> Context <span class="keyword">struct</span> &#123;</span><br><span class="line">	writermem responseWriter</span><br><span class="line">	Request   *http.Request</span><br><span class="line">	Writer    ResponseWriter</span><br><span class="line"></span><br><span class="line">	Params   Params</span><br><span class="line">	handlers HandlersChain</span><br><span class="line">	index    <span class="type">int8</span></span><br><span class="line"></span><br><span class="line">	engine *Engine</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Keys is a key/value pair exclusively for the context of each request.</span></span><br><span class="line">	Keys <span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Errors is a list of errors attached to all the handlers/middlewares who used this context.</span></span><br><span class="line">	Errors errorMsgs</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Accepted defines a list of manually accepted formats for content negotiation.</span></span><br><span class="line">	Accepted []<span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -374,6 +386,22 @@
 
                 
                     <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2024/07/13/centos%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%95%99%E7%A8%8B-md/"
+                                   title="centos9安装mysql服务端教程.md"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">centos9安装mysql服务端教程.md</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
                         
                         
                             <div class="next-post">
@@ -493,7 +521,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Restful-API"><span class="nav-number">1.</span> <span class="nav-text">Restful API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restful-API%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.1.</span> <span class="nav-text">Restful API风格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gin%E4%B8%AD%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">Gin中处理请求的接口</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Restful-API"><span class="nav-number">1.</span> <span class="nav-text">Restful API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restful-API%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.1.</span> <span class="nav-text">Restful API风格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gin%E4%B8%AD%E8%AF%B7%E6%B1%82%E7%9A%84%E6%B5%81%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">Gin中请求的流转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#net-http%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">net&#x2F;http如何处理请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gin%E4%B8%AD%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">Gin中处理请求的接口</span></a></li></ol>
     </div>
 </div>
 
@@ -675,7 +703,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Restful-API"><span class="nav-number">1.</span> <span class="nav-text">Restful API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restful-API%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.1.</span> <span class="nav-text">Restful API风格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gin%E4%B8%AD%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">Gin中处理请求的接口</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Restful-API"><span class="nav-number">1.</span> <span class="nav-text">Restful API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restful-API%E9%A3%8E%E6%A0%BC"><span class="nav-number">1.1.</span> <span class="nav-text">Restful API风格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gin%E4%B8%AD%E8%AF%B7%E6%B1%82%E7%9A%84%E6%B5%81%E8%BD%AC"><span class="nav-number">2.</span> <span class="nav-text">Gin中请求的流转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#net-http%E5%A6%82%E4%BD%95%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82"><span class="nav-number">2.1.</span> <span class="nav-text">net&#x2F;http如何处理请求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gin%E4%B8%AD%E5%A4%84%E7%90%86%E8%AF%B7%E6%B1%82%E7%9A%84%E6%8E%A5%E5%8F%A3"><span class="nav-number">3.</span> <span class="nav-text">Gin中处理请求的接口</span></a></li></ol>
     </div>
 </div>
 
