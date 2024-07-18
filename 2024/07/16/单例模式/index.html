@@ -9,7 +9,7 @@
     
     <title>
         
-            beego简单介绍.md |
+            单例模式 |
         
         Sirius的博客
     </title>
@@ -183,7 +183,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        beego简单介绍.md
+                        单例模式
                     </div>
                 
 
@@ -211,12 +211,12 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-06-14 09:58:48</span>
+                <span class="datetime">2024-07-16 20:04:28</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Thu Jul 11 2024 19:41:11 GMT+0800">2024-07-11 19:41:11</span>
+                <span class="datetime" data-updated="Tue Jul 16 2024 20:14:58 GMT+0800">2024-07-16 20:14:58</span>
             </span>
         
 
@@ -226,7 +226,7 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/web-beego/">web beego</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a></li>
                         
                     
                 </ul>
@@ -236,7 +236,7 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>186 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>22 字</span>
             </span>
         
         
@@ -262,26 +262,13 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <h2 id="简单安装与入门"><a href="#简单安装与入门" class="headerlink" title="简单安装与入门"></a>简单安装与入门</h2><h3 id="安装命令行工具bee"><a href="#安装命令行工具bee" class="headerlink" title="安装命令行工具bee"></a>安装命令行工具bee</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go install github.com/beego/bee/v2@latest</span><br></pre></td></tr></table></figure>
-
-<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bee new beego-Admin</span><br></pre></td></tr></table></figure>
-
-<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100255.png"   style="zoom:50%;" >
-
-<p>目录结构如上图所示，是一个典型的MVC架构，M（models 目录）、V（views 目录）和 C（controllers 目录）的结构， <code>main.go</code> 是入口文件。</p>
-<h3 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bee run</span><br></pre></td></tr></table></figure>
-
-<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100629.png"   style="zoom:50%;" >
-
-<p>这样，一个简单的demo就运行起来了</p>
-<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100843.png"   style="zoom:50%;" >
-
-<h2 id="框架解析"><a href="#框架解析" class="headerlink" title="框架解析"></a>框架解析</h2><h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><img     src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/architecture.png"   style="zoom:75%;" >
-
-<p>beego 是基于八大独立的模块构建的，是一个高度解耦的框架。当初设计 beego 的时候就是考虑功能模块化，用户即使不使用 beego 的 HTTP 逻辑，也依旧可以使用这些独立模块。</p>
-<h3 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h3><p><img   src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/init.png" ></p>
-<h2 id="开发实践"><a href="#开发实践" class="headerlink" title="开发实践"></a>开发实践</h2><p>beego官方给出了几个demo项目</p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/beego/samples" >https://github.com/beego/samples<i class="fas fa-external-link-alt"></i></a></p>
+                    <blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/justloveyou_/article/details/64127789" >https://blog.csdn.net/justloveyou_/article/details/64127789<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>golang的单例模式：</p>
+<blockquote>
+<p><a class="link"   target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43035350/article/details/125536474" >https://blog.csdn.net/qq_43035350/article/details/125536474<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
 
                 </div>
                 
@@ -292,7 +279,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/web-beego/">web beego</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">设计模式</a>
                                     </li>
                                 
                             </ul>
@@ -308,31 +295,15 @@
                 
                     <div class="post-nav border-box">
                         
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2024/07/09/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5-md/"
-                                   title="golang-gin框架实践(一)|请求与Context.md"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">golang-gin框架实践(一)|请求与Context.md</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/04/09/kubernetes%E5%AD%A6%E4%B9%A0/"
-                                   title="kubernetes学习"
+                                   href="/2024/07/15/ToDoList/"
+                                   title="ToDoList"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">kubernetes学习</span>
+                                        <span class="post-nav-title-item text-ellipsis">ToDoList</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -442,7 +413,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">简单安装与入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7bee"><span class="nav-number">1.1.</span> <span class="nav-text">安装命令行工具bee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.2.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.3.</span> <span class="nav-text">运行项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">框架解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">路由设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">开发实践</span></a></li></ol>
+        
     </div>
 </div>
 
@@ -624,7 +595,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">简单安装与入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7bee"><span class="nav-number">1.1.</span> <span class="nav-text">安装命令行工具bee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.2.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.3.</span> <span class="nav-text">运行项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">框架解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">路由设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">开发实践</span></a></li></ol>
+        
     </div>
 </div>
 

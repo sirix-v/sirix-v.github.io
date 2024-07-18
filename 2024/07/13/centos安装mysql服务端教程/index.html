@@ -9,7 +9,7 @@
     
     <title>
         
-            Orbstack虚拟机安装docker.md |
+            centos9安装mysql服务端教程 |
         
         Sirius的博客
     </title>
@@ -183,7 +183,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        Orbstack虚拟机安装docker.md
+                        centos9安装mysql服务端教程
                     </div>
                 
 
@@ -211,20 +211,33 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-07-15 11:53:27</span>
+                <span class="datetime">2024-07-13 19:09:57</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Mon Jul 15 2024 11:53:27 GMT+0800">2024-07-15 11:53:27</span>
+                <span class="datetime" data-updated="Tue Jul 16 2024 20:05:44 GMT+0800">2024-07-16 20:05:44</span>
             </span>
         
 
         
 
         
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
         
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>418 字</span>
+            </span>
         
         
             <span class="meta-info-item post-min2read">
@@ -249,12 +262,44 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    
+                    <p>安装的主要流程：<a class="link"   target="_blank" rel="noopener" href="https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/" >https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/<i class="fas fa-external-link-alt"></i></a></p>
+<p>之后，远程登录的时候，会报错：</p>
+<p>mysql -h ‘安装mysql服务端机器的IP’ -u root</p>
+<p>ERROR 1130 (HY000): Host ‘客户端的IP’ is not allowed to connect to this MySQL server这个错误什么原因导致的。</p>
+<p>这通常是由于 MySQL 的权限设置导致的。</p>
+<p>MySQL 的权限系统允许数据库管理员指定哪些用户可以从哪些主机连接到服务器。在这个案例中，尽管你使用了 <code>root</code> 用户，但可能 <code>root</code> 用户没有从 <code>客户端IP</code> 这个 IP 地址连接到服务器的权限。</p>
+<p>在 MySQL 中，<code>GRANT</code> 语句用于分配权限，但是 <code>IDENTIFIED BY</code> 子句用于创建用户或更改用户密码，并不应该在 <code>GRANT</code> 语句中使用。因此，你遇到的错误是因为语法不正确。</p>
+<p>你应该首先确保用户 <code>root</code>@<code>客户端IP</code> 存在，如果不存在，你需要先创建这个用户，然后再分配权限。以下是正确的步骤：</p>
+<ol>
+<li>创建用户（如果尚不存在）：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;客户端IP&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;WingKin45@&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>分配权限：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;客户端IP&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>使权限更改生效：</li>
+</ol>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<p>按照这些步骤操作后，<code>root</code> 用户应该能够从 IP 地址 <code>客户端IP</code> 连接到 MySQL 服务器，并拥有所有数据库和表的权限。如果你仍然遇到问题，请检查 MySQL 服务器的配置文件（如 <code>my.cnf</code> 或 <code>my.ini</code>），确保没有限制远程连接的设置。</p>
+
                 </div>
                 
 
                 <div class="post-bottom-tags-and-share border-box">
                     <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a>
+                                    </li>
+                                
+                            </ul>
                         
                     </div>
                     <div>
@@ -270,14 +315,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2024/07/15/ToDoList-md/"
-                                   title="ToDoList"
+                                   href="/2024/07/15/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker/"
+                                   title="Orbstack虚拟机安装docker"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">ToDoList</span>
+                                        <span class="post-nav-title-item text-ellipsis">Orbstack虚拟机安装docker</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -287,11 +332,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/07/13/centos%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%95%99%E7%A8%8B-md/"
-                                   title="centos9安装mysql服务端教程.md"
+                                   href="/2024/07/09/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5/"
+                                   title="golang-gin框架实践(一)|请求与Context"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">centos9安装mysql服务端教程.md</span>
+                                        <span class="post-nav-title-item text-ellipsis">golang-gin框架实践(一)|请求与Context</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">

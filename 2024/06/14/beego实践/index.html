@@ -9,7 +9,7 @@
     
     <title>
         
-            centos9安装mysql服务端教程.md |
+            beego简单介绍 |
         
         Sirius的博客
     </title>
@@ -183,7 +183,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        centos9安装mysql服务端教程.md
+                        beego简单介绍
                     </div>
                 
 
@@ -211,12 +211,12 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-07-13 19:09:57</span>
+                <span class="datetime">2024-06-14 09:58:48</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Jul 16 2024 09:06:22 GMT+0800">2024-07-16 09:06:22</span>
+                <span class="datetime" data-updated="Tue Jul 16 2024 20:04:50 GMT+0800">2024-07-16 20:04:50</span>
             </span>
         
 
@@ -226,7 +226,7 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/web-beego/">web beego</a></li>
                         
                     
                 </ul>
@@ -236,7 +236,7 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>418 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>186 字</span>
             </span>
         
         
@@ -262,30 +262,26 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <p>安装的主要流程：<a class="link"   target="_blank" rel="noopener" href="https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/" >https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/<i class="fas fa-external-link-alt"></i></a></p>
-<p>之后，远程登录的时候，会报错：</p>
-<p>mysql -h ‘安装mysql服务端机器的IP’ -u root</p>
-<p>ERROR 1130 (HY000): Host ‘客户端的IP’ is not allowed to connect to this MySQL server这个错误什么原因导致的。</p>
-<p>这通常是由于 MySQL 的权限设置导致的。</p>
-<p>MySQL 的权限系统允许数据库管理员指定哪些用户可以从哪些主机连接到服务器。在这个案例中，尽管你使用了 <code>root</code> 用户，但可能 <code>root</code> 用户没有从 <code>客户端IP</code> 这个 IP 地址连接到服务器的权限。</p>
-<p>在 MySQL 中，<code>GRANT</code> 语句用于分配权限，但是 <code>IDENTIFIED BY</code> 子句用于创建用户或更改用户密码，并不应该在 <code>GRANT</code> 语句中使用。因此，你遇到的错误是因为语法不正确。</p>
-<p>你应该首先确保用户 <code>root</code>@<code>客户端IP</code> 存在，如果不存在，你需要先创建这个用户，然后再分配权限。以下是正确的步骤：</p>
-<ol>
-<li>创建用户（如果尚不存在）：</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;客户端IP&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;WingKin45@&#x27;</span>;</span><br></pre></td></tr></table></figure>
+                    <h2 id="简单安装与入门"><a href="#简单安装与入门" class="headerlink" title="简单安装与入门"></a>简单安装与入门</h2><h3 id="安装命令行工具bee"><a href="#安装命令行工具bee" class="headerlink" title="安装命令行工具bee"></a>安装命令行工具bee</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">go install github.com/beego/bee/v2@latest</span><br></pre></td></tr></table></figure>
 
-<ol>
-<li>分配权限：</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;客户端IP&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br></pre></td></tr></table></figure>
+<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bee new beego-Admin</span><br></pre></td></tr></table></figure>
 
-<ol>
-<li>使权限更改生效：</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100255.png"   style="zoom:50%;" >
 
-<p>按照这些步骤操作后，<code>root</code> 用户应该能够从 IP 地址 <code>客户端IP</code> 连接到 MySQL 服务器，并拥有所有数据库和表的权限。如果你仍然遇到问题，请检查 MySQL 服务器的配置文件（如 <code>my.cnf</code> 或 <code>my.ini</code>），确保没有限制远程连接的设置。</p>
+<p>目录结构如上图所示，是一个典型的MVC架构，M（models 目录）、V（views 目录）和 C（controllers 目录）的结构， <code>main.go</code> 是入口文件。</p>
+<h3 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bee run</span><br></pre></td></tr></table></figure>
+
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100629.png"   style="zoom:50%;" >
+
+<p>这样，一个简单的demo就运行起来了</p>
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100843.png"   style="zoom:50%;" >
+
+<h2 id="框架解析"><a href="#框架解析" class="headerlink" title="框架解析"></a>框架解析</h2><h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><img     src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/architecture.png"   style="zoom:75%;" >
+
+<p>beego 是基于八大独立的模块构建的，是一个高度解耦的框架。当初设计 beego 的时候就是考虑功能模块化，用户即使不使用 beego 的 HTTP 逻辑，也依旧可以使用这些独立模块。</p>
+<h3 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h3><p><img   src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/init.png" ></p>
+<h2 id="开发实践"><a href="#开发实践" class="headerlink" title="开发实践"></a>开发实践</h2><p>beego官方给出了几个demo项目</p>
+<p><a class="link"   target="_blank" rel="noopener" href="https://github.com/beego/samples" >https://github.com/beego/samples<i class="fas fa-external-link-alt"></i></a></p>
 
                 </div>
                 
@@ -296,7 +292,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/web-beego/">web beego</a>
                                     </li>
                                 
                             </ul>
@@ -315,14 +311,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2024/07/15/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker-md/"
-                                   title="Orbstack虚拟机安装docker.md"
+                                   href="/2024/07/09/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5/"
+                                   title="golang-gin框架实践(一)|请求与Context"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Orbstack虚拟机安装docker.md</span>
+                                        <span class="post-nav-title-item text-ellipsis">golang-gin框架实践(一)|请求与Context</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -332,11 +328,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/07/09/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5-md/"
-                                   title="golang-gin框架实践(一)|请求与Context.md"
+                                   href="/2024/04/09/kubernetes%E5%AD%A6%E4%B9%A0/"
+                                   title="kubernetes学习"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">golang-gin框架实践(一)|请求与Context.md</span>
+                                        <span class="post-nav-title-item text-ellipsis">kubernetes学习</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -446,7 +442,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">简单安装与入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7bee"><span class="nav-number">1.1.</span> <span class="nav-text">安装命令行工具bee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.2.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.3.</span> <span class="nav-text">运行项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">框架解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">路由设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">开发实践</span></a></li></ol>
     </div>
 </div>
 
@@ -628,7 +624,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%AE%89%E8%A3%85%E4%B8%8E%E5%85%A5%E9%97%A8"><span class="nav-number">1.</span> <span class="nav-text">简单安装与入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7bee"><span class="nav-number">1.1.</span> <span class="nav-text">安装命令行工具bee</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.2.</span> <span class="nav-text">新建项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.3.</span> <span class="nav-text">运行项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A1%86%E6%9E%B6%E8%A7%A3%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">框架解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.</span> <span class="nav-text">架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%AE%BE%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">路由设置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%AE%9E%E8%B7%B5"><span class="nav-number">3.</span> <span class="nav-text">开发实践</span></a></li></ol>
     </div>
 </div>
 
