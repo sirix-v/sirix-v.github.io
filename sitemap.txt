@@ -1,8 +1,9 @@
-http://example.com/2024/07/18/ceshi/
+http://example.com/2024/07/18/centos-python%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/
+http://example.com/2024/07/18/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/
+http://example.com/2024/07/18/gin%E6%A1%86%E6%9E%B6-bind%E4%B8%8E%E9%AA%8C%E8%AF%81/
 http://example.com/2024/07/18/docker%E5%91%BD%E4%BB%A4/
 http://example.com/2024/07/16/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/
 http://example.com/2024/07/15/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker/
-http://example.com/2024/07/13/centos%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%95%99%E7%A8%8B/
 http://example.com/2024/07/09/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5/
 http://example.com/2024/06/14/beego%E5%AE%9E%E8%B7%B5/
 http://example.com/2024/07/15/ToDoList/

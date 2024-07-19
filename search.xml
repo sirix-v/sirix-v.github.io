@@ -83,38 +83,6 @@
       </tags>
   </entry>
   <entry>
-    <title>centos9安装mysql服务端教程</title>
-    <url>/2024/07/13/centos%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%95%99%E7%A8%8B/</url>
-    <content><![CDATA[<p>安装的主要流程：<a class="link"   href="https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/" >https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/<i class="fas fa-external-link-alt"></i></a></p>
-<p>之后，远程登录的时候，会报错：</p>
-<p>mysql -h ‘安装mysql服务端机器的IP’ -u root</p>
-<p>ERROR 1130 (HY000): Host ‘客户端的IP’ is not allowed to connect to this MySQL server这个错误什么原因导致的。</p>
-<p>这通常是由于 MySQL 的权限设置导致的。</p>
-<p>MySQL 的权限系统允许数据库管理员指定哪些用户可以从哪些主机连接到服务器。在这个案例中，尽管你使用了 <code>root</code> 用户，但可能 <code>root</code> 用户没有从 <code>客户端IP</code> 这个 IP 地址连接到服务器的权限。</p>
-<p>在 MySQL 中，<code>GRANT</code> 语句用于分配权限，但是 <code>IDENTIFIED BY</code> 子句用于创建用户或更改用户密码，并不应该在 <code>GRANT</code> 语句中使用。因此，你遇到的错误是因为语法不正确。</p>
-<p>你应该首先确保用户 <code>root</code>@<code>客户端IP</code> 存在，如果不存在，你需要先创建这个用户，然后再分配权限。以下是正确的步骤：</p>
-<ol>
-<li>创建用户（如果尚不存在）：</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;客户端IP&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;WingKin45@&#x27;</span>;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>分配权限：</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;客户端IP&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br></pre></td></tr></table></figure>
-
-<ol>
-<li>使权限更改生效：</li>
-</ol>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
-
-<p>按照这些步骤操作后，<code>root</code> 用户应该能够从 IP 地址 <code>客户端IP</code> 连接到 MySQL 服务器，并拥有所有数据库和表的权限。如果你仍然遇到问题，请检查 MySQL 服务器的配置文件（如 <code>my.cnf</code> 或 <code>my.ini</code>），确保没有限制远程连接的设置。</p>
-]]></content>
-      <tags>
-        <tag>运维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>ToDoList</title>
     <url>/2024/07/15/ToDoList/</url>
     <content><![CDATA[<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><ul>
@@ -254,11 +222,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ceshi</title>
-    <url>/2024/07/18/ceshi/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>docker命令</title>
     <url>/2024/07/18/docker%E5%91%BD%E4%BB%A4/</url>
     <content><![CDATA[<h2 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h2><blockquote>
@@ -271,5 +234,58 @@
       <tags>
         <tag>docker</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>centos-python基础镜像构建</title>
+    <url>/2024/07/18/centos-python%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/</url>
+    <content><![CDATA[<blockquote>
+<p><a class="link"   href="https://www.cnblogs.com/leeona/p/18282312" >https://www.cnblogs.com/leeona/p/18282312<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>上述方案解决centos:7基础镜像无法pip的问题</p>
+<blockquote>
+<p><a class="link"   href="https://www.cnblogs.com/Jimc/p/10218387.html" >https://www.cnblogs.com/Jimc/p/10218387.html<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   href="https://www.cnblogs.com/Jimc/p/10218062.html" >https://www.cnblogs.com/Jimc/p/10218062.html<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>源码编译安装python3.8</p>
+]]></content>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>centos9安装mysql服务端记录</title>
+    <url>/2024/07/18/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<p>安装的主要流程：<a class="link"   href="https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/" >https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/<i class="fas fa-external-link-alt"></i></a></p>
+<p>之后，远程登录的时候，会报错：</p>
+<p>mysql -h ‘安装mysql服务端机器的IP’ -u root</p>
+<p>ERROR 1130 (HY000): Host ‘客户端的IP’ is not allowed to connect to this MySQL server这个错误什么原因导致的。</p>
+<p>这通常是由于 MySQL 的权限设置导致的。</p>
+<p>MySQL 的权限系统允许数据库管理员指定哪些用户可以从哪些主机连接到服务器。在这个案例中，尽管你使用了 <code>root</code> 用户，但可能 <code>root</code> 用户没有从 <code>客户端IP</code> 这个 IP 地址连接到服务器的权限。</p>
+<p>在 MySQL 中，<code>GRANT</code> 语句用于分配权限，但是 <code>IDENTIFIED BY</code> 子句用于创建用户或更改用户密码，并不应该在 <code>GRANT</code> 语句中使用。因此，你遇到的错误是因为语法不正确。</p>
+<p>你应该首先确保用户 <code>root</code>@<code>客户端IP</code> 存在，如果不存在，你需要先创建这个用户，然后再分配权限。以下是正确的步骤：</p>
+<ol>
+<li><p>创建用户（如果尚不存在）：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">CREATE USER &#x27;root&#x27;@&#x27;客户端IP&#x27; IDENTIFIED BY &#x27;WingKin45@&#x27;;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>分配权限：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;客户端IP&#x27; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使权限更改生效</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+<p>按照这些步骤操作后，<code>root</code> 用户应该能够从 IP 地址 <code>客户端IP</code> 连接到 MySQL 服务器，并拥有所有数据库和表的权限。如果你仍然遇到问题，请检查 MySQL 服务器的配置文件（如 <code>my.cnf</code> 或 <code>my.ini</code>），确保没有限制远程连接的设置。</p>
+]]></content>
+      <tags>
+        <tag>运维</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gin框架-bind与验证</title>
+    <url>/2024/07/18/gin%E6%A1%86%E6%9E%B6-bind%E4%B8%8E%E9%AA%8C%E8%AF%81/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>

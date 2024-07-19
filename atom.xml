@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-07-18T08:23:48.600Z</updated>
+  <updated>2024-07-18T11:33:49.936Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,11 +17,56 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>ceshi</title>
-    <link href="http://example.com/2024/07/18/ceshi/"/>
-    <id>http://example.com/2024/07/18/ceshi/</id>
-    <published>2024-07-18T08:23:35.000Z</published>
-    <updated>2024-07-18T08:23:48.600Z</updated>
+    <title>centos-python基础镜像构建</title>
+    <link href="http://example.com/2024/07/18/centos-python%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/"/>
+    <id>http://example.com/2024/07/18/centos-python%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/</id>
+    <published>2024-07-18T11:32:22.000Z</published>
+    <updated>2024-07-18T11:33:49.936Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a class="link"   href="https://www.cnblogs.com/leeona/p/18282312" >https://www.cnblogs.com/leeona/p/18282312<i class="fas fa-external-link-alt"></i></a></p></blockquote><p>上述方案解决centos:7基础镜像无法pip的问题</p><blockquote><p><a class="link"   href="https://www.cnblogs.com/Jimc/p/10218387.html" >https://www.cnblogs.com/Jimc/p/10218387.html<i class="fas fa-external-link-alt"></i></a></p><p><a class="link"   href="https://www.cnblogs.com/Jimc/p/10218062.html" >https://www.cnblogs.com/Jimc/p/10218062.html<i class="fas fa-external-link-alt"></i></a></p></blockquote><p>源码编译安装python3.8</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;&lt;a class=&quot;link&quot;   href=&quot;https://www.cnblogs.com/leeona/p/18282312&quot; &gt;https://www.cnblogs.com/leeona/p/18282312&lt;i class=&quot;fas f</summary>
+      
+    
+    
+    
+    
+    <category term="运维" scheme="http://example.com/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>centos9安装mysql服务端记录</title>
+    <link href="http://example.com/2024/07/18/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/"/>
+    <id>http://example.com/2024/07/18/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/</id>
+    <published>2024-07-18T09:01:57.000Z</published>
+    <updated>2024-07-18T09:04:44.341Z</updated>
+    
+    <content type="html"><![CDATA[<p>安装的主要流程：<a class="link"   href="https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/" >https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/<i class="fas fa-external-link-alt"></i></a></p><p>之后，远程登录的时候，会报错：</p><p>mysql -h ‘安装mysql服务端机器的IP’ -u root</p><p>ERROR 1130 (HY000): Host ‘客户端的IP’ is not allowed to connect to this MySQL server这个错误什么原因导致的。</p><p>这通常是由于 MySQL 的权限设置导致的。</p><p>MySQL 的权限系统允许数据库管理员指定哪些用户可以从哪些主机连接到服务器。在这个案例中，尽管你使用了 <code>root</code> 用户，但可能 <code>root</code> 用户没有从 <code>客户端IP</code> 这个 IP 地址连接到服务器的权限。</p><p>在 MySQL 中，<code>GRANT</code> 语句用于分配权限，但是 <code>IDENTIFIED BY</code> 子句用于创建用户或更改用户密码，并不应该在 <code>GRANT</code> 语句中使用。因此，你遇到的错误是因为语法不正确。</p><p>你应该首先确保用户 <code>root</code>@<code>客户端IP</code> 存在，如果不存在，你需要先创建这个用户，然后再分配权限。以下是正确的步骤：</p><ol><li><p>创建用户（如果尚不存在）：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#x27;root&#x27;@&#x27;客户端IP&#x27; IDENTIFIED BY &#x27;WingKin45@&#x27;;</span><br></pre></td></tr></table></figure></li><li><p>分配权限：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;客户端IP&#x27; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure></li><li><p>使权限更改生效</p></li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure><p>按照这些步骤操作后，<code>root</code> 用户应该能够从 IP 地址 <code>客户端IP</code> 连接到 MySQL 服务器，并拥有所有数据库和表的权限。如果你仍然遇到问题，请检查 MySQL 服务器的配置文件（如 <code>my.cnf</code> 或 <code>my.ini</code>），确保没有限制远程连接的设置。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;安装的主要流程：&lt;a class=&quot;link&quot;   href=&quot;https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/&quot; &gt;https://www.sjkjc.com/posts/install-mysq</summary>
+      
+    
+    
+    
+    
+    <category term="运维" scheme="http://example.com/tags/%E8%BF%90%E7%BB%B4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>gin框架-bind与验证</title>
+    <link href="http://example.com/2024/07/18/gin%E6%A1%86%E6%9E%B6-bind%E4%B8%8E%E9%AA%8C%E8%AF%81/"/>
+    <id>http://example.com/2024/07/18/gin%E6%A1%86%E6%9E%B6-bind%E4%B8%8E%E9%AA%8C%E8%AF%81/</id>
+    <published>2024-07-18T08:43:18.000Z</published>
+    <updated>2024-07-18T08:43:18.315Z</updated>
     
     
     
@@ -110,28 +155,6 @@
     
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>centos9安装mysql服务端教程</title>
-    <link href="http://example.com/2024/07/13/centos%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%95%99%E7%A8%8B/"/>
-    <id>http://example.com/2024/07/13/centos%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%95%99%E7%A8%8B/</id>
-    <published>2024-07-13T11:09:57.000Z</published>
-    <updated>2024-07-16T12:05:44.728Z</updated>
-    
-    <content type="html"><![CDATA[<p>安装的主要流程：<a class="link"   href="https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/" >https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/<i class="fas fa-external-link-alt"></i></a></p><p>之后，远程登录的时候，会报错：</p><p>mysql -h ‘安装mysql服务端机器的IP’ -u root</p><p>ERROR 1130 (HY000): Host ‘客户端的IP’ is not allowed to connect to this MySQL server这个错误什么原因导致的。</p><p>这通常是由于 MySQL 的权限设置导致的。</p><p>MySQL 的权限系统允许数据库管理员指定哪些用户可以从哪些主机连接到服务器。在这个案例中，尽管你使用了 <code>root</code> 用户，但可能 <code>root</code> 用户没有从 <code>客户端IP</code> 这个 IP 地址连接到服务器的权限。</p><p>在 MySQL 中，<code>GRANT</code> 语句用于分配权限，但是 <code>IDENTIFIED BY</code> 子句用于创建用户或更改用户密码，并不应该在 <code>GRANT</code> 语句中使用。因此，你遇到的错误是因为语法不正确。</p><p>你应该首先确保用户 <code>root</code>@<code>客户端IP</code> 存在，如果不存在，你需要先创建这个用户，然后再分配权限。以下是正确的步骤：</p><ol><li>创建用户（如果尚不存在）：</li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;客户端IP&#x27;</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">&#x27;WingKin45@&#x27;</span>;</span><br></pre></td></tr></table></figure><ol><li>分配权限：</li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="operator">*</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;客户端IP&#x27;</span> <span class="keyword">WITH</span> <span class="keyword">GRANT</span> OPTION;</span><br></pre></td></tr></table></figure><ol><li>使权限更改生效：</li></ol><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sql</span>复制代码</span><br><span class="line"></span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure><p>按照这些步骤操作后，<code>root</code> 用户应该能够从 IP 地址 <code>客户端IP</code> 连接到 MySQL 服务器，并拥有所有数据库和表的权限。如果你仍然遇到问题，请检查 MySQL 服务器的配置文件（如 <code>my.cnf</code> 或 <code>my.ini</code>），确保没有限制远程连接的设置。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;安装的主要流程：&lt;a class=&quot;link&quot;   href=&quot;https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/&quot; &gt;https://www.sjkjc.com/posts/install-mysq</summary>
-      
-    
-    
-    
-    
-    <category term="运维" scheme="http://example.com/tags/%E8%BF%90%E7%BB%B4/"/>
     
   </entry>
   
