@@ -1,122 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>kubernetes学习</title>
-    <url>/2024/04/09/kubernetes%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h2 id="了解架构"><a href="#了解架构" class="headerlink" title="了解架构"></a>了解架构</h2><ul>
-<li><p>控制平面</p>
-<ul>
-<li>etcd分布式持久化存储</li>
-<li>API Server</li>
-<li>controller manager</li>
-<li>调度器</li>
-</ul>
-</li>
-<li><p>工作节点</p>
-<ul>
-<li>kubelet</li>
-<li>kubelet服务代理</li>
-<li>容器运行时（如docker、rkt）</li>
-</ul>
-</li>
-<li><p>附加组件</p>
-<ul>
-<li>kubernetes DNS服务器</li>
-<li>仪表板</li>
-<li>Ingress控制器</li>
-<li>Heapster（容器集群监控）</li>
-<li>CNI插件</li>
-</ul>
-</li>
-</ul>
-<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240410102847.png"   style="zoom:50%;" >
-
-<p>可以通过</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubectl get componentstatuses</span><br></pre></td></tr></table></figure>
-
-<p>获取各个控制平面组件的健康状态</p>
-<h2 id="API服务器的作用"><a href="#API服务器的作用" class="headerlink" title="API服务器的作用"></a>API服务器的作用</h2><h3 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h3><img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240411145447.png"   style="zoom:50%;">
-
-<p>认证插件：首先， API 服务器需要认证发送请求的客户端。 这是通过配置在 API 服务器上 的一个或多个认证插件来实现的。 API 服务器会轮流调用这些插件， 直到有一个能 确认是谁发送了该请求。 这是通过检查HTTP请求实现的。</p>
-<p>授权插件：除了认证插件， API 服务器还可以配置使用一个或多个授权插件。 它们的作用 是决定认证的用户是否可以对请求资源执行请求操作。 例如， 当创建 pod 时， API 服务器会轮询所有的授权插件， 来确认该用户是否可以在请求命名空间创建 pod。 一旦插件确认了用户可以执行该操作， API 服务器会继续下一步操作。</p>
-<p>准入插件：如果请求尝试创建、 修改或者删除一个资源，请求需要经过准入控制插件的验证。（注意：如果仅是读取资源，不会经过准入插件）</p>
-<p>请求通过了所有的准入控制插件后， API 服务器会验证存储到 etcd 的对象， 然 后返回一个响应给客户端。</p>
-<h3 id="通知客户端资源变更"><a href="#通知客户端资源变更" class="headerlink" title="通知客户端资源变更"></a>通知客户端资源变更</h3><p>API服务器的作用是启动控制器以及其他组件来监控已经部署资源的变更。</p>
-<h2 id="调度器"><a href="#调度器" class="headerlink" title="调度器"></a>调度器</h2><h2 id="控制器管理器中运行的控制器"><a href="#控制器管理器中运行的控制器" class="headerlink" title="控制器管理器中运行的控制器"></a>控制器管理器中运行的控制器</h2><p>由于使用监听机制并不保证控制器不会漏掉时间， 所以 仍然需要定期执行重列举操作来确保不会丢掉什么。</p>
-<h2 id="kubelet"><a href="#kubelet" class="headerlink" title="kubelet"></a>kubelet</h2><p>未完待续。。。。</p>
-]]></content>
-      <tags>
-        <tag>kubernetes</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Orbstack虚拟机安装docker</title>
-    <url>/2024/07/15/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>beego简单介绍</title>
-    <url>/2024/06/14/beego%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<h2 id="简单安装与入门"><a href="#简单安装与入门" class="headerlink" title="简单安装与入门"></a>简单安装与入门</h2><h3 id="安装命令行工具bee"><a href="#安装命令行工具bee" class="headerlink" title="安装命令行工具bee"></a>安装命令行工具bee</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go install github.com/beego/bee/v2@latest</span><br></pre></td></tr></table></figure>
-
-<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bee new beego-Admin</span><br></pre></td></tr></table></figure>
-
-<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100255.png"   style="zoom:50%;" >
-
-<p>目录结构如上图所示，是一个典型的MVC架构，M（models 目录）、V（views 目录）和 C（controllers 目录）的结构， <code>main.go</code> 是入口文件。</p>
-<h3 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bee run</span><br></pre></td></tr></table></figure>
-
-<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100629.png"   style="zoom:50%;" >
-
-<p>这样，一个简单的demo就运行起来了</p>
-<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100843.png"   style="zoom:50%;" >
-
-<h2 id="框架解析"><a href="#框架解析" class="headerlink" title="框架解析"></a>框架解析</h2><h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><img     src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/architecture.png"   style="zoom:75%;" >
-
-<p>beego 是基于八大独立的模块构建的，是一个高度解耦的框架。当初设计 beego 的时候就是考虑功能模块化，用户即使不使用 beego 的 HTTP 逻辑，也依旧可以使用这些独立模块。</p>
-<h3 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h3><p><img   src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/init.png" ></p>
-<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>beego官方给出了几个demo项目</p>
-<p><a class="link"   href="https://github.com/beego/samples" >https://github.com/beego/samples<i class="fas fa-external-link-alt"></i></a></p>
-]]></content>
-      <tags>
-        <tag>web beego</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ToDoList</title>
-    <url>/2024/07/15/ToDoList/</url>
-    <content><![CDATA[<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><ul>
-<li>Golang</li>
-<li>mysql</li>
-<li>redis</li>
-<li>rabbitmq</li>
-<li></li>
-</ul>
-<h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><ul>
-<li>秒杀</li>
-<li>网关</li>
-<li></li>
-</ul>
-]]></content>
-  </entry>
-  <entry>
-    <title>单例模式</title>
-    <url>/2024/07/16/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<blockquote>
-<p><a class="link"   href="https://blog.csdn.net/justloveyou_/article/details/64127789" >https://blog.csdn.net/justloveyou_/article/details/64127789<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
-<p>golang的单例模式：</p>
+    <title>golang-module详解</title>
+    <url>/2024/07/24/golang/golang-module%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<p>以此文总结下目前自己掌握的go module知识</p>
 <blockquote>
-<p><a class="link"   href="https://blog.csdn.net/qq_43035350/article/details/125536474" >https://blog.csdn.net/qq_43035350/article/details/125536474<i class="fas fa-external-link-alt"></i></a></p>
+<p> 引用《go专家编程》<a class="link"   href="https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html" >https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html<i class="fas fa-external-link-alt"></i></a></p>
 </blockquote>
 ]]></content>
       <tags>
-        <tag>设计模式</tag>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Protobuf详解</title>
+    <url>/2024/07/22/gin/Protobuf%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>gin</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
       </tags>
   </entry>
   <entry>
     <title>golang-gin框架实践(一)|请求与Context</title>
-    <url>/2024/07/09/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5/</url>
+    <url>/2024/07/09/gin/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5/</url>
     <content><![CDATA[<p>gin是一个简洁高效的web框架，自然而然就肯定会有与请求信息相关的处理逻辑。本文从这个角度来看下gin框架是怎么做的。</p>
 <p>目录如下：</p>
 <ul>
@@ -217,30 +126,143 @@
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/************************************/</span></span><br><span class="line"><span class="comment">/************ INPUT DATA ************/</span></span><br><span class="line"><span class="comment">/************************************/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Param returns the value of the URL param.</span></span><br><span class="line"><span class="comment">// It is a shortcut for c.Params.ByName(key)</span></span><br><span class="line"><span class="comment">//     router.GET(&quot;/user/:id&quot;, func(c *gin.Context) &#123;</span></span><br><span class="line"><span class="comment">//         // a GET request to /user/john</span></span><br><span class="line"><span class="comment">//         id := c.Param(&quot;id&quot;) // id == &quot;john&quot;</span></span><br><span class="line"><span class="comment">//     &#125;)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Param(key <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.Params.ByName(key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Query returns the keyed url query value if it exists,</span></span><br><span class="line"><span class="comment">// otherwise it returns an empty string `(&quot;&quot;)`.</span></span><br><span class="line"><span class="comment">// It is shortcut for `c.Request.URL.Query().Get(key)`</span></span><br><span class="line"><span class="comment">//     GET /path?id=1234&amp;name=Manu&amp;value=</span></span><br><span class="line"><span class="comment">// 	   c.Query(&quot;id&quot;) == &quot;1234&quot;</span></span><br><span class="line"><span class="comment">// 	   c.Query(&quot;name&quot;) == &quot;Manu&quot;</span></span><br><span class="line"><span class="comment">// 	   c.Query(&quot;value&quot;) == &quot;&quot;</span></span><br><span class="line"><span class="comment">// 	   c.Query(&quot;wtf&quot;) == &quot;&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Query(key <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	value, _ := c.GetQuery(key)</span><br><span class="line">	<span class="keyword">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DefaultQuery returns the keyed url query value if it exists,</span></span><br><span class="line"><span class="comment">// otherwise it returns the specified defaultValue string.</span></span><br><span class="line"><span class="comment">// See: Query() and GetQuery() for further information.</span></span><br><span class="line"><span class="comment">//     GET /?name=Manu&amp;lastname=</span></span><br><span class="line"><span class="comment">//     c.DefaultQuery(&quot;name&quot;, &quot;unknown&quot;) == &quot;Manu&quot;</span></span><br><span class="line"><span class="comment">//     c.DefaultQuery(&quot;id&quot;, &quot;none&quot;) == &quot;none&quot;</span></span><br><span class="line"><span class="comment">//     c.DefaultQuery(&quot;lastname&quot;, &quot;none&quot;) == &quot;&quot;</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> DefaultQuery(key, defaultValue <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> value, ok := c.GetQuery(key); ok &#123;</span><br><span class="line">		<span class="keyword">return</span> value</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> defaultValue</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetQuery is like Query(), it returns the keyed url query value</span></span><br><span class="line"><span class="comment">// if it exists `(value, true)` (even when the value is an empty string),</span></span><br><span class="line"><span class="comment">// otherwise it returns `(&quot;&quot;, false)`.</span></span><br><span class="line"><span class="comment">// It is shortcut for `c.Request.URL.Query().Get(key)`</span></span><br><span class="line"><span class="comment">//     GET /?name=Manu&amp;lastname=</span></span><br><span class="line"><span class="comment">//     (&quot;Manu&quot;, true) == c.GetQuery(&quot;name&quot;)</span></span><br><span class="line"><span class="comment">//     (&quot;&quot;, false) == c.GetQuery(&quot;id&quot;)</span></span><br><span class="line"><span class="comment">//     (&quot;&quot;, true) == c.GetQuery(&quot;lastname&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetQuery(key <span class="type">string</span>) (<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> values, ok := c.GetQueryArray(key); ok &#123;</span><br><span class="line">		<span class="keyword">return</span> values[<span class="number">0</span>], ok</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;&quot;</span>, <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// QueryArray returns a slice of strings for a given query key.</span></span><br><span class="line"><span class="comment">// The length of the slice depends on the number of params with the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> QueryArray(key <span class="type">string</span>) []<span class="type">string</span> &#123;</span><br><span class="line">	values, _ := c.GetQueryArray(key)</span><br><span class="line">	<span class="keyword">return</span> values</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetQueryArray returns a slice of strings for a given query key, plus</span></span><br><span class="line"><span class="comment">// a boolean value whether at least one value exists for the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetQueryArray(key <span class="type">string</span>) ([]<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> values, ok := c.Request.URL.Query()[key]; ok &amp;&amp; <span class="built_in">len</span>(values) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> values, <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> []<span class="type">string</span>&#123;&#125;, <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// QueryMap returns a map for a given query key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> QueryMap(key <span class="type">string</span>) <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span> &#123;</span><br><span class="line">	dicts, _ := c.GetQueryMap(key)</span><br><span class="line">	<span class="keyword">return</span> dicts</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetQueryMap returns a map for a given query key, plus a boolean value</span></span><br><span class="line"><span class="comment">// whether at least one value exists for the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetQueryMap(key <span class="type">string</span>) (<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	<span class="keyword">return</span> c.get(c.Request.URL.Query(), key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// PostForm returns the specified key from a POST urlencoded form or multipart form</span></span><br><span class="line"><span class="comment">// when it exists, otherwise it returns an empty string `(&quot;&quot;)`.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> PostForm(key <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	value, _ := c.GetPostForm(key)</span><br><span class="line">	<span class="keyword">return</span> value</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// DefaultPostForm returns the specified key from a POST urlencoded form or multipart form</span></span><br><span class="line"><span class="comment">// when it exists, otherwise it returns the specified defaultValue string.</span></span><br><span class="line"><span class="comment">// See: PostForm() and GetPostForm() for further information.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> DefaultPostForm(key, defaultValue <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> value, ok := c.GetPostForm(key); ok &#123;</span><br><span class="line">		<span class="keyword">return</span> value</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> defaultValue</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetPostForm is like PostForm(key). It returns the specified key from a POST urlencoded</span></span><br><span class="line"><span class="comment">// form or multipart form when it exists `(value, true)` (even when the value is an empty string),</span></span><br><span class="line"><span class="comment">// otherwise it returns (&quot;&quot;, false).</span></span><br><span class="line"><span class="comment">// For example, during a PATCH request to update the user&#x27;s email:</span></span><br><span class="line"><span class="comment">//     email=mail@example.com  --&gt;  (&quot;mail@example.com&quot;, true) := GetPostForm(&quot;email&quot;) // set email to &quot;mail@example.com&quot;</span></span><br><span class="line"><span class="comment">// 	   email=                  --&gt;  (&quot;&quot;, true) := GetPostForm(&quot;email&quot;) // set email to &quot;&quot;</span></span><br><span class="line"><span class="comment">//                             --&gt;  (&quot;&quot;, false) := GetPostForm(&quot;email&quot;) // do nothing with email</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetPostForm(key <span class="type">string</span>) (<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> values, ok := c.GetPostFormArray(key); ok &#123;</span><br><span class="line">		<span class="keyword">return</span> values[<span class="number">0</span>], ok</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;&quot;</span>, <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// PostFormArray returns a slice of strings for a given form key.</span></span><br><span class="line"><span class="comment">// The length of the slice depends on the number of params with the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> PostFormArray(key <span class="type">string</span>) []<span class="type">string</span> &#123;</span><br><span class="line">	values, _ := c.GetPostFormArray(key)</span><br><span class="line">	<span class="keyword">return</span> values</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetPostFormArray returns a slice of strings for a given form key, plus</span></span><br><span class="line"><span class="comment">// a boolean value whether at least one value exists for the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetPostFormArray(key <span class="type">string</span>) ([]<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	req := c.Request</span><br><span class="line">	<span class="keyword">if</span> err := req.ParseMultipartForm(c.engine.MaxMultipartMemory); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err != http.ErrNotMultipart &#123;</span><br><span class="line">			debugPrint(<span class="string">&quot;error on parse multipart form array: %v&quot;</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> values := req.PostForm[key]; <span class="built_in">len</span>(values) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> values, <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> []<span class="type">string</span>&#123;&#125;, <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// PostFormMap returns a map for a given form key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> PostFormMap(key <span class="type">string</span>) <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span> &#123;</span><br><span class="line">	dicts, _ := c.GetPostFormMap(key)</span><br><span class="line">	<span class="keyword">return</span> dicts</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// GetPostFormMap returns a map for a given form key, plus a boolean value</span></span><br><span class="line"><span class="comment">// whether at least one value exists for the given key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> GetPostFormMap(key <span class="type">string</span>) (<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	req := c.Request</span><br><span class="line">	<span class="keyword">if</span> err := req.ParseMultipartForm(c.engine.MaxMultipartMemory); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err != http.ErrNotMultipart &#123;</span><br><span class="line">			debugPrint(<span class="string">&quot;error on parse multipart form map: %v&quot;</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> c.get(req.PostForm, key)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// get is an internal method and returns a map which satisfy conditions.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> get(m <span class="keyword">map</span>[<span class="type">string</span>][]<span class="type">string</span>, key <span class="type">string</span>) (<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>, <span class="type">bool</span>) &#123;</span><br><span class="line">	dicts := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>)</span><br><span class="line">	exist := <span class="literal">false</span></span><br><span class="line">	<span class="keyword">for</span> k, v := <span class="keyword">range</span> m &#123;</span><br><span class="line">		<span class="keyword">if</span> i := strings.IndexByte(k, <span class="string">&#x27;[&#x27;</span>); i &gt;= <span class="number">1</span> &amp;&amp; k[<span class="number">0</span>:i] == key &#123;</span><br><span class="line">			<span class="keyword">if</span> j := strings.IndexByte(k[i+<span class="number">1</span>:], <span class="string">&#x27;]&#x27;</span>); j &gt;= <span class="number">1</span> &#123;</span><br><span class="line">				exist = <span class="literal">true</span></span><br><span class="line">				dicts[k[i+<span class="number">1</span>:][:j]] = v[<span class="number">0</span>]</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dicts, exist</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// FormFile returns the first file for the provided form key.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> FormFile(name <span class="type">string</span>) (*multipart.FileHeader, <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> c.Request.MultipartForm == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> err := c.Request.ParseMultipartForm(c.engine.MaxMultipartMemory); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	_, fh, err := c.Request.FormFile(name)</span><br><span class="line">	<span class="keyword">return</span> fh, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MultipartForm is the parsed multipart form, including file uploads.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> MultipartForm() (*multipart.Form, <span class="type">error</span>) &#123;</span><br><span class="line">	err := c.Request.ParseMultipartForm(c.engine.MaxMultipartMemory)</span><br><span class="line">	<span class="keyword">return</span> c.Request.MultipartForm, err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// SaveUploadedFile uploads the form file to specific dst.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> SaveUploadedFile(file *multipart.FileHeader, dst <span class="type">string</span>) <span class="type">error</span> &#123;</span><br><span class="line">	src, err := file.Open()</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> src.Close()</span><br><span class="line"></span><br><span class="line">	out, err := os.Create(dst)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">defer</span> out.Close()</span><br><span class="line"></span><br><span class="line">	_, err = io.Copy(out, src)</span><br><span class="line">	<span class="keyword">return</span> err</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Bind checks the Content-Type to select a binding engine automatically,</span></span><br><span class="line"><span class="comment">// Depending the &quot;Content-Type&quot; header different bindings are used:</span></span><br><span class="line"><span class="comment">//     &quot;application/json&quot; --&gt; JSON binding</span></span><br><span class="line"><span class="comment">//     &quot;application/xml&quot;  --&gt; XML binding</span></span><br><span class="line"><span class="comment">// otherwise --&gt; returns an error.</span></span><br><span class="line"><span class="comment">// It parses the request&#x27;s body as JSON if Content-Type == &quot;application/json&quot; using JSON or XML as a JSON input.</span></span><br><span class="line"><span class="comment">// It decodes the json payload into the struct specified as a pointer.</span></span><br><span class="line"><span class="comment">// It writes a 400 error and sets Content-Type header &quot;text/plain&quot; in the response if input is not valid.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> Bind(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	b := binding.Default(c.Request.Method, c.ContentType())</span><br><span class="line">	<span class="keyword">return</span> c.MustBindWith(obj, b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BindJSON is a shortcut for c.MustBindWith(obj, binding.JSON).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> BindJSON(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.MustBindWith(obj, binding.JSON)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BindXML is a shortcut for c.MustBindWith(obj, binding.BindXML).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> BindXML(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.MustBindWith(obj, binding.XML)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BindQuery is a shortcut for c.MustBindWith(obj, binding.Query).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> BindQuery(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.MustBindWith(obj, binding.Query)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BindYAML is a shortcut for c.MustBindWith(obj, binding.YAML).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> BindYAML(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.MustBindWith(obj, binding.YAML)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// BindUri binds the passed struct pointer using binding.Uri.</span></span><br><span class="line"><span class="comment">// It will abort the request with HTTP 400 if any error occurs.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> BindUri(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err := c.ShouldBindUri(obj); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) <span class="comment">// nolint: errcheck</span></span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// MustBindWith binds the passed struct pointer using the specified binding engine.</span></span><br><span class="line"><span class="comment">// It will abort the request with HTTP 400 if any error occurs.</span></span><br><span class="line"><span class="comment">// See the binding package.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> MustBindWith(obj <span class="keyword">interface</span>&#123;&#125;, b binding.Binding) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> err := c.ShouldBindWith(obj, b); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		c.AbortWithError(http.StatusBadRequest, err).SetType(ErrorTypeBind) <span class="comment">// nolint: errcheck</span></span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBind checks the Content-Type to select a binding engine automatically,</span></span><br><span class="line"><span class="comment">// Depending the &quot;Content-Type&quot; header different bindings are used:</span></span><br><span class="line"><span class="comment">//     &quot;application/json&quot; --&gt; JSON binding</span></span><br><span class="line"><span class="comment">//     &quot;application/xml&quot;  --&gt; XML binding</span></span><br><span class="line"><span class="comment">// otherwise --&gt; returns an error</span></span><br><span class="line"><span class="comment">// It parses the request&#x27;s body as JSON if Content-Type == &quot;application/json&quot; using JSON or XML as a JSON input.</span></span><br><span class="line"><span class="comment">// It decodes the json payload into the struct specified as a pointer.</span></span><br><span class="line"><span class="comment">// Like c.Bind() but this method does not set the response status code to 400 and abort if the json is not valid.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBind(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	b := binding.Default(c.Request.Method, c.ContentType())</span><br><span class="line">	<span class="keyword">return</span> c.ShouldBindWith(obj, b)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindJSON is a shortcut for c.ShouldBindWith(obj, binding.JSON).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindJSON(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.ShouldBindWith(obj, binding.JSON)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindXML is a shortcut for c.ShouldBindWith(obj, binding.XML).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindXML(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.ShouldBindWith(obj, binding.XML)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindQuery is a shortcut for c.ShouldBindWith(obj, binding.Query).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindQuery(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.ShouldBindWith(obj, binding.Query)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindYAML is a shortcut for c.ShouldBindWith(obj, binding.YAML).</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindYAML(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.ShouldBindWith(obj, binding.YAML)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindUri binds the passed struct pointer using the specified binding engine.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindUri(obj <span class="keyword">interface</span>&#123;&#125;) <span class="type">error</span> &#123;</span><br><span class="line">	m := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>][]<span class="type">string</span>)</span><br><span class="line">	<span class="keyword">for</span> _, v := <span class="keyword">range</span> c.Params &#123;</span><br><span class="line">		m[v.Key] = []<span class="type">string</span>&#123;v.Value&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> binding.Uri.BindUri(m, obj)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindWith binds the passed struct pointer using the specified binding engine.</span></span><br><span class="line"><span class="comment">// See the binding package.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindWith(obj <span class="keyword">interface</span>&#123;&#125;, b binding.Binding) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> b.Bind(c.Request, obj)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ShouldBindBodyWith is similar with ShouldBindWith, but it stores the request</span></span><br><span class="line"><span class="comment">// body into the context, and reuse when it is called again.</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// <span class="doctag">NOTE:</span> This method reads the body before binding. So you should use</span></span><br><span class="line"><span class="comment">// ShouldBindWith for better performance if you need to call only once.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ShouldBindBodyWith(obj <span class="keyword">interface</span>&#123;&#125;, bb binding.BindingBody) (err <span class="type">error</span>) &#123;</span><br><span class="line">	<span class="keyword">var</span> body []<span class="type">byte</span></span><br><span class="line">	<span class="keyword">if</span> cb, ok := c.Get(BodyBytesKey); ok &#123;</span><br><span class="line">		<span class="keyword">if</span> cbb, ok := cb.([]<span class="type">byte</span>); ok &#123;</span><br><span class="line">			body = cbb</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> body == <span class="literal">nil</span> &#123;</span><br><span class="line">		body, err = ioutil.ReadAll(c.Request.Body)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> err</span><br><span class="line">		&#125;</span><br><span class="line">		c.Set(BodyBytesKey, body)</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> bb.BindBody(body, obj)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ClientIP implements a best effort algorithm to return the real client IP, it parses</span></span><br><span class="line"><span class="comment">// X-Real-IP and X-Forwarded-For in order to work properly with reverse-proxies such us: nginx or haproxy.</span></span><br><span class="line"><span class="comment">// Use X-Forwarded-For before X-Real-Ip as nginx uses X-Real-Ip with the proxy&#x27;s IP.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ClientIP() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> c.engine.ForwardedByClientIP &#123;</span><br><span class="line">		clientIP := c.requestHeader(<span class="string">&quot;X-Forwarded-For&quot;</span>)</span><br><span class="line">		clientIP = strings.TrimSpace(strings.Split(clientIP, <span class="string">&quot;,&quot;</span>)[<span class="number">0</span>])</span><br><span class="line">		<span class="keyword">if</span> clientIP == <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			clientIP = strings.TrimSpace(c.requestHeader(<span class="string">&quot;X-Real-Ip&quot;</span>))</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span> clientIP != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> clientIP</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> c.engine.AppEngine &#123;</span><br><span class="line">		<span class="keyword">if</span> addr := c.requestHeader(<span class="string">&quot;X-Appengine-Remote-Addr&quot;</span>); addr != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> addr</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> ip, _, err := net.SplitHostPort(strings.TrimSpace(c.Request.RemoteAddr)); err == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> ip</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="string">&quot;&quot;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ContentType returns the Content-Type header of the request.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> ContentType() <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> filterFlags(c.requestHeader(<span class="string">&quot;Content-Type&quot;</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// IsWebsocket returns true if the request headers indicate that a websocket</span></span><br><span class="line"><span class="comment">// handshake is being initiated by the client.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> IsWebsocket() <span class="type">bool</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> strings.Contains(strings.ToLower(c.requestHeader(<span class="string">&quot;Connection&quot;</span>)), <span class="string">&quot;upgrade&quot;</span>) &amp;&amp;</span><br><span class="line">		strings.ToLower(c.requestHeader(<span class="string">&quot;Upgrade&quot;</span>)) == <span class="string">&quot;websocket&quot;</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *Context)</span></span> requestHeader(key <span class="type">string</span>) <span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> c.Request.Header.Get(key)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>gin</category>
+      </categories>
       <tags>
-        <tag>Gin Web</tag>
+        <tag>Gin</tag>
+        <tag>Web</tag>
       </tags>
   </entry>
   <entry>
-    <title>docker命令</title>
-    <url>/2024/07/18/docker%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h2 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h2><blockquote>
-<p><a class="link"   href="https://yeasy.gitbook.io/docker_practice/image/commit" >https://yeasy.gitbook.io/docker_practice/image/commit<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
-<p>1.docker commit [选项] &lt;容器ID或容器名&gt; [&lt;仓库名&gt;[:&lt;标签&gt;]]</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker commit \</span><br><span class="line">    --author &quot;Tao Wang &lt;twang2218@gmail.com&gt;&quot; \</span><br><span class="line">    --message &quot;修改了默认网页&quot; \</span><br><span class="line">    webserver \</span><br><span class="line">    nginx:v2</span><br><span class="line">sha256:07e33465974800ce65751acc279adc6ed2dc5ed4e0838f8b86f0c87aa1795214</span><br></pre></td></tr></table></figure>
+    <title>goframe-1-快速开始</title>
+    <url>/2024/08/15/goframe%E6%A1%86%E6%9E%B6/goframe-1-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>goframe实践｜初始化</title>
+    <url>/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%88%9D%E5%A7%8B%E5%8C%96/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>goframe框架</category>
+      </categories>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2024/08/23/template/Front-matter/</url>
+    <content><![CDATA[<hr>
+<h2 id="title-time-tags-‘’categories"><a href="#title-time-tags-‘’categories" class="headerlink" title="title: &lt;% tp.file.title %&gt;time: &lt;% tp.date.now() %&gt;tags:  - ‘’categories:  - &lt;% tp.file.folder(relative&#x3D;true) %&gt;  "></a>title: &lt;% tp.file.title %&gt;<br>time: &lt;% tp.date.now() %&gt;<br>tags:<br>  - ‘’<br>categories:<br>  - &lt;% tp.file.folder(relative&#x3D;true) %&gt;  </h2>]]></content>
+  </entry>
+  <entry>
+    <title>kubernetes学习</title>
+    <url>/2024/04/09/kubernetes/kubernetes%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="了解架构"><a href="#了解架构" class="headerlink" title="了解架构"></a>了解架构</h2><ul>
+<li><p>控制平面</p>
+<ul>
+<li>etcd分布式持久化存储</li>
+<li>API Server</li>
+<li>controller manager</li>
+<li>调度器</li>
+</ul>
+</li>
+<li><p>工作节点</p>
+<ul>
+<li>kubelet</li>
+<li>kubelet服务代理</li>
+<li>容器运行时（如docker、rkt）</li>
+</ul>
+</li>
+<li><p>附加组件</p>
+<ul>
+<li>kubernetes DNS服务器</li>
+<li>仪表板</li>
+<li>Ingress控制器</li>
+<li>Heapster（容器集群监控）</li>
+<li>CNI插件</li>
+</ul>
+</li>
+</ul>
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240410102847.png"   style="zoom:50%;" >
 
-<ol start="2">
-<li></li>
-</ol>
+<p>可以通过</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">kubectl get componentstatuses</span><br></pre></td></tr></table></figure>
+
+<p>获取各个控制平面组件的健康状态</p>
+<h2 id="API服务器的作用"><a href="#API服务器的作用" class="headerlink" title="API服务器的作用"></a>API服务器的作用</h2><h3 id="校验"><a href="#校验" class="headerlink" title="校验"></a>校验</h3><img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240411145447.png"   style="zoom:50%;">
+
+<p>认证插件：首先， API 服务器需要认证发送请求的客户端。 这是通过配置在 API 服务器上 的一个或多个认证插件来实现的。 API 服务器会轮流调用这些插件， 直到有一个能 确认是谁发送了该请求。 这是通过检查HTTP请求实现的。</p>
+<p>授权插件：除了认证插件， API 服务器还可以配置使用一个或多个授权插件。 它们的作用 是决定认证的用户是否可以对请求资源执行请求操作。 例如， 当创建 pod 时， API 服务器会轮询所有的授权插件， 来确认该用户是否可以在请求命名空间创建 pod。 一旦插件确认了用户可以执行该操作， API 服务器会继续下一步操作。</p>
+<p>准入插件：如果请求尝试创建、 修改或者删除一个资源，请求需要经过准入控制插件的验证。（注意：如果仅是读取资源，不会经过准入插件）</p>
+<p>请求通过了所有的准入控制插件后， API 服务器会验证存储到 etcd 的对象， 然 后返回一个响应给客户端。</p>
+<h3 id="通知客户端资源变更"><a href="#通知客户端资源变更" class="headerlink" title="通知客户端资源变更"></a>通知客户端资源变更</h3><p>API服务器的作用是启动控制器以及其他组件来监控已经部署资源的变更。</p>
+<h2 id="调度器"><a href="#调度器" class="headerlink" title="调度器"></a>调度器</h2><h2 id="控制器管理器中运行的控制器"><a href="#控制器管理器中运行的控制器" class="headerlink" title="控制器管理器中运行的控制器"></a>控制器管理器中运行的控制器</h2><p>由于使用监听机制并不保证控制器不会漏掉时间， 所以 仍然需要定期执行重列举操作来确保不会丢掉什么。</p>
+<h2 id="kubelet"><a href="#kubelet" class="headerlink" title="kubelet"></a>kubelet</h2><p>未完待续。。。。</p>
 ]]></content>
       <tags>
-        <tag>docker</tag>
+        <tag>kubernetes</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Orbstack虚拟机安装docker</title>
+    <url>/2024/07/15/%E9%9A%8F%E7%AC%94/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>ToDoList</title>
+    <url>/2024/07/15/%E9%9A%8F%E7%AC%94/ToDoList/</url>
+    <content><![CDATA[<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><ul>
+<li>Golang</li>
+<li>mysql</li>
+<li>redis</li>
+<li>rabbitmq</li>
+<li></li>
+</ul>
+<h3 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h3><ul>
+<li>秒杀</li>
+<li>网关</li>
+<li></li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title>beego简单介绍</title>
+    <url>/2024/06/14/%E9%9A%8F%E7%AC%94/beego%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<h2 id="简单安装与入门"><a href="#简单安装与入门" class="headerlink" title="简单安装与入门"></a>简单安装与入门</h2><h3 id="安装命令行工具bee"><a href="#安装命令行工具bee" class="headerlink" title="安装命令行工具bee"></a>安装命令行工具bee</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">go install github.com/beego/bee/v2@latest</span><br></pre></td></tr></table></figure>
+
+<h3 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bee new beego-Admin</span><br></pre></td></tr></table></figure>
+
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100255.png"   style="zoom:50%;" >
+
+<p>目录结构如上图所示，是一个典型的MVC架构，M（models 目录）、V（views 目录）和 C（controllers 目录）的结构， <code>main.go</code> 是入口文件。</p>
+<h3 id="运行项目"><a href="#运行项目" class="headerlink" title="运行项目"></a>运行项目</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">bee run</span><br></pre></td></tr></table></figure>
+
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100629.png"   style="zoom:50%;" >
+
+<p>这样，一个简单的demo就运行起来了</p>
+<img     src="https://raw.githubusercontent.com/miller-star/picture/master/20240614100843.png"   style="zoom:50%;" >
+
+<h2 id="框架解析"><a href="#框架解析" class="headerlink" title="框架解析"></a>框架解析</h2><h3 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h3><img     src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/architecture.png"   style="zoom:75%;" >
+
+<p>beego 是基于八大独立的模块构建的，是一个高度解耦的框架。当初设计 beego 的时候就是考虑功能模块化，用户即使不使用 beego 的 HTTP 逻辑，也依旧可以使用这些独立模块。</p>
+<h3 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h3><p><img   src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/init.png" ></p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>beego官方给出了几个demo项目</p>
+<p><a class="link"   href="https://github.com/beego/samples" >https://github.com/beego/samples<i class="fas fa-external-link-alt"></i></a></p>
+]]></content>
+      <tags>
+        <tag>web beego</tag>
       </tags>
   </entry>
   <entry>
     <title>centos-python基础镜像构建</title>
-    <url>/2024/07/18/centos-python%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/</url>
+    <url>/2024/07/18/%E9%9A%8F%E7%AC%94/centos-python%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/</url>
     <content><![CDATA[<blockquote>
 <p><a class="link"   href="https://www.cnblogs.com/leeona/p/18282312" >https://www.cnblogs.com/leeona/p/18282312<i class="fas fa-external-link-alt"></i></a></p>
 </blockquote>
@@ -257,7 +279,7 @@
   </entry>
   <entry>
     <title>centos9安装mysql服务端记录</title>
-    <url>/2024/07/18/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/</url>
+    <url>/2024/07/18/%E9%9A%8F%E7%AC%94/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<p>安装的主要流程：<a class="link"   href="https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/" >https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/<i class="fas fa-external-link-alt"></i></a></p>
 <p>之后，远程登录的时候，会报错：</p>
 <p>mysql -h ‘安装mysql服务端机器的IP’ -u root</p>
@@ -287,36 +309,35 @@
       </tags>
   </entry>
   <entry>
-    <title>gin框架-bind与验证</title>
-    <url>/2024/07/18/gin%E6%A1%86%E6%9E%B6-bind%E4%B8%8E%E9%AA%8C%E8%AF%81/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title>Protobuf详解</title>
-    <url>/2024/07/22/Protobuf%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[]]></content>
+    <title>docker命令</title>
+    <url>/2024/07/18/%E9%9A%8F%E7%AC%94/docker%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h2 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h2><blockquote>
+<p><a class="link"   href="https://yeasy.gitbook.io/docker_practice/image/commit" >https://yeasy.gitbook.io/docker_practice/image/commit<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>1.docker commit [选项] &lt;容器ID或容器名&gt; [&lt;仓库名&gt;[:&lt;标签&gt;]]</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker commit \</span><br><span class="line">    --author &quot;Tao Wang &lt;twang2218@gmail.com&gt;&quot; \</span><br><span class="line">    --message &quot;修改了默认网页&quot; \</span><br><span class="line">    webserver \</span><br><span class="line">    nginx:v2</span><br><span class="line">sha256:07e33465974800ce65751acc279adc6ed2dc5ed4e0838f8b86f0c87aa1795214</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li></li>
+</ol>
+]]></content>
       <tags>
-        <tag>golang</tag>
+        <tag>docker</tag>
       </tags>
   </entry>
   <entry>
-    <title>goframe-1-快速开始</title>
-    <url>/2024/08/15/goframe-1-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/</url>
-    <content><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
-      <tags>
-        <tag>web</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>golang-module详解</title>
-    <url>/2024/07/24/golang-module%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<p>以此文总结下目前自己掌握的go module知识</p>
+    <title>单例模式</title>
+    <url>/2024/07/16/%E9%9A%8F%E7%AC%94/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
+    <content><![CDATA[<blockquote>
+<p><a class="link"   href="https://blog.csdn.net/justloveyou_/article/details/64127789" >https://blog.csdn.net/justloveyou_/article/details/64127789<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+<p>golang的单例模式：</p>
 <blockquote>
-<p> 引用《go专家编程》<a class="link"   href="https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html" >https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html<i class="fas fa-external-link-alt"></i></a></p>
+<p><a class="link"   href="https://blog.csdn.net/qq_43035350/article/details/125536474" >https://blog.csdn.net/qq_43035350/article/details/125536474<i class="fas fa-external-link-alt"></i></a></p>
 </blockquote>
 ]]></content>
       <tags>
-        <tag>golang</tag>
+        <tag>设计模式</tag>
       </tags>
   </entry>
 </search>
