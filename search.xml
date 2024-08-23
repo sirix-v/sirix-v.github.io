@@ -75,7 +75,7 @@
 
 <p>beego 是基于八大独立的模块构建的，是一个高度解耦的框架。当初设计 beego 的时候就是考虑功能模块化，用户即使不使用 beego 的 HTTP 逻辑，也依旧可以使用这些独立模块。</p>
 <h3 id="路由设置"><a href="#路由设置" class="headerlink" title="路由设置"></a>路由设置</h3><p><img   src="https://raw.githubusercontent.com/beego/beedoc/master/zh-CN/images/init.png" ></p>
-<h2 id="开发实践"><a href="#开发实践" class="headerlink" title="开发实践"></a>开发实践</h2><p>beego官方给出了几个demo项目</p>
+<h2 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h2><p>beego官方给出了几个demo项目</p>
 <p><a class="link"   href="https://github.com/beego/samples" >https://github.com/beego/samples<i class="fas fa-external-link-alt"></i></a></p>
 ]]></content>
       <tags>
@@ -209,7 +209,7 @@
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">type</span> ServeMux <span class="keyword">struct</span> &#123;</span><br><span class="line">    mu    sync.RWMutex  <span class="comment">// 读写锁，用于并发访问路由map时加锁保护</span></span><br><span class="line">    m     <span class="keyword">map</span>[<span class="type">string</span>]muxEntry <span class="comment">// 保存路由的map</span></span><br><span class="line">    es    []muxEntry <span class="comment">// slice of entries sorted from longest to shortest. 基于路径保存的handler列表</span></span><br><span class="line">    hosts <span class="type">bool</span>       <span class="comment">// whether any patterns contain hostnames</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> muxEntry <span class="keyword">struct</span> &#123;</span><br><span class="line">    h       Handler <span class="comment">// Handler是go的标准网络处理函数，任何实现了ServeHTTP(ResponseWriter, *Request)的函数都可以作为Handler</span></span><br><span class="line">    pattern <span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>http.HandleFunc()具体功能就是将用户定义的Handler函数保存到DefaultServeMux.m中，原理较为简单，在此不再赘述。</p>
-<p><img   src="https://img2022.cnblogs.com/blog/1951229/202210/1951229-20221023100944302-1862362530.png" ></p>
+<p><img   src="https://raw.githubusercontent.com/miller-star/picture/master/1951229-20221023100944302-1862362530.png" ></p>
 <h2 id="Gin中处理请求的接口"><a href="#Gin中处理请求的接口" class="headerlink" title="Gin中处理请求的接口"></a>Gin中处理请求的接口</h2><p>主要通过context结构体中的相关方法来处理请求</p>
 <figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// Context is the most important part of gin. It allows us to pass variables between middleware,</span></span><br><span class="line"><span class="comment">// manage the flow, validate the JSON of a request and render a JSON response for example.</span></span><br><span class="line"><span class="keyword">type</span> Context <span class="keyword">struct</span> &#123;</span><br><span class="line">	writermem responseWriter</span><br><span class="line">	Request   *http.Request</span><br><span class="line">	Writer    ResponseWriter</span><br><span class="line"></span><br><span class="line">	Params   Params</span><br><span class="line">	handlers HandlersChain</span><br><span class="line">	index    <span class="type">int8</span></span><br><span class="line"></span><br><span class="line">	engine *Engine</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Keys is a key/value pair exclusively for the context of each request.</span></span><br><span class="line">	Keys <span class="keyword">map</span>[<span class="type">string</span>]<span class="keyword">interface</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Errors is a list of errors attached to all the handlers/middlewares who used this context.</span></span><br><span class="line">	Errors errorMsgs</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Accepted defines a list of manually accepted formats for content negotiation.</span></span><br><span class="line">	Accepted []<span class="type">string</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -230,6 +230,9 @@
 <p>1.docker commit [选项] &lt;容器ID或容器名&gt; [&lt;仓库名&gt;[:&lt;标签&gt;]]</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ docker commit \</span><br><span class="line">    --author &quot;Tao Wang &lt;twang2218@gmail.com&gt;&quot; \</span><br><span class="line">    --message &quot;修改了默认网页&quot; \</span><br><span class="line">    webserver \</span><br><span class="line">    nginx:v2</span><br><span class="line">sha256:07e33465974800ce65751acc279adc6ed2dc5ed4e0838f8b86f0c87aa1795214</span><br></pre></td></tr></table></figure>
 
+<ol start="2">
+<li></li>
+</ol>
 ]]></content>
       <tags>
         <tag>docker</tag>
@@ -287,5 +290,33 @@
     <title>gin框架-bind与验证</title>
     <url>/2024/07/18/gin%E6%A1%86%E6%9E%B6-bind%E4%B8%8E%E9%AA%8C%E8%AF%81/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Protobuf详解</title>
+    <url>/2024/07/22/Protobuf%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[]]></content>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>goframe-1-快速开始</title>
+    <url>/2024/08/15/goframe-1-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/</url>
+    <content><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+      <tags>
+        <tag>web</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>golang-module详解</title>
+    <url>/2024/07/24/golang-module%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<p>以此文总结下目前自己掌握的go module知识</p>
+<blockquote>
+<p> 引用《go专家编程》<a class="link"   href="https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html" >https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+]]></content>
+      <tags>
+        <tag>golang</tag>
+      </tags>
   </entry>
 </search>
