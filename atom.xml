@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-08-23T10:29:32.681Z</updated>
+  <updated>2024-08-23T10:48:29.745Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,22 +17,39 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://example.com/2024/08/23/template/Front-matter/"/>
-    <id>http://example.com/2024/08/23/template/Front-matter/</id>
-    <published>2024-08-23T10:27:26.132Z</published>
-    <updated>2024-08-23T10:29:32.681Z</updated>
+    <title>goframe实践｜实践</title>
+    <link href="http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%AE%9E%E8%B7%B5/</id>
+    <published>2024-08-23T10:48:06.617Z</published>
+    <updated>2024-08-23T10:48:29.745Z</updated>
     
-    <content type="html"><![CDATA[<hr><h2 id="title-time-tags-‘’categories"><a href="#title-time-tags-‘’categories" class="headerlink" title="title: &lt;% tp.file.title %&gt;time: &lt;% tp.date.now() %&gt;tags:  - ‘’categories:  - &lt;% tp.file.folder(relative&#x3D;true) %&gt;  "></a>title: &lt;% tp.file.title %&gt;<br>time: &lt;% tp.date.now() %&gt;<br>tags:<br>  - ‘’<br>categories:<br>  - &lt;% tp.file.folder(relative&#x3D;true) %&gt;  </h2>]]></content>
+    
+    
+    
+    <category term="goframe框架" scheme="http://example.com/categories/goframe%E6%A1%86%E6%9E%B6/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>goframe实践｜架构与目录</title>
+    <link href="http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/"/>
+    <id>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/</id>
+    <published>2024-08-23T10:48:06.617Z</published>
+    <updated>2024-08-23T10:49:16.530Z</updated>
+    
+    <content type="html"><![CDATA[<p>测试</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;hr&gt;
-&lt;h2 id=&quot;title-time-tags-‘’categories&quot;&gt;&lt;a href=&quot;#title-time-tags-‘’categories&quot; class=&quot;headerlink&quot; title=&quot;title: &amp;lt;% tp.file.title %&amp;gt</summary>
+    <summary type="html">&lt;p&gt;测试&lt;/p&gt;
+</summary>
       
     
     
+    
+    <category term="goframe框架" scheme="http://example.com/categories/goframe%E6%A1%86%E6%9E%B6/"/>
     
     
   </entry>
@@ -49,34 +66,6 @@
     
     <category term="goframe框架" scheme="http://example.com/categories/goframe%E6%A1%86%E6%9E%B6/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
-    <id>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</id>
-    <published>2024-08-23T06:36:22.512Z</published>
-    <updated>2024-08-23T06:37:08.398Z</updated>
-    
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>goframe-1-快速开始</title>
-    <link href="http://example.com/2024/08/15/goframe%E6%A1%86%E6%9E%B6/goframe-1-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/"/>
-    <id>http://example.com/2024/08/15/goframe%E6%A1%86%E6%9E%B6/goframe-1-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/</id>
-    <published>2024-08-15T11:07:36.000Z</published>
-    <updated>2024-08-23T07:56:14.508Z</updated>
-    
-    
-    
-    
-    
-    <category term="web" scheme="http://example.com/tags/web/"/>
     
   </entry>
   

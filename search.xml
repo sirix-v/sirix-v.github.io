@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>golang-module详解</title>
-    <url>/2024/07/24/golang/golang-module%E8%AF%A6%E8%A7%A3/</url>
-    <content><![CDATA[<p>以此文总结下目前自己掌握的go module知识</p>
-<blockquote>
-<p> 引用《go专家编程》<a class="link"   href="https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html" >https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
-]]></content>
-      <tags>
-        <tag>golang</tag>
-      </tags>
+    <title>goframe实践｜初始化</title>
+    <url>/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%88%9D%E5%A7%8B%E5%8C%96/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>goframe框架</category>
+      </categories>
   </entry>
   <entry>
     <title>Protobuf详解</title>
@@ -135,31 +131,16 @@
       </tags>
   </entry>
   <entry>
-    <title>goframe-1-快速开始</title>
-    <url>/2024/08/15/goframe%E6%A1%86%E6%9E%B6/goframe-1-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/</url>
-    <content><![CDATA[]]></content>
+    <title>golang-module详解</title>
+    <url>/2024/07/24/golang/golang-module%E8%AF%A6%E8%A7%A3/</url>
+    <content><![CDATA[<p>以此文总结下目前自己掌握的go module知识</p>
+<blockquote>
+<p> 引用《go专家编程》<a class="link"   href="https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html" >https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+]]></content>
       <tags>
-        <tag>web</tag>
+        <tag>golang</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>goframe实践｜初始化</title>
-    <url>/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%88%9D%E5%A7%8B%E5%8C%96/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>goframe框架</category>
-      </categories>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2024/08/23/template/Front-matter/</url>
-    <content><![CDATA[<hr>
-<h2 id="title-time-tags-‘’categories"><a href="#title-time-tags-‘’categories" class="headerlink" title="title: &lt;% tp.file.title %&gt;time: &lt;% tp.date.now() %&gt;tags:  - ‘’categories:  - &lt;% tp.file.folder(relative&#x3D;true) %&gt;  "></a>title: &lt;% tp.file.title %&gt;<br>time: &lt;% tp.date.now() %&gt;<br>tags:<br>  - ‘’<br>categories:<br>  - &lt;% tp.file.folder(relative&#x3D;true) %&gt;  </h2>]]></content>
   </entry>
   <entry>
     <title>kubernetes学习</title>
@@ -339,5 +320,22 @@
       <tags>
         <tag>设计模式</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>goframe实践｜实践</title>
+    <url>/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>goframe框架</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>goframe实践｜架构与目录</title>
+    <url>/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/</url>
+    <content><![CDATA[<p>测试</p>
+]]></content>
+      <categories>
+        <category>goframe框架</category>
+      </categories>
   </entry>
 </search>

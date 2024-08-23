@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%88%9D%E5%A7%8B%E5%8C%96/</loc>
+    <loc>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/</loc>
     
     <lastmod>2024-08-23</lastmod>
     
@@ -11,7 +11,16 @@
   </url>
   
   <url>
-    <loc>http://example.com/2024/08/23/template/Front-matter/</loc>
+    <loc>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%AE%9E%E8%B7%B5/</loc>
+    
+    <lastmod>2024-08-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%88%9D%E5%A7%8B%E5%8C%96/</loc>
     
     <lastmod>2024-08-23</lastmod>
     
@@ -39,24 +48,6 @@
   
   <url>
     <loc>http://example.com/categories/index.html</loc>
-    
-    <lastmod>2024-08-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/08/15/goframe%E6%A1%86%E6%9E%B6/goframe-1-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B/</loc>
-    
-    <lastmod>2024-08-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</loc>
     
     <lastmod>2024-08-23</lastmod>
     
@@ -194,13 +185,6 @@
   </url>
   
   <url>
-    <loc>http://example.com/tags/web/</loc>
-    <lastmod>2024-08-23</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://example.com/tags/kubernetes/</loc>
     <lastmod>2024-08-23</lastmod>
     <changefreq>weekly</changefreq>
@@ -238,14 +222,14 @@
 
   
   <url>
-    <loc>http://example.com/categories/gin/</loc>
+    <loc>http://example.com/categories/goframe%E6%A1%86%E6%9E%B6/</loc>
     <lastmod>2024-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://example.com/categories/goframe%E6%A1%86%E6%9E%B6/</loc>
+    <loc>http://example.com/categories/gin/</loc>
     <lastmod>2024-08-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
