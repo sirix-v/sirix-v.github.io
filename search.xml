@@ -8,8 +8,9 @@
 </blockquote>
 <p>基本的工程目录结构</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">/</span><br><span class="line">├── api</span><br><span class="line">├── hack</span><br><span class="line">├── internal</span><br><span class="line">│   ├── cmd</span><br><span class="line">│   ├── consts</span><br><span class="line">│   ├── controller</span><br><span class="line">│   ├── dao</span><br><span class="line">│   ├── logic</span><br><span class="line">│   ├── model</span><br><span class="line">│   |   ├── do</span><br><span class="line">│   │   └── entity</span><br><span class="line">│   └── service</span><br><span class="line">├── manifest</span><br><span class="line">├── resource</span><br><span class="line">├── utility</span><br><span class="line">├── go.mod</span><br><span class="line">└── main.go </span><br></pre></td></tr></table></figure>
-<p>一个大体的目录结构如上，当然可以根据需要增减</p>
-<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2>]]></content>
+<p>一个大体的目录结构如上，当然可以根据需要增减<br>整体流程<br><img   src="https://goframe.org/download/attachments/30740166/image2022-6-22_16-2-37.png?version=1&modificationDate=1655884751621&api=v2" ></p>
+<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>这里着重讲一下model目录，数据结构管理模块，管理数据实体对象，以及输入与输出数据结构定义。<br><img   src="https://goframe.org/download/attachments/30740166/image2022-1-18_0-47-31.png?version=1&modificationDate=1642437918159&api=v2" ><br>与service</p>
+]]></content>
       <categories>
         <category>goframe框架</category>
       </categories>
@@ -224,11 +225,6 @@
 <li></li>
 </ul>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Orbstack虚拟机安装docker</title>
-    <url>/2024/07/15/%E9%9A%8F%E7%AC%94/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>beego简单介绍</title>

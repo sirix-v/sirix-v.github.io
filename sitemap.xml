@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/2024/08/25/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-2%20%EF%BD%9Cweb%E5%BC%80%E5%8F%91/</loc>
+    <loc>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/</loc>
     
-    <lastmod>2024-08-25</lastmod>
+    <lastmod>2024-08-26</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/</loc>
+    <loc>http://example.com/2024/08/25/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-2%20%EF%BD%9Cweb%E5%BC%80%E5%8F%91/</loc>
     
     <lastmod>2024-08-25</lastmod>
     
@@ -102,15 +102,6 @@
   
   <url>
     <loc>http://example.com/2024/07/16/%E9%9A%8F%E7%AC%94/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</loc>
-    
-    <lastmod>2024-07-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/07/15/%E9%9A%8F%E7%AC%94/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker/</loc>
     
     <lastmod>2024-07-16</lastmod>
     

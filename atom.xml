@@ -36,9 +36,9 @@
     <link href="http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/"/>
     <id>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/</id>
     <published>2024-08-23T10:48:06.617Z</published>
-    <updated>2024-08-25T09:17:28.794Z</updated>
+    <updated>2024-08-26T07:21:49.661Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="工程目录"><a href="#工程目录" class="headerlink" title="工程目录"></a>工程目录</h2><blockquote><p><a class="link"   href="https://goframe.org/pages/viewpage.action?pageId=30740166" >https://goframe.org/pages/viewpage.action?pageId=30740166<i class="fas fa-external-link-alt"></i></a></p></blockquote><p>基本的工程目录结构</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">├── api</span><br><span class="line">├── hack</span><br><span class="line">├── internal</span><br><span class="line">│   ├── cmd</span><br><span class="line">│   ├── consts</span><br><span class="line">│   ├── controller</span><br><span class="line">│   ├── dao</span><br><span class="line">│   ├── logic</span><br><span class="line">│   ├── model</span><br><span class="line">│   |   ├── do</span><br><span class="line">│   │   └── entity</span><br><span class="line">│   └── service</span><br><span class="line">├── manifest</span><br><span class="line">├── resource</span><br><span class="line">├── utility</span><br><span class="line">├── go.mod</span><br><span class="line">└── main.go </span><br></pre></td></tr></table></figure><p>一个大体的目录结构如上，当然可以根据需要增减</p><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2>]]></content>
+    <content type="html"><![CDATA[<h2 id="工程目录"><a href="#工程目录" class="headerlink" title="工程目录"></a>工程目录</h2><blockquote><p><a class="link"   href="https://goframe.org/pages/viewpage.action?pageId=30740166" >https://goframe.org/pages/viewpage.action?pageId=30740166<i class="fas fa-external-link-alt"></i></a></p></blockquote><p>基本的工程目录结构</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">├── api</span><br><span class="line">├── hack</span><br><span class="line">├── internal</span><br><span class="line">│   ├── cmd</span><br><span class="line">│   ├── consts</span><br><span class="line">│   ├── controller</span><br><span class="line">│   ├── dao</span><br><span class="line">│   ├── logic</span><br><span class="line">│   ├── model</span><br><span class="line">│   |   ├── do</span><br><span class="line">│   │   └── entity</span><br><span class="line">│   └── service</span><br><span class="line">├── manifest</span><br><span class="line">├── resource</span><br><span class="line">├── utility</span><br><span class="line">├── go.mod</span><br><span class="line">└── main.go </span><br></pre></td></tr></table></figure><p>一个大体的目录结构如上，当然可以根据需要增减<br>整体流程<br><img   src="https://goframe.org/download/attachments/30740166/image2022-6-22_16-2-37.png?version=1&modificationDate=1655884751621&api=v2" ></p><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>这里着重讲一下model目录，数据结构管理模块，管理数据实体对象，以及输入与输出数据结构定义。<br><img   src="https://goframe.org/download/attachments/30740166/image2022-1-18_0-47-31.png?version=1&modificationDate=1642437918159&api=v2" ><br>与service</p>]]></content>
     
     
       
@@ -207,19 +207,6 @@
 &lt;li&gt;rabbitmq&lt;/li&gt;
 &lt;li&gt;</summary>
       
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Orbstack虚拟机安装docker</title>
-    <link href="http://example.com/2024/07/15/%E9%9A%8F%E7%AC%94/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker/"/>
-    <id>http://example.com/2024/07/15/%E9%9A%8F%E7%AC%94/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker/</id>
-    <published>2024-07-15T03:53:27.000Z</published>
-    <updated>2024-07-16T12:05:53.521Z</updated>
-    
     
     
     

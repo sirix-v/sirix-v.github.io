@@ -1,5 +1,5 @@
-http://example.com/2024/08/25/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-2%20%EF%BD%9Cweb%E5%BC%80%E5%8F%91/
 http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/
+http://example.com/2024/08/25/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-2%20%EF%BD%9Cweb%E5%BC%80%E5%8F%91/
 http://example.com/2024/07/09/gin/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5/
 http://example.com/2024/07/22/gin/Protobuf%E8%AF%A6%E8%A7%A3/
 http://example.com/categories/index.html
@@ -10,7 +10,6 @@ http://example.com/2024/07/18/%E9%9A%8F%E7%AC%94/docker%E5%91%BD%E4%BB%A4/
 http://example.com/2024/07/18/%E9%9A%8F%E7%AC%94/centos-python%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/
 http://example.com/2024/07/18/%E9%9A%8F%E7%AC%94/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/
 http://example.com/2024/07/16/%E9%9A%8F%E7%AC%94/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/
-http://example.com/2024/07/15/%E9%9A%8F%E7%AC%94/Orbstack%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%AE%89%E8%A3%85docker/
 http://example.com/2024/07/15/%E9%9A%8F%E7%AC%94/ToDoList/
 http://example.com/2024/04/09/kubernetes/kubernetes%E5%AD%A6%E4%B9%A0/
 http://example.com/tags/index.html
