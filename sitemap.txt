@@ -1,6 +1,5 @@
-http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/
-http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%AE%9E%E8%B7%B5/
-http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5%EF%BD%9C%E5%88%9D%E5%A7%8B%E5%8C%96/
+http://example.com/2024/08/25/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-2%20%EF%BD%9Cweb%E5%BC%80%E5%8F%91/
+http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/
 http://example.com/2024/07/09/gin/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5/
 http://example.com/2024/07/22/gin/Protobuf%E8%AF%A6%E8%A7%A3/
 http://example.com/categories/index.html
@@ -16,9 +15,10 @@ http://example.com/2024/07/15/%E9%9A%8F%E7%AC%94/ToDoList/
 http://example.com/2024/04/09/kubernetes/kubernetes%E5%AD%A6%E4%B9%A0/
 http://example.com/tags/index.html
 http://example.com/
-http://example.com/tags/golang/
+http://example.com/tags/goframe/
 http://example.com/tags/Gin/
 http://example.com/tags/Web/
+http://example.com/tags/golang/
 http://example.com/tags/kubernetes/
 http://example.com/tags/web-beego/
 http://example.com/tags/%E8%BF%90%E7%BB%B4/
