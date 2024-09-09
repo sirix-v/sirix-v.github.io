@@ -321,7 +321,9 @@
   <entry>
     <title>go包管理详解</title>
     <url>/2024/09/05/golang/go%E5%8C%85%E7%AE%A1%E7%90%86/</url>
-    <content><![CDATA[<h3 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h3><h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
+    <content><![CDATA[<p>总结一下go moudle相关内容</p>
+<span id="more"></span>
+<h3 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h3><h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
 <p>1、go get：</p>
 <p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p>
 <p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p>
