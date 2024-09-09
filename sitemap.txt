@@ -1,5 +1,5 @@
+http://example.com/2024/09/05/golang/go%E5%8C%85%E7%AE%A1%E7%90%86/
 http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/
-http://example.com/2024/09/05/golang/go%E5%8C%85%E7%AE%A1%E7%90%86%E8%AF%A6%E8%A7%A3/
 http://example.com/2024/08/25/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-2%20%EF%BD%9Cweb%E5%BC%80%E5%8F%91/
 http://example.com/2024/07/09/gin/golang-gin%E6%A1%86%E6%9E%B6%E5%AE%9E%E8%B7%B5/
 http://example.com/2024/07/22/gin/Protobuf%E8%AF%A6%E8%A7%A3/
