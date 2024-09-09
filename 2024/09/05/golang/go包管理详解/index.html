@@ -9,7 +9,7 @@
     
     <title>
         
-            goframe实践-1｜架构与目录 |
+            go work详解 |
         
         Sirius的博客
     </title>
@@ -200,7 +200,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        goframe实践-1｜架构与目录
+                        go work详解
                     </div>
                 
 
@@ -228,12 +228,12 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-08-23 18:48:06</span>
+                <span class="datetime">2024-09-05 09:46:45</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Mon Sep 09 2024 10:28:51 GMT+0800">2024-09-09 10:28:51</span>
+                <span class="datetime" data-updated="Mon Sep 09 2024 10:25:04 GMT+0800">2024-09-09 10:25:04</span>
             </span>
         
 
@@ -241,7 +241,7 @@
             <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
                 <ul class="post-category-ul">
                     
-                            <li class="category-item"><a href="/categories/goframe%E6%A1%86%E6%9E%B6/">goframe框架</a></li>
+                            <li class="category-item"><a href="/categories/golang/">golang</a></li>
                         
                     
                 </ul>
@@ -252,7 +252,7 @@
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/goframe/">goframe</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/golang/">golang</a></li>
                         
                     
                 </ul>
@@ -262,12 +262,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>124 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>915 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>3 分钟</span>
             </span>
         
         
@@ -288,14 +288,47 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <h2 id="工程目录"><a href="#工程目录" class="headerlink" title="工程目录"></a>工程目录</h2><blockquote>
-<p><a class="link"   target="_blank" rel="noopener" href="https://goframe.org/pages/viewpage.action?pageId=30740166" >https://goframe.org/pages/viewpage.action?pageId=30740166<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
-<p>基本的工程目录结构</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">├── api</span><br><span class="line">├── hack</span><br><span class="line">├── internal</span><br><span class="line">│   ├── cmd</span><br><span class="line">│   ├── consts</span><br><span class="line">│   ├── controller</span><br><span class="line">│   ├── dao</span><br><span class="line">│   ├── logic</span><br><span class="line">│   ├── model</span><br><span class="line">│   |   ├── do</span><br><span class="line">│   │   └── entity</span><br><span class="line">│   └── service</span><br><span class="line">├── manifest</span><br><span class="line">├── resource</span><br><span class="line">├── utility</span><br><span class="line">├── go.mod</span><br><span class="line">└── main.go </span><br></pre></td></tr></table></figure>
-<p>一个大体的目录结构如上，当然可以根据需要增减<br>goframe官方提供的一个示例项目focus-single目录如下：<br><img   src="https://raw.githubusercontent.com/miller-star/picture/master/20240909102833.png"  alt="image.png"></p>
-<p>整体流程<br><img   src="https://goframe.org/download/attachments/30740166/image2022-6-22_16-2-37.png?version=1&modificationDate=1655884751621&api=v2" ></p>
-<h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>这里着重讲一下model目录，数据结构管理模块，管理数据实体对象，以及输入与输出数据结构定义。<br><img   src="https://goframe.org/download/attachments/30740166/image2022-1-18_0-47-31.png?version=1&modificationDate=1642437918159&api=v2" ></p>
+                    <h3 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h3><h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
+<p>1、go get：</p>
+<p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p>
+<p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p>
+<p>通常，go get 会自动安装依赖项，无需手动执行 go install。</p>
+<p>2、go install：</p>
+<p>go install 用于编译并安装 Go 语言的可执行程序。它将 Go 代码编译成二进制文件，并将其安装到 GOPATH 或 GOMOD 的 bin 目录中，以供后续执行。</p>
+<p>当您执行 go install 命令时，它会在当前包的目录中执行编译过程，并将生成的可执行文件放置在 bin 目录中。</p>
+<p>通过 go install 安装的可执行文件可以通过命令行直接运行，无需指定文件路径。</p>
+<p>golang的1.16版本之后，go install可以在模块感知的模式下运行，可忽略当前目录或上层目录的 <code>go.mod</code> 文件。这对于在不影响主模块依赖的情况下（不会修改go.mod文件），安装二进制很方便；</p>
+<ul>
+<li>在将来，<code>go install</code> 被设计为“用于构建和安装二进制文件”， <code>go get</code> 则被设计为 “用于编辑 go.mod 变更依赖”，并且使用时，应该与 <code>-d</code> 参数共用，在将来版本中 <code>-d</code> 可能会默认启用；</li>
+<li>非常的简单直观。需要注意的是 <code>go install &lt;package&gt;@&lt;version&gt;</code> 是从 1.16 开始增加的，无论你当前是否在一个模块下，此命令都会在 <code>$GOPATH/bin</code> 下安装指定版本的工具。 （参考<a class="link"   target="_blank" rel="noopener" href="https://moelove.info/2020/12/19/Go-1.16-%E4%B8%AD%E5%85%B3%E4%BA%8E-go-get-%E5%92%8C-go-install-%E4%BD%A0%E9%9C%80%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E5%9C%B0%E6%96%B9/" ># Go 1.16 中关于 go get 和 go install 你需要注意的地方<i class="fas fa-external-link-alt"></i></a>）</li>
+<li><code>go get</code> 将二进制安装相关的功能都转移到了 <code>go install</code>, 仅作为用于编辑 <code>go.mod</code> 文件的命令存在。在后续版本（计划是 Go 1.17）中删掉 <code>go get</code> 安装二进制的功能，接下来 <code>go get</code> 的行为就等同于我们现在执行 <code>go get -d</code> 命令了，仅需下载源码，并将依赖添加至 <code>go.mod</code> 即可。</li>
+</ul>
+<h4 id="go-mod如何编辑"><a href="#go-mod如何编辑" class="headerlink" title="go.mod如何编辑"></a>go.mod如何编辑</h4><p>在 Go 1.16 中，另一个行为变更是 <code>go build</code> 和 <code>go test</code> 不会自动编辑 <code>go.mod</code> 了，基于以上信息，Go 1.16 中将进行如下处理：</p>
+<ul>
+<li><p>通过在代码中修改 import 语句，来修改 <code>go.mod</code>：</p>
+<ul>
+<li><code>go get</code> 可用于添加新模块；</li>
+<li><code>go mod tidy</code> 删除掉无用的模块；</li>
+</ul>
+</li>
+<li><p>将未导入的模块写入 <code>go.mod</code>:</p>
+<ul>
+<li><code>go get &lt;package&gt;[@&lt;version&gt;]</code>;</li>
+<li><code>go mod tidy</code> 也可以；</li>
+<li>手动编辑；</li>
+</ul>
+</li>
+</ul>
+<h3 id="go-work"><a href="#go-work" class="headerlink" title="go work"></a>go work</h3><p>go work机制是1.18版本推出的，是go moudle的最后一块拼图</p>
+<p>go work没出来之前的问题：</p>
+<ul>
+<li>当go.mod中引用的moudle未在github发布，那么go mod tidy时候会报错（多moudle开发的时候经常会遇到这个问题）</li>
+</ul>
+<p>在Go 1.18以前，如果遇到以下场景：Module A新增了一个feature，Module B需要使用Module A的这个新feature，你有2种方案：</p>
+<ul>
+<li>发布Module A的修改到代码仓库，Module B更新依赖的Module A的版本即可</li>
+<li>修改Module B的go.mod，使用replace指令把对Module A的依赖指向你本地未发布的Module A所在目录。<br>等Module A发布后，在发布Module B的时候，再删除Module B的go.mod文件里的replace指令。</li>
+</ul>
 
                 </div>
                 
@@ -306,7 +339,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/goframe/">goframe</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/golang/">golang</a>
                                     </li>
                                 
                             </ul>
@@ -322,31 +355,15 @@
                 
                     <div class="post-nav border-box">
                         
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/2024/08/25/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-2%20%EF%BD%9Cweb%E5%BC%80%E5%8F%91/"
-                                   title="goframe实践-2 ｜web开发"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">goframe实践-2 ｜web开发</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/07/24/golang/golang-module%E8%AF%A6%E8%A7%A3/"
-                                   title="golang-module详解"
+                                   href="/2024/08/25/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-2%20%EF%BD%9Cweb%E5%BC%80%E5%8F%91/"
+                                   title="goframe实践-2 ｜web开发"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">golang-module详解</span>
+                                        <span class="post-nav-title-item text-ellipsis">goframe实践-2 ｜web开发</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -456,7 +473,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">工程目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">架构</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#go-mod"><span class="nav-number">1.</span> <span class="nav-text">go mod</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#go-get%E4%B8%8Ego-install"><span class="nav-number">1.1.</span> <span class="nav-text">go get与go install</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#go-mod%E5%A6%82%E4%BD%95%E7%BC%96%E8%BE%91"><span class="nav-number">1.2.</span> <span class="nav-text">go.mod如何编辑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-work"><span class="nav-number">2.</span> <span class="nav-text">go work</span></a></li></ol>
     </div>
 </div>
 
@@ -638,7 +655,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E7%A8%8B%E7%9B%AE%E5%BD%95"><span class="nav-number">1.</span> <span class="nav-text">工程目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">架构</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#go-mod"><span class="nav-number">1.</span> <span class="nav-text">go mod</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#go-get%E4%B8%8Ego-install"><span class="nav-number">1.1.</span> <span class="nav-text">go get与go install</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#go-mod%E5%A6%82%E4%BD%95%E7%BC%96%E8%BE%91"><span class="nav-number">1.2.</span> <span class="nav-text">go.mod如何编辑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-work"><span class="nav-number">2.</span> <span class="nav-text">go work</span></a></li></ol>
     </div>
 </div>
 
