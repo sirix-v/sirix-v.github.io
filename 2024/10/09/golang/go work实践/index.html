@@ -9,7 +9,7 @@
     
     <title>
         
-            centos-python基础镜像构建 |
+            go work实践 |
         
         Sirius的博客
     </title>
@@ -200,7 +200,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        centos-python基础镜像构建
+                        go work实践
                     </div>
                 
 
@@ -228,22 +228,31 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-07-18 19:32:22</span>
+                <span class="datetime">2024-10-09 11:29:26</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Thu Jul 18 2024 19:33:49 GMT+0800">2024-07-18 19:33:49</span>
+                <span class="datetime" data-updated="Wed Oct 09 2024 11:33:49 GMT+0800">2024-10-09 11:33:49</span>
             </span>
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/golang/">golang</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/golang/">golang</a></li>
                         
                     
                 </ul>
@@ -253,7 +262,7 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>48 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>145 字</span>
             </span>
         
         
@@ -279,15 +288,15 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <blockquote>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/leeona/p/18282312" >https://www.cnblogs.com/leeona/p/18282312<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
-<p>上述方案解决centos:7基础镜像无法pip的问题</p>
-<blockquote>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/Jimc/p/10218387.html" >https://www.cnblogs.com/Jimc/p/10218387.html<i class="fas fa-external-link-alt"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/Jimc/p/10218062.html" >https://www.cnblogs.com/Jimc/p/10218062.html<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
-<p>源码编译安装python3.8</p>
+                    <p>go work在1.18引入<br>旨在解决本地开发多module场景，传统的go module不优雅的问题</p>
+<p>1.18之前</p>
+<ul>
+<li>当go.mod中引用的moudle未在github发布，那么go mod tidy时候会报错（多moudle开发的时候经常会遇到这个问题）</li>
+<li>需要在go.mod文件中进行replace替换成本地包，但是push的时候，有需要将其修改回来<br>引入工作区模式之后：</li>
+<li>不需要在go.mod中替换，在go.work文件中替换即可</li>
+<li>go.work文件不提交到代码库</li>
+</ul>
+<p>需要注意的是</p>
 
                 </div>
                 
@@ -298,7 +307,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/golang/">golang</a>
                                     </li>
                                 
                             </ul>
@@ -317,14 +326,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/"
-                                   title="goframe实践-1｜架构与目录"
+                                   href="/2024/10/17/web%E5%BC%80%E5%8F%91/%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E3%80%81reverseproxy/"
+                                   title="正向代理、反向代理、reverseproxy"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">goframe实践-1｜架构与目录</span>
+                                        <span class="post-nav-title-item text-ellipsis">正向代理、反向代理、reverseproxy</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -334,11 +343,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/07/18/%E9%9A%8F%E7%AC%94/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/"
-                                   title="centos9安装mysql服务端记录"
+                                   href="/2024/09/13/golang/cobra%E5%AE%9E%E8%B7%B5/"
+                                   title="cobra实践"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">centos9安装mysql服务端记录</span>
+                                        <span class="post-nav-title-item text-ellipsis">cobra实践</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">

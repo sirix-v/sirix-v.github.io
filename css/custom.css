@@ -2,4 +2,7 @@
 
 :root {
     --post-img-align: 0 auto;
+    --code-foreground: #333;
+    --code-background: #ddd;
+    --code-border-color: none;
 }

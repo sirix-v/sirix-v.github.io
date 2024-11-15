@@ -9,7 +9,7 @@
     
     <title>
         
-            golang-module详解 |
+            正向代理、反向代理、reverseproxy |
         
         Sirius的博客
     </title>
@@ -200,7 +200,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        golang-module详解
+                        正向代理、反向代理、reverseproxy
                     </div>
                 
 
@@ -228,22 +228,20 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-07-24 10:57:55</span>
+                <span class="datetime">2024-10-17 09:54:56</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Wed Jul 24 2024 10:59:29 GMT+0800">2024-07-24 10:59:29</span>
+                <span class="datetime" data-updated="Fri Oct 18 2024 11:11:22 GMT+0800">2024-10-18 11:11:22</span>
             </span>
         
 
         
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <ul class="post-tag-ul">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/golang/">golang</a></li>
+                            <li class="category-item"><a href="/categories/web%E5%BC%80%E5%8F%91/">web开发</a></li>
                         
                     
                 </ul>
@@ -251,9 +249,11 @@
         
 
         
+
+        
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>33 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>87 字</span>
             </span>
         
         
@@ -279,24 +279,18 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <p>以此文总结下目前自己掌握的go module知识</p>
-<blockquote>
-<p> 引用《go专家编程》<a class="link"   target="_blank" rel="noopener" href="https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html" >https://docs.kilvn.com/GoExpertProgramming/chapter12/3-foreword.html<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
+                    <p>这里说下我理解的正反向代理与golang的reverse_proxy如何实现代理</p>
+<h2 id="正向代理与反向代理"><a href="#正向代理与反向代理" class="headerlink" title="正向代理与反向代理"></a>正向代理与反向代理</h2><p>正向代理与反向代理的核心区别在于其目的（或者说作用的对象）</p>
+<ul>
+<li>正向代理：帮客户端进行请求代理，发给服务器</li>
+<li>反向代理，帮服务端处理</li>
+</ul>
 
                 </div>
                 
 
                 <div class="post-bottom-tags-and-share border-box">
                     <div>
-                        
-                            <ul class="post-tags-box border-box">
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/golang/">golang</a>
-                                    </li>
-                                
-                            </ul>
                         
                     </div>
                     <div>
@@ -312,14 +306,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/"
-                                   title="goframe实践-1｜架构与目录"
+                                   href="/2024/10/22/%E9%9A%8F%E7%AC%94/IDE%E9%85%8D%E7%BD%AE/"
+                                   title="IDE配置"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">goframe实践-1｜架构与目录</span>
+                                        <span class="post-nav-title-item text-ellipsis">IDE配置</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -329,11 +323,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/07/22/gin/Protobuf%E8%AF%A6%E8%A7%A3/"
-                                   title="Protobuf详解"
+                                   href="/2024/10/09/golang/go%20work%E5%AE%9E%E8%B7%B5/"
+                                   title="go work实践"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Protobuf详解</span>
+                                        <span class="post-nav-title-item text-ellipsis">go work实践</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -443,7 +437,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">正向代理与反向代理</span></a></li></ol>
     </div>
 </div>
 
@@ -625,7 +619,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E4%B8%8E%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">正向代理与反向代理</span></a></li></ol>
     </div>
 </div>
 

@@ -9,7 +9,7 @@
     
     <title>
         
-            centos-python基础镜像构建 |
+            golang包管理 |
         
         Sirius的博客
     </title>
@@ -200,7 +200,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        centos-python基础镜像构建
+                        golang包管理
                     </div>
                 
 
@@ -228,22 +228,31 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2024-07-18 19:32:22</span>
+                <span class="datetime">2024-09-09 15:29:30</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Thu Jul 18 2024 19:33:49 GMT+0800">2024-07-18 19:33:49</span>
+                <span class="datetime" data-updated="Mon Sep 09 2024 16:58:55 GMT+0800">2024-09-09 16:58:55</span>
             </span>
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/golang/">golang</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
             <span class="post-tag meta-info-item border-box">
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/golang/">golang</a></li>
                         
                     
                 </ul>
@@ -253,12 +262,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>48 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>773 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>1 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>2 分钟</span>
             </span>
         
         
@@ -279,15 +288,43 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <blockquote>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/leeona/p/18282312" >https://www.cnblogs.com/leeona/p/18282312<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
-<p>上述方案解决centos:7基础镜像无法pip的问题</p>
-<blockquote>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/Jimc/p/10218387.html" >https://www.cnblogs.com/Jimc/p/10218387.html<i class="fas fa-external-link-alt"></i></a></p>
-<p><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/Jimc/p/10218062.html" >https://www.cnblogs.com/Jimc/p/10218062.html<i class="fas fa-external-link-alt"></i></a></p>
-</blockquote>
-<p>源码编译安装python3.8</p>
+                    <p>总结一下go moudle相关内容</p>
+<h2 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h2><h3 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h3><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
+<p>1、go get：</p>
+<p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p>
+<p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p>
+<p>通常，go get 会自动安装依赖项，无需手动执行 go install。</p>
+<p>2、go install：</p>
+<p>go install 用于编译并安装 Go 语言的可执行程序。它将 Go 代码编译成二进制文件，并将其安装到 GOPATH 或 GOMOD 的 bin 目录中，以供后续执行。</p>
+<p>当您执行 go install 命令时，它会在当前包的目录中执行编译过程，并将生成的可执行文件放置在 bin 目录中。</p>
+<p>通过 go install 安装的可执行文件可以通过命令行直接运行，无需指定文件路径。</p>
+<p>golang的1.16版本之后，go install可以在模块感知的模式下运行，可忽略当前目录或上层目录的 go.mod 文件。这对于在不影响主模块依赖的情况下（不会修改go.mod文件），安装二进制很方便；</p>
+<ul>
+<li>在将来，go install 被设计为“用于构建和安装二进制文件”， go get 则被设计为 “用于编辑 go.mod 变更依赖”，并且使用时，应该与 <code>-d</code> 参数共用，在将来版本中 <code>-d</code> 可能会默认启用；</li>
+<li>非常的简单直观。需要注意的是 go install package@version是从 1.16 开始增加的，无论你当前是否在一个模块下，此命令都会在 <code>$GOPATH/bin</code> 下安装指定版本的工具。</li>
+</ul>
+<p>go get 将二进制安装相关的功能都转移到了 <code>go install</code>, 仅作为用于编辑 <code>go.mod</code> 文件的命令存在。在后续版本（计划是 Go 1.17）中删掉 <code>go get</code> 安装二进制的功能，接下来 <code>go get</code> 的行为就等同于我们现在执行 <code>go get -d</code> 命令了，仅需下载源码，并将依赖添加至 <code>go.mod</code> 即可。</p>
+<p>在 Go 1.16 中，另一个行为变更是 <code>go build</code> 和 <code>go test</code> 不会自动编辑 <code>go.mod</code> 了，基于以上信息，Go 1.16 中将进行如下处理：</p>
+<ul>
+<li><p>通过在代码中修改 import 语句，来修改 <code>go.mod</code>：</p>
+<ul>
+<li><code>go get</code> 可用于添加新模块；</li>
+<li><code>go mod tidy</code> 删除掉无用的模块；</li>
+</ul>
+</li>
+<li><p>将未导入的模块写入 <code>go.mod</code>:</p>
+<ul>
+<li><code>go get &lt;package&gt;@&lt;version&gt;</code>;</li>
+<li><code>go mod tidy</code> 也可以；</li>
+<li>手动编辑；</li>
+</ul>
+</li>
+</ul>
+<h3 id="go-work"><a href="#go-work" class="headerlink" title="go work"></a>go work</h3><p>go work机制是1.18版本推出的，是go moudle的最后一块拼图</p>
+<p>go work没出来之前的问题：</p>
+<ul>
+<li>当go.mod中引用的moudle未在github发布，那么go mod tidy时候会报错（多moudle开发的时候经常会遇到这个问题）</li>
+</ul>
 
                 </div>
                 
@@ -298,7 +335,7 @@
                             <ul class="post-tags-box border-box">
                                 
                                     <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E8%BF%90%E7%BB%B4/">运维</a>
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/golang/">golang</a>
                                     </li>
                                 
                             </ul>
@@ -317,14 +354,14 @@
                             <div class="prev-post">
                                 <a class="prev"
                                    rel="prev"
-                                   href="/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/"
-                                   title="goframe实践-1｜架构与目录"
+                                   href="/2024/09/13/golang/cobra%E5%AE%9E%E8%B7%B5/"
+                                   title="cobra实践"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">goframe实践-1｜架构与目录</span>
+                                        <span class="post-nav-title-item text-ellipsis">cobra实践</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -334,11 +371,11 @@
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/2024/07/18/%E9%9A%8F%E7%AC%94/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/"
-                                   title="centos9安装mysql服务端记录"
+                                   href="/2024/09/05/golang/go%E5%8C%85%E7%AE%A1%E7%90%86/"
+                                   title="go包管理详解"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">centos9安装mysql服务端记录</span>
+                                        <span class="post-nav-title-item text-ellipsis">go包管理详解</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">
@@ -448,7 +485,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#go-mod"><span class="nav-number">1.</span> <span class="nav-text">go mod</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#go-get%E4%B8%8Ego-install"><span class="nav-number">1.1.</span> <span class="nav-text">go get与go install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-work"><span class="nav-number">1.2.</span> <span class="nav-text">go work</span></a></li></ol></li></ol>
     </div>
 </div>
 
@@ -630,7 +667,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#go-mod"><span class="nav-number">1.</span> <span class="nav-text">go mod</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#go-get%E4%B8%8Ego-install"><span class="nav-number">1.1.</span> <span class="nav-text">go get与go install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-work"><span class="nav-number">1.2.</span> <span class="nav-text">go work</span></a></li></ol></li></ol>
     </div>
 </div>
 
