@@ -215,7 +215,7 @@
                             <div class="author border-box">
                                 <span class="name">Sirius</span>
                                 
-                                    <span class="author-badge">Lv2</span>
+                                    <span class="author-badge">Lv3</span>
                                 
                             </div>
                             <div class="meta-info border-box">
@@ -233,7 +233,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Mon Sep 09 2024 16:58:55 GMT+0800">2024-09-09 16:58:55</span>
+                <span class="datetime" data-updated="Wed Dec 11 2024 17:39:06 GMT+0800">2024-12-11 17:39:06</span>
             </span>
         
 
@@ -262,12 +262,12 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>773 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.3k 字</span>
             </span>
         
         
             <span class="meta-info-item post-min2read">
-                <i class="icon fas fa-clock"></i>&nbsp;<span>2 分钟</span>
+                <i class="icon fas fa-clock"></i>&nbsp;<span>4 分钟</span>
             </span>
         
         
@@ -289,7 +289,34 @@
                     
 
                     <p>总结一下go moudle相关内容</p>
-<h2 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h2><h3 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h3><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
+<p>golang的包管理经历了GOPATH、go vendor、go moudle三个阶段</p>
+<h3 id="GOPATH机制"><a href="#GOPATH机制" class="headerlink" title="GOPATH机制"></a>GOPATH机制</h3><p>golang的package主要分为三种</p>
+<ul>
+<li>标准库</li>
+<li>第三方库</li>
+<li>项目私库<br>项目会放在GOPATH&#x2F;src目录下<br>这种方式有一个问题，就是当你有两个项目A、B依赖了同一个第三方库C的不同版本，只能维护两个GOPATH</li>
+</ul>
+<blockquote>
+<p>由于编译器依赖查找固定从GOPATH&#x2F;src下查找<code>GOPATH/src/T</code>，所以，无法在同一个GOPATH目录下保存第三方库T的两个版本</p>
+</blockquote>
+<p>为了解决这个问题，引入GOVENDOR机制</p>
+<h3 id="go-vendor"><a href="#go-vendor" class="headerlink" title="go vendor"></a>go vendor</h3><p>go vendor机制将依赖放在项目目录中，从而隔离了不同项目，不同项目可以引用同一个第三方库的不同版本。<br>但是这会导致两个问题</p>
+<p>比如：项目A中依赖了B、C两个第三方库，而B也依赖了C这个库，就会到导致两个问题：</p>
+<ol>
+<li>C被两次编译进A项目的可执行文件</li>
+<li>再进一步，如果两个C的版本不一致，也会有兼容性问题</li>
+</ol>
+<h3 id="go-moudle"><a href="#go-moudle" class="headerlink" title="go moudle"></a>go moudle</h3><p>在go1.11版本中引入了go moudle机制，它采用了一种全新的设计思想</p>
+<p>通过go.mod文件实现</p>
+<ol>
+<li>准确地记录项目依赖</li>
+<li>可重复构建</li>
+</ol>
+<p>核心是把项目及其依赖抽象成moudle</p>
+<h4 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h4><p>replace用于替换require中出现的包</p>
+<p>它正常工作还需要满足两个条件：<br>第一，<code>replace</code>仅在当前module为<code>main module</code>时有效，比如我们当前在编译<code>github.com/renhongcai/gomodule</code>，此时就是<code>main module</code>，如果其他项目引用了<code>github.com/renhongcai/gomodule</code>，那么其他项目编译时，<code>replace</code>就会被自动忽略。</p>
+<p>第二，<code>replace</code>指定中<code>=&gt;</code>前面的包及其版本号必须出现在<code>require</code>中才有效，否则指令无效，也会被忽略。 比如，上面的例子中，我们指定<code>replace github.com/google/uuid =&gt; github.com/google/uuid v1.1.0</code>，或者指定<code>replace github.com/google/uuid v1.0.9 =&gt; github.com/google/uuid v1.1.0</code>，二者均都无效。</p>
+<h4 id="inderict"><a href="#inderict" class="headerlink" title="inderict"></a>inderict</h4><h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
 <p>1、go get：</p>
 <p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p>
 <p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p>
@@ -485,7 +512,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#go-mod"><span class="nav-number">1.</span> <span class="nav-text">go mod</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#go-get%E4%B8%8Ego-install"><span class="nav-number">1.1.</span> <span class="nav-text">go get与go install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-work"><span class="nav-number">1.2.</span> <span class="nav-text">go work</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GOPATH%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">GOPATH机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-vendor"><span class="nav-number">2.</span> <span class="nav-text">go vendor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-moudle"><span class="nav-number">3.</span> <span class="nav-text">go moudle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#replace"><span class="nav-number">3.1.</span> <span class="nav-text">replace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inderict"><span class="nav-number">3.2.</span> <span class="nav-text">inderict</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#go-get%E4%B8%8Ego-install"><span class="nav-number">3.3.</span> <span class="nav-text">go get与go install</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-work"><span class="nav-number">4.</span> <span class="nav-text">go work</span></a></li></ol>
     </div>
 </div>
 
@@ -667,7 +694,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#go-mod"><span class="nav-number">1.</span> <span class="nav-text">go mod</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#go-get%E4%B8%8Ego-install"><span class="nav-number">1.1.</span> <span class="nav-text">go get与go install</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-work"><span class="nav-number">1.2.</span> <span class="nav-text">go work</span></a></li></ol></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GOPATH%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">GOPATH机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-vendor"><span class="nav-number">2.</span> <span class="nav-text">go vendor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-moudle"><span class="nav-number">3.</span> <span class="nav-text">go moudle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#replace"><span class="nav-number">3.1.</span> <span class="nav-text">replace</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#inderict"><span class="nav-number">3.2.</span> <span class="nav-text">inderict</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#go-get%E4%B8%8Ego-install"><span class="nav-number">3.3.</span> <span class="nav-text">go get与go install</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#go-work"><span class="nav-number">4.</span> <span class="nav-text">go work</span></a></li></ol>
     </div>
 </div>
 

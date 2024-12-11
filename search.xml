@@ -349,7 +349,34 @@
     <title>golang包管理</title>
     <url>/2024/09/09/golang/golang%E5%8C%85%E7%AE%A1%E7%90%86/</url>
     <content><![CDATA[<p>总结一下go moudle相关内容</p>
-<h2 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h2><h3 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h3><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
+<p>golang的包管理经历了GOPATH、go vendor、go moudle三个阶段</p>
+<h3 id="GOPATH机制"><a href="#GOPATH机制" class="headerlink" title="GOPATH机制"></a>GOPATH机制</h3><p>golang的package主要分为三种</p>
+<ul>
+<li>标准库</li>
+<li>第三方库</li>
+<li>项目私库<br>项目会放在GOPATH&#x2F;src目录下<br>这种方式有一个问题，就是当你有两个项目A、B依赖了同一个第三方库C的不同版本，只能维护两个GOPATH</li>
+</ul>
+<blockquote>
+<p>由于编译器依赖查找固定从GOPATH&#x2F;src下查找<code>GOPATH/src/T</code>，所以，无法在同一个GOPATH目录下保存第三方库T的两个版本</p>
+</blockquote>
+<p>为了解决这个问题，引入GOVENDOR机制</p>
+<h3 id="go-vendor"><a href="#go-vendor" class="headerlink" title="go vendor"></a>go vendor</h3><p>go vendor机制将依赖放在项目目录中，从而隔离了不同项目，不同项目可以引用同一个第三方库的不同版本。<br>但是这会导致两个问题</p>
+<p>比如：项目A中依赖了B、C两个第三方库，而B也依赖了C这个库，就会到导致两个问题：</p>
+<ol>
+<li>C被两次编译进A项目的可执行文件</li>
+<li>再进一步，如果两个C的版本不一致，也会有兼容性问题</li>
+</ol>
+<h3 id="go-moudle"><a href="#go-moudle" class="headerlink" title="go moudle"></a>go moudle</h3><p>在go1.11版本中引入了go moudle机制，它采用了一种全新的设计思想</p>
+<p>通过go.mod文件实现</p>
+<ol>
+<li>准确地记录项目依赖</li>
+<li>可重复构建</li>
+</ol>
+<p>核心是把项目及其依赖抽象成moudle</p>
+<h4 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h4><p>replace用于替换require中出现的包</p>
+<p>它正常工作还需要满足两个条件：<br>第一，<code>replace</code>仅在当前module为<code>main module</code>时有效，比如我们当前在编译<code>github.com/renhongcai/gomodule</code>，此时就是<code>main module</code>，如果其他项目引用了<code>github.com/renhongcai/gomodule</code>，那么其他项目编译时，<code>replace</code>就会被自动忽略。</p>
+<p>第二，<code>replace</code>指定中<code>=&gt;</code>前面的包及其版本号必须出现在<code>require</code>中才有效，否则指令无效，也会被忽略。 比如，上面的例子中，我们指定<code>replace github.com/google/uuid =&gt; github.com/google/uuid v1.1.0</code>，或者指定<code>replace github.com/google/uuid v1.0.9 =&gt; github.com/google/uuid v1.1.0</code>，二者均都无效。</p>
+<h4 id="inderict"><a href="#inderict" class="headerlink" title="inderict"></a>inderict</h4><h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
 <p>1、go get：</p>
 <p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p>
 <p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p>
@@ -437,7 +464,7 @@
 </thead>
 <tbody><tr>
 <td>Cmd+D(gb)</td>
-<td>选择下一个匹配项</td>
+<td>选择下一个匹配项，也是选择光标所在单词</td>
 </tr>
 <tr>
 <td>Cmd+K Cmd+D</td>
@@ -474,6 +501,206 @@
 <li>正向代理：帮客户端进行请求代理，发给服务器</li>
 <li>反向代理，帮服务端处理</li>
 </ul>
+]]></content>
+      <categories>
+        <category>web开发</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Go的slice</title>
+    <url>/2024/11/16/golang/Go%E7%9A%84slice/</url>
+    <content><![CDATA[<p>go的切片，slice[2:4],左闭右开</p>
+]]></content>
+      <categories>
+        <category>golang</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>堆结构详解-golang</title>
+    <url>/2024/11/25/golang/%E5%A0%86%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3-golang/</url>
+    <content><![CDATA[<p>堆用于管理数据集中元素以保持一定顺序</p>
+]]></content>
+      <categories>
+        <category>golang</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>gorm笔记</title>
+    <url>/2024/12/11/%E6%95%B0%E6%8D%AE%E5%BA%93/gorm%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>数据库</category>
+      </categories>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2024/11/20/Mysql%E8%A1%A8%E8%BF%9E%E6%8E%A5/</url>
+    <content><![CDATA[<p>等值连接</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2024/11/23/redis%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%80%E8%87%B4%E6%80%A7/</url>
+    <content><![CDATA[<h2 id="读取数据"><a href="#读取数据" class="headerlink" title="读取数据"></a>读取数据</h2><p>读取数据的情况比较简单，先读redis，redis没有的话，再读数据库，之后将数据更新到redis<br><img   src="https://blog-picture-a.oss-cn-shanghai.aliyuncs.com/20241123224837.png"  alt="image.png"></p>
+<h2 id="更新数据"><a href="#更新数据" class="headerlink" title="更新数据"></a>更新数据</h2><p>其实写请求，才是造成大多数一致性问题的原因<br>一般来说，针对写请求有四个策略</p>
+<ul>
+<li>更新数据库后更新缓存</li>
+<li>更新数据库前更新缓存</li>
+<li>更新数据库前删除缓存</li>
+<li>更新数据库后删除缓存<br>接来来，我们分别说一下这四种情况</li>
+</ul>
+<h4 id="先更新数据库后更新缓存"><a href="#先更新数据库后更新缓存" class="headerlink" title="先更新数据库后更新缓存"></a>先更新数据库后更新缓存</h4><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>线程A（写请求）</th>
+<th>线程B（写请求）</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>更新数据库为99</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td></td>
+<td>更新数据库为98</td>
+<td></td>
+</tr>
+<tr>
+<td>T3</td>
+<td></td>
+<td>更新缓存数据为98</td>
+<td></td>
+</tr>
+<tr>
+<td>T4</td>
+<td>更新缓存数据为99</td>
+<td></td>
+<td>此时缓存的值被显式更新为99，但是实际上数据库的值已经是98，数据不一致</td>
+</tr>
+</tbody></table>
+<h4 id="先更新缓存再更新数据库"><a href="#先更新缓存再更新数据库" class="headerlink" title="先更新缓存再更新数据库"></a>先更新缓存再更新数据库</h4><p>这是最不靠谱的一种方案</p>
+<p>因为更新数据库不一定成功，如果数据库没有更新成功，那么读到的就不是脏数据了，而是<code>错误数据</code>了</p>
+<h4 id="先删除缓存再更新数据库"><a href="#先删除缓存再更新数据库" class="headerlink" title="先删除缓存再更新数据库"></a>先删除缓存再更新数据库</h4><p>这么做，写写并发的时候没有问题，但是读写并发的时候有问题</p>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>线程A（写请求）</th>
+<th>线程B（读请求）</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T1</td>
+<td>删除缓存值</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T2</td>
+<td></td>
+<td>1.读取缓存数据，缓存缺失，从数据库读取数据100</td>
+<td></td>
+</tr>
+<tr>
+<td>T3</td>
+<td>更新数据库中的数据X的值为99</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T4</td>
+<td></td>
+<td>将数据100的值写入缓存</td>
+<td>此时缓存的值被显式更新为100，但是实际上数据库的值已经是99了</td>
+</tr>
+<tr>
+<td>针对这种场景，有个做法是所谓的<strong>“延迟双删策略”</strong>，就是说，既然可能因为读请求把一个旧的值又写回去，那么我在写请求处理完之后，等到差不多的时间延迟再重新删除这个缓存值。</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>线程A（写请求）</th>
+<th>线程C（新的读请求）</th>
+<th>线程D（新的读请求）</th>
+<th>问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T5</td>
+<td>sleep(N)</td>
+<td>缓存存在，读取到缓存旧值100</td>
+<td></td>
+<td>其他线程可能在双删成功前读到脏数据</td>
+</tr>
+<tr>
+<td>T6</td>
+<td>删除缓存值</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>T7</td>
+<td></td>
+<td></td>
+<td>缓存缺失，从数据库读取数据的最新值（99）</td>
+<td></td>
+</tr>
+<tr>
+<td>如果N的时间设置得太短，那么删除缓存还是在读线程C更新缓存之前，那么还是脏数据</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="先更新数据库后删除缓存"><a href="#先更新数据库后删除缓存" class="headerlink" title="先更新数据库后删除缓存"></a>先更新数据库后删除缓存</h4>]]></content>
+  </entry>
+  <entry>
+    <title>git笔记</title>
+    <url>/2024/11/25/%E9%9A%8F%E7%AC%94/git%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[<p>撤销尚未add的修改：<br>git checkout – filepath</p>
+]]></content>
+      <categories>
+        <category>goframe框架</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>mysql是怎样运行的｜第一章</title>
+    <url>/2024/11/19/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%EF%BD%9C%E7%AC%AC%E4%B8%80%E7%AB%A0/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>kafka论文解读</title>
+    <url>/2024/12/01/web%E5%BC%80%E5%8F%91/kafka%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/</url>
+    <content><![CDATA[<h2 id="架构详解"><a href="#架构详解" class="headerlink" title="架构详解"></a>架构详解</h2><p>相比rabbitmq等
+ </p>
 ]]></content>
       <categories>
         <category>web开发</category>
