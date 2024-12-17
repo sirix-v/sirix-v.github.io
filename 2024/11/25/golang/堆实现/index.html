@@ -233,7 +233,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Mon Nov 25 2024 09:52:36 GMT+0800">2024-11-25 09:52:36</span>
+                <span class="datetime" data-updated="Fri Dec 13 2024 19:03:33 GMT+0800">2024-12-13 19:03:33</span>
             </span>
         
 
@@ -262,7 +262,7 @@
         
         
             <span class="meta-info-item post-wordcount">
-                <i class="icon fas fa-file-word"></i>&nbsp;<span>18 字</span>
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>157 字</span>
             </span>
         
         
@@ -288,7 +288,11 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <p>堆用于管理数据集中元素以保持一定顺序</p>
+                    <p>golang没有像java一样提供容器类<br>想要实现堆，要实现heap接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type Interface interface &#123;</span><br><span class="line">	sort.Interface</span><br><span class="line">	Push(x interface&#123;&#125;) // add x as element Len()</span><br><span class="line">	Pop() interface&#123;&#125;   // remove and return element Len() - 1.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现push和pop，还要实现sort接口</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// Package sort provides primitives for sorting slices and user-defined</span><br><span class="line">// collections.</span><br><span class="line">package sort</span><br><span class="line"></span><br><span class="line">// A type, typically a collection, that satisfies sort.Interface can be</span><br><span class="line">// sorted by the routines in this package. The methods require that the</span><br><span class="line">// elements of the collection be enumerated by an integer index.</span><br><span class="line">type Interface interface &#123;</span><br><span class="line">   </span><br><span class="line">	// Len is the number of elements in the collection.</span><br><span class="line">	Len() int</span><br><span class="line">	// Less reports whether the element with</span><br><span class="line">	// index i should sort before the element with index j.</span><br><span class="line">	Less(i, j int) bool</span><br><span class="line">	// Swap swaps the elements with indexes i and j.</span><br><span class="line">	Swap(i, j int)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
                 </div>
                 

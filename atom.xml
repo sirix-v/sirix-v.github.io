@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-12-11T02:53:15.702Z</updated>
+  <updated>2024-12-16T10:44:06.713Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>排序技巧</title>
+    <link href="http://example.com/2024/12/16/golang/%E6%8E%92%E5%BA%8F%E6%8A%80%E5%B7%A7/"/>
+    <id>http://example.com/2024/12/16/golang/%E6%8E%92%E5%BA%8F%E6%8A%80%E5%B7%A7/</id>
+    <published>2024-12-16T01:49:44.287Z</published>
+    <updated>2024-12-16T10:44:06.713Z</updated>
+    
+    <content type="html"><![CDATA[<p>要善用sort包</p><p>首先看下之前在堆排序文章中讲的sort接口</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type Interface interface &#123;</span><br><span class="line">Len() int</span><br><span class="line">Less(i, j int) bool</span><br><span class="line">Swap(i, j int)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>其中<br>你可以定义一个实现了这个接口的类型</p><p>然后比如可以把这个</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;要善用sort包&lt;/p&gt;
+&lt;p&gt;首先看下之前在堆排序文章中讲的sort接口&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/sp</summary>
+      
+    
+    
+    
+    <category term="golang" scheme="http://example.com/categories/golang/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>gorm笔记</title>
@@ -82,18 +106,18 @@
   
   <entry>
     <title>堆结构详解-golang</title>
-    <link href="http://example.com/2024/11/25/golang/%E5%A0%86%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3-golang/"/>
-    <id>http://example.com/2024/11/25/golang/%E5%A0%86%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3-golang/</id>
+    <link href="http://example.com/2024/11/25/golang/%E5%A0%86%E5%AE%9E%E7%8E%B0/"/>
+    <id>http://example.com/2024/11/25/golang/%E5%A0%86%E5%AE%9E%E7%8E%B0/</id>
     <published>2024-11-25T01:50:09.545Z</published>
-    <updated>2024-11-25T01:52:36.070Z</updated>
+    <updated>2024-12-13T11:03:33.500Z</updated>
     
-    <content type="html"><![CDATA[<p>堆用于管理数据集中元素以保持一定顺序</p>]]></content>
+    <content type="html"><![CDATA[<p>golang没有像java一样提供容器类<br>想要实现堆，要实现heap接口</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type Interface interface &#123;</span><br><span class="line">sort.Interface</span><br><span class="line">Push(x interface&#123;&#125;) // add x as element Len()</span><br><span class="line">Pop() interface&#123;&#125;   // remove and return element Len() - 1.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>实现push和pop，还要实现sort接口</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">// Package sort provides primitives for sorting slices and user-defined</span><br><span class="line">// collections.</span><br><span class="line">package sort</span><br><span class="line"></span><br><span class="line">// A type, typically a collection, that satisfies sort.Interface can be</span><br><span class="line">// sorted by the routines in this package. The methods require that the</span><br><span class="line">// elements of the collection be enumerated by an integer index.</span><br><span class="line">type Interface interface &#123;</span><br><span class="line">   </span><br><span class="line">// Len is the number of elements in the collection.</span><br><span class="line">Len() int</span><br><span class="line">// Less reports whether the element with</span><br><span class="line">// index i should sort before the element with index j.</span><br><span class="line">Less(i, j int) bool</span><br><span class="line">// Swap swaps the elements with indexes i and j.</span><br><span class="line">Swap(i, j int)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;堆用于管理数据集中元素以保持一定顺序&lt;/p&gt;
-</summary>
+    <summary type="html">&lt;p&gt;golang没有像java一样提供容器类&lt;br&gt;想要实现堆，要实现heap接口&lt;/p&gt;
+&lt;figure class=&quot;highlight plaintext&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/</summary>
       
     
     
@@ -289,9 +313,9 @@
     <link href="http://example.com/2024/09/09/golang/golang%E5%8C%85%E7%AE%A1%E7%90%86/"/>
     <id>http://example.com/2024/09/09/golang/golang%E5%8C%85%E7%AE%A1%E7%90%86/</id>
     <published>2024-09-09T07:29:30.736Z</published>
-    <updated>2024-12-11T09:39:06.287Z</updated>
+    <updated>2024-12-12T01:57:18.485Z</updated>
     
-    <content type="html"><![CDATA[<p>总结一下go moudle相关内容</p><p>golang的包管理经历了GOPATH、go vendor、go moudle三个阶段</p><h3 id="GOPATH机制"><a href="#GOPATH机制" class="headerlink" title="GOPATH机制"></a>GOPATH机制</h3><p>golang的package主要分为三种</p><ul><li>标准库</li><li>第三方库</li><li>项目私库<br>项目会放在GOPATH&#x2F;src目录下<br>这种方式有一个问题，就是当你有两个项目A、B依赖了同一个第三方库C的不同版本，只能维护两个GOPATH</li></ul><blockquote><p>由于编译器依赖查找固定从GOPATH&#x2F;src下查找<code>GOPATH/src/T</code>，所以，无法在同一个GOPATH目录下保存第三方库T的两个版本</p></blockquote><p>为了解决这个问题，引入GOVENDOR机制</p><h3 id="go-vendor"><a href="#go-vendor" class="headerlink" title="go vendor"></a>go vendor</h3><p>go vendor机制将依赖放在项目目录中，从而隔离了不同项目，不同项目可以引用同一个第三方库的不同版本。<br>但是这会导致两个问题</p><p>比如：项目A中依赖了B、C两个第三方库，而B也依赖了C这个库，就会到导致两个问题：</p><ol><li>C被两次编译进A项目的可执行文件</li><li>再进一步，如果两个C的版本不一致，也会有兼容性问题</li></ol><h3 id="go-moudle"><a href="#go-moudle" class="headerlink" title="go moudle"></a>go moudle</h3><p>在go1.11版本中引入了go moudle机制，它采用了一种全新的设计思想</p><p>通过go.mod文件实现</p><ol><li>准确地记录项目依赖</li><li>可重复构建</li></ol><p>核心是把项目及其依赖抽象成moudle</p><h4 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h4><p>replace用于替换require中出现的包</p><p>它正常工作还需要满足两个条件：<br>第一，<code>replace</code>仅在当前module为<code>main module</code>时有效，比如我们当前在编译<code>github.com/renhongcai/gomodule</code>，此时就是<code>main module</code>，如果其他项目引用了<code>github.com/renhongcai/gomodule</code>，那么其他项目编译时，<code>replace</code>就会被自动忽略。</p><p>第二，<code>replace</code>指定中<code>=&gt;</code>前面的包及其版本号必须出现在<code>require</code>中才有效，否则指令无效，也会被忽略。 比如，上面的例子中，我们指定<code>replace github.com/google/uuid =&gt; github.com/google/uuid v1.1.0</code>，或者指定<code>replace github.com/google/uuid v1.0.9 =&gt; github.com/google/uuid v1.1.0</code>，二者均都无效。</p><h4 id="inderict"><a href="#inderict" class="headerlink" title="inderict"></a>inderict</h4><h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p><p>1、go get：</p><p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p><p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p><p>通常，go get 会自动安装依赖项，无需手动执行 go install。</p><p>2、go install：</p><p>go install 用于编译并安装 Go 语言的可执行程序。它将 Go 代码编译成二进制文件，并将其安装到 GOPATH 或 GOMOD 的 bin 目录中，以供后续执行。</p><p>当您执行 go install 命令时，它会在当前包的目录中执行编译过程，并将生成的可执行文件放置在 bin 目录中。</p><p>通过 go install 安装的可执行文件可以通过命令行直接运行，无需指定文件路径。</p><p>golang的1.16版本之后，go install可以在模块感知的模式下运行，可忽略当前目录或上层目录的 go.mod 文件。这对于在不影响主模块依赖的情况下（不会修改go.mod文件），安装二进制很方便；</p><ul><li>在将来，go install 被设计为“用于构建和安装二进制文件”， go get 则被设计为 “用于编辑 go.mod 变更依赖”，并且使用时，应该与 <code>-d</code> 参数共用，在将来版本中 <code>-d</code> 可能会默认启用；</li><li>非常的简单直观。需要注意的是 go install package@version是从 1.16 开始增加的，无论你当前是否在一个模块下，此命令都会在 <code>$GOPATH/bin</code> 下安装指定版本的工具。</li></ul><p>go get 将二进制安装相关的功能都转移到了 <code>go install</code>, 仅作为用于编辑 <code>go.mod</code> 文件的命令存在。在后续版本（计划是 Go 1.17）中删掉 <code>go get</code> 安装二进制的功能，接下来 <code>go get</code> 的行为就等同于我们现在执行 <code>go get -d</code> 命令了，仅需下载源码，并将依赖添加至 <code>go.mod</code> 即可。</p><p>在 Go 1.16 中，另一个行为变更是 <code>go build</code> 和 <code>go test</code> 不会自动编辑 <code>go.mod</code> 了，基于以上信息，Go 1.16 中将进行如下处理：</p><ul><li><p>通过在代码中修改 import 语句，来修改 <code>go.mod</code>：</p><ul><li><code>go get</code> 可用于添加新模块；</li><li><code>go mod tidy</code> 删除掉无用的模块；</li></ul></li><li><p>将未导入的模块写入 <code>go.mod</code>:</p><ul><li><code>go get &lt;package&gt;@&lt;version&gt;</code>;</li><li><code>go mod tidy</code> 也可以；</li><li>手动编辑；</li></ul></li></ul><h3 id="go-work"><a href="#go-work" class="headerlink" title="go work"></a>go work</h3><p>go work机制是1.18版本推出的，是go moudle的最后一块拼图</p><p>go work没出来之前的问题：</p><ul><li>当go.mod中引用的moudle未在github发布，那么go mod tidy时候会报错（多moudle开发的时候经常会遇到这个问题）</li></ul>]]></content>
+    <content type="html"><![CDATA[<p>总结一下go moudle相关内容</p><p>golang的包管理经历了GOPATH、go vendor、go moudle三个阶段</p><h3 id="GOPATH机制"><a href="#GOPATH机制" class="headerlink" title="GOPATH机制"></a>GOPATH机制</h3><p>golang的package主要分为三种</p><ul><li>标准库</li><li>第三方库</li><li>项目私库<br>项目会放在GOPATH&#x2F;src目录下<br>这种方式有一个问题，就是当你有两个项目A、B依赖了同一个第三方库C的不同版本，只能维护两个GOPATH</li></ul><blockquote><p>由于编译器依赖查找固定从GOPATH&#x2F;src下查找<code>GOPATH/src/T</code>，所以，无法在同一个GOPATH目录下保存第三方库T的两个版本</p></blockquote><p>为了解决这个问题，引入GOVENDOR机制</p><h3 id="go-vendor"><a href="#go-vendor" class="headerlink" title="go vendor"></a>go vendor</h3><p>go vendor机制将依赖放在项目目录中，从而隔离了不同项目，不同项目可以引用同一个第三方库的不同版本。<br>但是这会导致两个问题</p><p>比如：项目A中依赖了B、C两个第三方库，而B也依赖了C这个库，就会到导致两个问题：</p><ol><li>C被两次编译进A项目的可执行文件</li><li>再进一步，如果两个C的版本不一致，也会有兼容性问题</li></ol><h3 id="go-moudle"><a href="#go-moudle" class="headerlink" title="go moudle"></a>go moudle</h3><p>在go1.11版本中引入了go moudle机制，它采用了一种全新的设计思想</p><p>通过go.mod文件实现</p><ol><li>准确地记录项目依赖</li><li>可重复构建</li></ol><p>核心是把项目及其依赖抽象成moudle</p><h4 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h4><p>replace用于替换require中出现的包</p><p>它正常工作还需要满足两个条件：<br>第一，<code>replace</code>仅在当前module为<code>main module</code>时有效，比如我们当前在编译<code>github.com/renhongcai/gomodule</code>，此时就是<code>main module</code>，如果其他项目引用了<code>github.com/renhongcai/gomodule</code>，那么其他项目编译时，<code>replace</code>就会被自动忽略。</p><p>第二，<code>replace</code>指定中<code>=&gt;</code>前面的包及其版本号必须出现在<code>require</code>中才有效，否则指令无效，也会被忽略。 比如，上面的例子中，我们指定<code>replace github.com/google/uuid =&gt; github.com/google/uuid v1.1.0</code>，或者指定<code>replace github.com/google/uuid v1.0.9 =&gt; github.com/google/uuid v1.1.0</code>，二者均都无效。</p><h4 id="inderict"><a href="#inderict" class="headerlink" title="inderict"></a>inderict</h4><p>间接引用，比如</p><h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p><p>1、go get：</p><p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p><p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p><p>通常，go get 会自动安装依赖项，无需手动执行 go install。</p><p>2、go install：</p><p>go install 用于编译并安装 Go 语言的可执行程序。它将 Go 代码编译成二进制文件，并将其安装到 GOPATH 或 GOMOD 的 bin 目录中，以供后续执行。</p><p>当您执行 go install 命令时，它会在当前包的目录中执行编译过程，并将生成的可执行文件放置在 bin 目录中。</p><p>通过 go install 安装的可执行文件可以通过命令行直接运行，无需指定文件路径。</p><p>golang的1.16版本之后，go install可以在模块感知的模式下运行，可忽略当前目录或上层目录的 go.mod 文件。这对于在不影响主模块依赖的情况下（不会修改go.mod文件），安装二进制很方便；</p><ul><li>在将来，go install 被设计为“用于构建和安装二进制文件”， go get 则被设计为 “用于编辑 go.mod 变更依赖”，并且使用时，应该与 <code>-d</code> 参数共用，在将来版本中 <code>-d</code> 可能会默认启用；</li><li>非常的简单直观。需要注意的是 go install package@version是从 1.16 开始增加的，无论你当前是否在一个模块下，此命令都会在 <code>$GOPATH/bin</code> 下安装指定版本的工具。</li></ul><p>go get 将二进制安装相关的功能都转移到了 <code>go install</code>, 仅作为用于编辑 <code>go.mod</code> 文件的命令存在。在后续版本（计划是 Go 1.17）中删掉 <code>go get</code> 安装二进制的功能，接下来 <code>go get</code> 的行为就等同于我们现在执行 <code>go get -d</code> 命令了，仅需下载源码，并将依赖添加至 <code>go.mod</code> 即可。</p><p>在 Go 1.16 中，另一个行为变更是 <code>go build</code> 和 <code>go test</code> 不会自动编辑 <code>go.mod</code> 了，基于以上信息，Go 1.16 中将进行如下处理：</p><ul><li><p>通过在代码中修改 import 语句，来修改 <code>go.mod</code>：</p><ul><li><code>go get</code> 可用于添加新模块；</li><li><code>go mod tidy</code> 删除掉无用的模块；</li></ul></li><li><p>将未导入的模块写入 <code>go.mod</code>:</p><ul><li><code>go get &lt;package&gt;@&lt;version&gt;</code>;</li><li><code>go mod tidy</code> 也可以；</li><li>手动编辑；</li></ul></li></ul><h3 id="go-work"><a href="#go-work" class="headerlink" title="go work"></a>go work</h3><p>go work机制是1.18版本推出的，是go moudle的最后一块拼图</p><p>go work没出来之前的问题：</p><ul><li>当go.mod中引用的moudle未在github发布，那么go mod tidy时候会报错（多moudle开发的时候经常会遇到这个问题）</li></ul>]]></content>
     
     
       
@@ -440,29 +464,6 @@
     
     
     <category term="docker" scheme="http://example.com/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>单例模式</title>
-    <link href="http://example.com/2024/07/16/%E9%9A%8F%E7%AC%94/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://example.com/2024/07/16/%E9%9A%8F%E7%AC%94/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</id>
-    <published>2024-07-16T12:04:28.000Z</published>
-    <updated>2024-07-16T12:14:58.315Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p><a class="link"   href="https://blog.csdn.net/justloveyou_/article/details/64127789" >https://blog.csdn.net/justloveyou_/article/details/64127789<i class="fas fa-external-link-alt"></i></a></p></blockquote><p>golang的单例模式：</p><blockquote><p><a class="link"   href="https://blog.csdn.net/qq_43035350/article/details/125536474" >https://blog.csdn.net/qq_43035350/article/details/125536474<i class="fas fa-external-link-alt"></i></a></p></blockquote>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;&lt;a class=&quot;link&quot;   href=&quot;https://blog.csdn.net/justloveyou_/article/details/64127789&quot; &gt;https://blog.csdn.net/justloveyou_/art</summary>
-      
-    
-    
-    
-    
-    <category term="设计模式" scheme="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
   </entry>
   

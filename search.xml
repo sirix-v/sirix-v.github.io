@@ -376,7 +376,8 @@
 <h4 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h4><p>replace用于替换require中出现的包</p>
 <p>它正常工作还需要满足两个条件：<br>第一，<code>replace</code>仅在当前module为<code>main module</code>时有效，比如我们当前在编译<code>github.com/renhongcai/gomodule</code>，此时就是<code>main module</code>，如果其他项目引用了<code>github.com/renhongcai/gomodule</code>，那么其他项目编译时，<code>replace</code>就会被自动忽略。</p>
 <p>第二，<code>replace</code>指定中<code>=&gt;</code>前面的包及其版本号必须出现在<code>require</code>中才有效，否则指令无效，也会被忽略。 比如，上面的例子中，我们指定<code>replace github.com/google/uuid =&gt; github.com/google/uuid v1.1.0</code>，或者指定<code>replace github.com/google/uuid v1.0.9 =&gt; github.com/google/uuid v1.1.0</code>，二者均都无效。</p>
-<h4 id="inderict"><a href="#inderict" class="headerlink" title="inderict"></a>inderict</h4><h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
+<h4 id="inderict"><a href="#inderict" class="headerlink" title="inderict"></a>inderict</h4><p>间接引用，比如</p>
+<h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
 <p>1、go get：</p>
 <p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p>
 <p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p>
@@ -510,18 +511,6 @@
     <title>Go的slice</title>
     <url>/2024/11/16/golang/Go%E7%9A%84slice/</url>
     <content><![CDATA[<p>go的切片，slice[2:4],左闭右开</p>
-]]></content>
-      <categories>
-        <category>golang</category>
-      </categories>
-      <tags>
-        <tag>golang</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>堆结构详解-golang</title>
-    <url>/2024/11/25/golang/%E5%A0%86%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3-golang/</url>
-    <content><![CDATA[<p>堆用于管理数据集中元素以保持一定顺序</p>
 ]]></content>
       <categories>
         <category>golang</category>
@@ -704,6 +693,35 @@
 ]]></content>
       <categories>
         <category>web开发</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>堆结构详解-golang</title>
+    <url>/2024/11/25/golang/%E5%A0%86%E5%AE%9E%E7%8E%B0/</url>
+    <content><![CDATA[<p>golang没有像java一样提供容器类<br>想要实现堆，要实现heap接口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type Interface interface &#123;</span><br><span class="line">	sort.Interface</span><br><span class="line">	Push(x interface&#123;&#125;) // add x as element Len()</span><br><span class="line">	Pop() interface&#123;&#125;   // remove and return element Len() - 1.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现push和pop，还要实现sort接口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// Package sort provides primitives for sorting slices and user-defined</span><br><span class="line">// collections.</span><br><span class="line">package sort</span><br><span class="line"></span><br><span class="line">// A type, typically a collection, that satisfies sort.Interface can be</span><br><span class="line">// sorted by the routines in this package. The methods require that the</span><br><span class="line">// elements of the collection be enumerated by an integer index.</span><br><span class="line">type Interface interface &#123;</span><br><span class="line">   </span><br><span class="line">	// Len is the number of elements in the collection.</span><br><span class="line">	Len() int</span><br><span class="line">	// Less reports whether the element with</span><br><span class="line">	// index i should sort before the element with index j.</span><br><span class="line">	Less(i, j int) bool</span><br><span class="line">	// Swap swaps the elements with indexes i and j.</span><br><span class="line">	Swap(i, j int)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>golang</category>
+      </categories>
+      <tags>
+        <tag>golang</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>排序技巧</title>
+    <url>/2024/12/16/golang/%E6%8E%92%E5%BA%8F%E6%8A%80%E5%B7%A7/</url>
+    <content><![CDATA[<p>要善用sort包</p>
+<p>首先看下之前在堆排序文章中讲的sort接口</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">type Interface interface &#123;</span><br><span class="line">	Len() int</span><br><span class="line">	Less(i, j int) bool</span><br><span class="line">	Swap(i, j int)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中<br>你可以定义一个实现了这个接口的类型</p>
+<p>然后比如可以把这个</p>
+]]></content>
+      <categories>
+        <category>golang</category>
       </categories>
   </entry>
 </search>
