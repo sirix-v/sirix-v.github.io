@@ -376,7 +376,7 @@
 <h4 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h4><p>replace用于替换require中出现的包</p>
 <p>它正常工作还需要满足两个条件：<br>第一，<code>replace</code>仅在当前module为<code>main module</code>时有效，比如我们当前在编译<code>github.com/renhongcai/gomodule</code>，此时就是<code>main module</code>，如果其他项目引用了<code>github.com/renhongcai/gomodule</code>，那么其他项目编译时，<code>replace</code>就会被自动忽略。</p>
 <p>第二，<code>replace</code>指定中<code>=&gt;</code>前面的包及其版本号必须出现在<code>require</code>中才有效，否则指令无效，也会被忽略。 比如，上面的例子中，我们指定<code>replace github.com/google/uuid =&gt; github.com/google/uuid v1.1.0</code>，或者指定<code>replace github.com/google/uuid v1.0.9 =&gt; github.com/google/uuid v1.1.0</code>，二者均都无效。</p>
-<h4 id="inderict"><a href="#inderict" class="headerlink" title="inderict"></a>inderict</h4><p>间接引用，比如</p>
+<h4 id="inderict"><a href="#inderict" class="headerlink" title="inderict"></a>inderict</h4><p>间接引用，比如A引用了B，B引用了C，但是B项目没有采用go moudle管理方式或者缺失go.mod或者go.mod中缺失C，那么在A的go.mod中就会添加C并且后面跟着<br>&#x2F;&#x2F; inderict</p>
 <h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p>
 <p>1、go get：</p>
 <p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p>
@@ -722,6 +722,31 @@
 ]]></content>
       <categories>
         <category>golang</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>docker镜像体积优化</title>
+    <url>/2024/12/20/kubernetes/docker%E9%95%9C%E5%83%8F%E4%BD%93%E7%A7%AF%E4%BC%98%E5%8C%96/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>kubernetes</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>rpc相较于http的优势</title>
+    <url>/2024/12/23/%E9%A1%B9%E7%9B%AE/rpc%E7%9B%B8%E8%BE%83%E4%BA%8Ehttp%E7%9A%84%E4%BC%98%E5%8A%BF/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>项目https协议</title>
+    <url>/2024/12/18/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AEhttps%E5%8D%8F%E8%AE%AE/</url>
+    <content><![CDATA[<p>证书：</p>
+]]></content>
+      <categories>
+        <category>项目</category>
       </categories>
   </entry>
 </search>

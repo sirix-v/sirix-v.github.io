@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-12-16T10:44:06.713Z</updated>
+  <updated>2024-12-23T03:58:24.132Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>rpc相较于http的优势</title>
+    <link href="http://example.com/2024/12/23/%E9%A1%B9%E7%9B%AE/rpc%E7%9B%B8%E8%BE%83%E4%BA%8Ehttp%E7%9A%84%E4%BC%98%E5%8A%BF/"/>
+    <id>http://example.com/2024/12/23/%E9%A1%B9%E7%9B%AE/rpc%E7%9B%B8%E8%BE%83%E4%BA%8Ehttp%E7%9A%84%E4%BC%98%E5%8A%BF/</id>
+    <published>2024-12-23T03:58:09.082Z</published>
+    <updated>2024-12-23T03:58:24.132Z</updated>
+    
+    
+    
+    
+    <category term="项目" scheme="http://example.com/categories/%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>docker镜像体积优化</title>
+    <link href="http://example.com/2024/12/20/kubernetes/docker%E9%95%9C%E5%83%8F%E4%BD%93%E7%A7%AF%E4%BC%98%E5%8C%96/"/>
+    <id>http://example.com/2024/12/20/kubernetes/docker%E9%95%9C%E5%83%8F%E4%BD%93%E7%A7%AF%E4%BC%98%E5%8C%96/</id>
+    <published>2024-12-20T14:43:51.176Z</published>
+    <updated>2024-12-20T14:44:10.221Z</updated>
+    
+    
+    
+    
+    <category term="kubernetes" scheme="http://example.com/categories/kubernetes/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>项目https协议</title>
+    <link href="http://example.com/2024/12/18/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AEhttps%E5%8D%8F%E8%AE%AE/"/>
+    <id>http://example.com/2024/12/18/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AEhttps%E5%8D%8F%E8%AE%AE/</id>
+    <published>2024-12-18T13:09:17.665Z</published>
+    <updated>2024-12-19T01:22:47.300Z</updated>
+    
+    <content type="html"><![CDATA[<p>证书：</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;证书：&lt;/p&gt;
+</summary>
+      
+    
+    
+    
+    <category term="项目" scheme="http://example.com/categories/%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>排序技巧</title>
@@ -313,9 +366,9 @@
     <link href="http://example.com/2024/09/09/golang/golang%E5%8C%85%E7%AE%A1%E7%90%86/"/>
     <id>http://example.com/2024/09/09/golang/golang%E5%8C%85%E7%AE%A1%E7%90%86/</id>
     <published>2024-09-09T07:29:30.736Z</published>
-    <updated>2024-12-12T01:57:18.485Z</updated>
+    <updated>2024-12-18T08:45:14.047Z</updated>
     
-    <content type="html"><![CDATA[<p>总结一下go moudle相关内容</p><p>golang的包管理经历了GOPATH、go vendor、go moudle三个阶段</p><h3 id="GOPATH机制"><a href="#GOPATH机制" class="headerlink" title="GOPATH机制"></a>GOPATH机制</h3><p>golang的package主要分为三种</p><ul><li>标准库</li><li>第三方库</li><li>项目私库<br>项目会放在GOPATH&#x2F;src目录下<br>这种方式有一个问题，就是当你有两个项目A、B依赖了同一个第三方库C的不同版本，只能维护两个GOPATH</li></ul><blockquote><p>由于编译器依赖查找固定从GOPATH&#x2F;src下查找<code>GOPATH/src/T</code>，所以，无法在同一个GOPATH目录下保存第三方库T的两个版本</p></blockquote><p>为了解决这个问题，引入GOVENDOR机制</p><h3 id="go-vendor"><a href="#go-vendor" class="headerlink" title="go vendor"></a>go vendor</h3><p>go vendor机制将依赖放在项目目录中，从而隔离了不同项目，不同项目可以引用同一个第三方库的不同版本。<br>但是这会导致两个问题</p><p>比如：项目A中依赖了B、C两个第三方库，而B也依赖了C这个库，就会到导致两个问题：</p><ol><li>C被两次编译进A项目的可执行文件</li><li>再进一步，如果两个C的版本不一致，也会有兼容性问题</li></ol><h3 id="go-moudle"><a href="#go-moudle" class="headerlink" title="go moudle"></a>go moudle</h3><p>在go1.11版本中引入了go moudle机制，它采用了一种全新的设计思想</p><p>通过go.mod文件实现</p><ol><li>准确地记录项目依赖</li><li>可重复构建</li></ol><p>核心是把项目及其依赖抽象成moudle</p><h4 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h4><p>replace用于替换require中出现的包</p><p>它正常工作还需要满足两个条件：<br>第一，<code>replace</code>仅在当前module为<code>main module</code>时有效，比如我们当前在编译<code>github.com/renhongcai/gomodule</code>，此时就是<code>main module</code>，如果其他项目引用了<code>github.com/renhongcai/gomodule</code>，那么其他项目编译时，<code>replace</code>就会被自动忽略。</p><p>第二，<code>replace</code>指定中<code>=&gt;</code>前面的包及其版本号必须出现在<code>require</code>中才有效，否则指令无效，也会被忽略。 比如，上面的例子中，我们指定<code>replace github.com/google/uuid =&gt; github.com/google/uuid v1.1.0</code>，或者指定<code>replace github.com/google/uuid v1.0.9 =&gt; github.com/google/uuid v1.1.0</code>，二者均都无效。</p><h4 id="inderict"><a href="#inderict" class="headerlink" title="inderict"></a>inderict</h4><p>间接引用，比如</p><h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p><p>1、go get：</p><p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p><p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p><p>通常，go get 会自动安装依赖项，无需手动执行 go install。</p><p>2、go install：</p><p>go install 用于编译并安装 Go 语言的可执行程序。它将 Go 代码编译成二进制文件，并将其安装到 GOPATH 或 GOMOD 的 bin 目录中，以供后续执行。</p><p>当您执行 go install 命令时，它会在当前包的目录中执行编译过程，并将生成的可执行文件放置在 bin 目录中。</p><p>通过 go install 安装的可执行文件可以通过命令行直接运行，无需指定文件路径。</p><p>golang的1.16版本之后，go install可以在模块感知的模式下运行，可忽略当前目录或上层目录的 go.mod 文件。这对于在不影响主模块依赖的情况下（不会修改go.mod文件），安装二进制很方便；</p><ul><li>在将来，go install 被设计为“用于构建和安装二进制文件”， go get 则被设计为 “用于编辑 go.mod 变更依赖”，并且使用时，应该与 <code>-d</code> 参数共用，在将来版本中 <code>-d</code> 可能会默认启用；</li><li>非常的简单直观。需要注意的是 go install package@version是从 1.16 开始增加的，无论你当前是否在一个模块下，此命令都会在 <code>$GOPATH/bin</code> 下安装指定版本的工具。</li></ul><p>go get 将二进制安装相关的功能都转移到了 <code>go install</code>, 仅作为用于编辑 <code>go.mod</code> 文件的命令存在。在后续版本（计划是 Go 1.17）中删掉 <code>go get</code> 安装二进制的功能，接下来 <code>go get</code> 的行为就等同于我们现在执行 <code>go get -d</code> 命令了，仅需下载源码，并将依赖添加至 <code>go.mod</code> 即可。</p><p>在 Go 1.16 中，另一个行为变更是 <code>go build</code> 和 <code>go test</code> 不会自动编辑 <code>go.mod</code> 了，基于以上信息，Go 1.16 中将进行如下处理：</p><ul><li><p>通过在代码中修改 import 语句，来修改 <code>go.mod</code>：</p><ul><li><code>go get</code> 可用于添加新模块；</li><li><code>go mod tidy</code> 删除掉无用的模块；</li></ul></li><li><p>将未导入的模块写入 <code>go.mod</code>:</p><ul><li><code>go get &lt;package&gt;@&lt;version&gt;</code>;</li><li><code>go mod tidy</code> 也可以；</li><li>手动编辑；</li></ul></li></ul><h3 id="go-work"><a href="#go-work" class="headerlink" title="go work"></a>go work</h3><p>go work机制是1.18版本推出的，是go moudle的最后一块拼图</p><p>go work没出来之前的问题：</p><ul><li>当go.mod中引用的moudle未在github发布，那么go mod tidy时候会报错（多moudle开发的时候经常会遇到这个问题）</li></ul>]]></content>
+    <content type="html"><![CDATA[<p>总结一下go moudle相关内容</p><p>golang的包管理经历了GOPATH、go vendor、go moudle三个阶段</p><h3 id="GOPATH机制"><a href="#GOPATH机制" class="headerlink" title="GOPATH机制"></a>GOPATH机制</h3><p>golang的package主要分为三种</p><ul><li>标准库</li><li>第三方库</li><li>项目私库<br>项目会放在GOPATH&#x2F;src目录下<br>这种方式有一个问题，就是当你有两个项目A、B依赖了同一个第三方库C的不同版本，只能维护两个GOPATH</li></ul><blockquote><p>由于编译器依赖查找固定从GOPATH&#x2F;src下查找<code>GOPATH/src/T</code>，所以，无法在同一个GOPATH目录下保存第三方库T的两个版本</p></blockquote><p>为了解决这个问题，引入GOVENDOR机制</p><h3 id="go-vendor"><a href="#go-vendor" class="headerlink" title="go vendor"></a>go vendor</h3><p>go vendor机制将依赖放在项目目录中，从而隔离了不同项目，不同项目可以引用同一个第三方库的不同版本。<br>但是这会导致两个问题</p><p>比如：项目A中依赖了B、C两个第三方库，而B也依赖了C这个库，就会到导致两个问题：</p><ol><li>C被两次编译进A项目的可执行文件</li><li>再进一步，如果两个C的版本不一致，也会有兼容性问题</li></ol><h3 id="go-moudle"><a href="#go-moudle" class="headerlink" title="go moudle"></a>go moudle</h3><p>在go1.11版本中引入了go moudle机制，它采用了一种全新的设计思想</p><p>通过go.mod文件实现</p><ol><li>准确地记录项目依赖</li><li>可重复构建</li></ol><p>核心是把项目及其依赖抽象成moudle</p><h4 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h4><p>replace用于替换require中出现的包</p><p>它正常工作还需要满足两个条件：<br>第一，<code>replace</code>仅在当前module为<code>main module</code>时有效，比如我们当前在编译<code>github.com/renhongcai/gomodule</code>，此时就是<code>main module</code>，如果其他项目引用了<code>github.com/renhongcai/gomodule</code>，那么其他项目编译时，<code>replace</code>就会被自动忽略。</p><p>第二，<code>replace</code>指定中<code>=&gt;</code>前面的包及其版本号必须出现在<code>require</code>中才有效，否则指令无效，也会被忽略。 比如，上面的例子中，我们指定<code>replace github.com/google/uuid =&gt; github.com/google/uuid v1.1.0</code>，或者指定<code>replace github.com/google/uuid v1.0.9 =&gt; github.com/google/uuid v1.1.0</code>，二者均都无效。</p><h4 id="inderict"><a href="#inderict" class="headerlink" title="inderict"></a>inderict</h4><p>间接引用，比如A引用了B，B引用了C，但是B项目没有采用go moudle管理方式或者缺失go.mod或者go.mod中缺失C，那么在A的go.mod中就会添加C并且后面跟着<br>&#x2F;&#x2F; inderict</p><h4 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h4><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p><p>1、go get：</p><p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p><p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p><p>通常，go get 会自动安装依赖项，无需手动执行 go install。</p><p>2、go install：</p><p>go install 用于编译并安装 Go 语言的可执行程序。它将 Go 代码编译成二进制文件，并将其安装到 GOPATH 或 GOMOD 的 bin 目录中，以供后续执行。</p><p>当您执行 go install 命令时，它会在当前包的目录中执行编译过程，并将生成的可执行文件放置在 bin 目录中。</p><p>通过 go install 安装的可执行文件可以通过命令行直接运行，无需指定文件路径。</p><p>golang的1.16版本之后，go install可以在模块感知的模式下运行，可忽略当前目录或上层目录的 go.mod 文件。这对于在不影响主模块依赖的情况下（不会修改go.mod文件），安装二进制很方便；</p><ul><li>在将来，go install 被设计为“用于构建和安装二进制文件”， go get 则被设计为 “用于编辑 go.mod 变更依赖”，并且使用时，应该与 <code>-d</code> 参数共用，在将来版本中 <code>-d</code> 可能会默认启用；</li><li>非常的简单直观。需要注意的是 go install package@version是从 1.16 开始增加的，无论你当前是否在一个模块下，此命令都会在 <code>$GOPATH/bin</code> 下安装指定版本的工具。</li></ul><p>go get 将二进制安装相关的功能都转移到了 <code>go install</code>, 仅作为用于编辑 <code>go.mod</code> 文件的命令存在。在后续版本（计划是 Go 1.17）中删掉 <code>go get</code> 安装二进制的功能，接下来 <code>go get</code> 的行为就等同于我们现在执行 <code>go get -d</code> 命令了，仅需下载源码，并将依赖添加至 <code>go.mod</code> 即可。</p><p>在 Go 1.16 中，另一个行为变更是 <code>go build</code> 和 <code>go test</code> 不会自动编辑 <code>go.mod</code> 了，基于以上信息，Go 1.16 中将进行如下处理：</p><ul><li><p>通过在代码中修改 import 语句，来修改 <code>go.mod</code>：</p><ul><li><code>go get</code> 可用于添加新模块；</li><li><code>go mod tidy</code> 删除掉无用的模块；</li></ul></li><li><p>将未导入的模块写入 <code>go.mod</code>:</p><ul><li><code>go get &lt;package&gt;@&lt;version&gt;</code>;</li><li><code>go mod tidy</code> 也可以；</li><li>手动编辑；</li></ul></li></ul><h3 id="go-work"><a href="#go-work" class="headerlink" title="go work"></a>go work</h3><p>go work机制是1.18版本推出的，是go moudle的最后一块拼图</p><p>go work没出来之前的问题：</p><ul><li>当go.mod中引用的moudle未在github发布，那么go mod tidy时候会报错（多moudle开发的时候经常会遇到这个问题）</li></ul>]]></content>
     
     
       
@@ -396,74 +449,6 @@
     
     
     <category term="goframe" scheme="http://example.com/tags/goframe/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos-python基础镜像构建</title>
-    <link href="http://example.com/2024/07/18/%E9%9A%8F%E7%AC%94/centos-python%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/"/>
-    <id>http://example.com/2024/07/18/%E9%9A%8F%E7%AC%94/centos-python%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E6%9E%84%E5%BB%BA/</id>
-    <published>2024-07-18T11:32:22.000Z</published>
-    <updated>2024-07-18T11:33:49.936Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p><a class="link"   href="https://www.cnblogs.com/leeona/p/18282312" >https://www.cnblogs.com/leeona/p/18282312<i class="fas fa-external-link-alt"></i></a></p></blockquote><p>上述方案解决centos:7基础镜像无法pip的问题</p><blockquote><p><a class="link"   href="https://www.cnblogs.com/Jimc/p/10218387.html" >https://www.cnblogs.com/Jimc/p/10218387.html<i class="fas fa-external-link-alt"></i></a></p><p><a class="link"   href="https://www.cnblogs.com/Jimc/p/10218062.html" >https://www.cnblogs.com/Jimc/p/10218062.html<i class="fas fa-external-link-alt"></i></a></p></blockquote><p>源码编译安装python3.8</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;&lt;a class=&quot;link&quot;   href=&quot;https://www.cnblogs.com/leeona/p/18282312&quot; &gt;https://www.cnblogs.com/leeona/p/18282312&lt;i class=&quot;fas f</summary>
-      
-    
-    
-    
-    
-    <category term="运维" scheme="http://example.com/tags/%E8%BF%90%E7%BB%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>centos9安装mysql服务端记录</title>
-    <link href="http://example.com/2024/07/18/%E9%9A%8F%E7%AC%94/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/"/>
-    <id>http://example.com/2024/07/18/%E9%9A%8F%E7%AC%94/centos9%E5%AE%89%E8%A3%85mysql%E6%9C%8D%E5%8A%A1%E7%AB%AF%E8%AE%B0%E5%BD%95/</id>
-    <published>2024-07-18T09:01:57.000Z</published>
-    <updated>2024-07-18T09:04:44.341Z</updated>
-    
-    <content type="html"><![CDATA[<p>安装的主要流程：<a class="link"   href="https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/" >https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/<i class="fas fa-external-link-alt"></i></a></p><p>之后，远程登录的时候，会报错：</p><p>mysql -h ‘安装mysql服务端机器的IP’ -u root</p><p>ERROR 1130 (HY000): Host ‘客户端的IP’ is not allowed to connect to this MySQL server这个错误什么原因导致的。</p><p>这通常是由于 MySQL 的权限设置导致的。</p><p>MySQL 的权限系统允许数据库管理员指定哪些用户可以从哪些主机连接到服务器。在这个案例中，尽管你使用了 <code>root</code> 用户，但可能 <code>root</code> 用户没有从 <code>客户端IP</code> 这个 IP 地址连接到服务器的权限。</p><p>在 MySQL 中，<code>GRANT</code> 语句用于分配权限，但是 <code>IDENTIFIED BY</code> 子句用于创建用户或更改用户密码，并不应该在 <code>GRANT</code> 语句中使用。因此，你遇到的错误是因为语法不正确。</p><p>你应该首先确保用户 <code>root</code>@<code>客户端IP</code> 存在，如果不存在，你需要先创建这个用户，然后再分配权限。以下是正确的步骤：</p><ol><li><p>创建用户（如果尚不存在）：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE USER &#x27;root&#x27;@&#x27;客户端IP&#x27; IDENTIFIED BY &#x27;WingKin45@&#x27;;</span><br></pre></td></tr></table></figure></li><li><p>分配权限：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO &#x27;root&#x27;@&#x27;客户端IP&#x27; WITH GRANT OPTION;</span><br></pre></td></tr></table></figure></li><li><p>使权限更改生效</p></li></ol><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure><p>按照这些步骤操作后，<code>root</code> 用户应该能够从 IP 地址 <code>客户端IP</code> 连接到 MySQL 服务器，并拥有所有数据库和表的权限。如果你仍然遇到问题，请检查 MySQL 服务器的配置文件（如 <code>my.cnf</code> 或 <code>my.ini</code>），确保没有限制远程连接的设置。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;安装的主要流程：&lt;a class=&quot;link&quot;   href=&quot;https://www.sjkjc.com/posts/install-mysql8-on-centos-stream-9/&quot; &gt;https://www.sjkjc.com/posts/install-mysq</summary>
-      
-    
-    
-    
-    
-    <category term="运维" scheme="http://example.com/tags/%E8%BF%90%E7%BB%B4/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker命令</title>
-    <link href="http://example.com/2024/07/18/%E9%9A%8F%E7%AC%94/docker%E5%91%BD%E4%BB%A4/"/>
-    <id>http://example.com/2024/07/18/%E9%9A%8F%E7%AC%94/docker%E5%91%BD%E4%BB%A4/</id>
-    <published>2024-07-18T07:59:02.000Z</published>
-    <updated>2024-07-20T10:32:49.172Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="docker-常用命令"><a href="#docker-常用命令" class="headerlink" title="docker 常用命令"></a>docker 常用命令</h2><blockquote><p><a class="link"   href="https://yeasy.gitbook.io/docker_practice/image/commit" >https://yeasy.gitbook.io/docker_practice/image/commit<i class="fas fa-external-link-alt"></i></a></p></blockquote><p>1.docker commit [选项] &lt;容器ID或容器名&gt; [&lt;仓库名&gt;[:&lt;标签&gt;]]</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ docker commit \</span><br><span class="line">    --author &quot;Tao Wang &lt;twang2218@gmail.com&gt;&quot; \</span><br><span class="line">    --message &quot;修改了默认网页&quot; \</span><br><span class="line">    webserver \</span><br><span class="line">    nginx:v2</span><br><span class="line">sha256:07e33465974800ce65751acc279adc6ed2dc5ed4e0838f8b86f0c87aa1795214</span><br></pre></td></tr></table></figure><ol start="2"><li></li></ol>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;docker-常用命令&quot;&gt;&lt;a href=&quot;#docker-常用命令&quot; class=&quot;headerlink&quot; title=&quot;docker 常用命令&quot;&gt;&lt;/a&gt;docker 常用命令&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;a class=&quot;link&quot;   hre</summary>
-      
-    
-    
-    
-    
-    <category term="docker" scheme="http://example.com/tags/docker/"/>
     
   </entry>
   
