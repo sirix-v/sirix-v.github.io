@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2024-12-23T03:58:24.132Z</updated>
+  <updated>2025-02-06T04:13:24.305Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>协程与线程｜协程池是否必要</title>
+    <link href="http://example.com/2025/02/06/golang/%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%EF%BD%9C%E5%8D%8F%E7%A8%8B%E6%B1%A0%E6%98%AF%E5%90%A6%E5%BF%85%E8%A6%81/"/>
+    <id>http://example.com/2025/02/06/golang/%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%EF%BD%9C%E5%8D%8F%E7%A8%8B%E6%B1%A0%E6%98%AF%E5%90%A6%E5%BF%85%E8%A6%81/</id>
+    <published>2025-02-06T04:12:59.648Z</published>
+    <updated>2025-02-06T04:13:24.305Z</updated>
+    
+    
+    
+    
+    <category term="golang" scheme="http://example.com/categories/golang/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>rpc相较于http的优势</title>
@@ -424,31 +439,6 @@
     
     <category term="goframe框架" scheme="http://example.com/categories/goframe%E6%A1%86%E6%9E%B6/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>goframe实践-1｜架构与目录</title>
-    <link href="http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/"/>
-    <id>http://example.com/2024/08/23/goframe%E6%A1%86%E6%9E%B6/goframe%E5%AE%9E%E8%B7%B5-1%EF%BD%9C%E6%9E%B6%E6%9E%84%E4%B8%8E%E7%9B%AE%E5%BD%95/</id>
-    <published>2024-08-23T10:48:06.617Z</published>
-    <updated>2024-09-09T02:28:51.888Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="工程目录"><a href="#工程目录" class="headerlink" title="工程目录"></a>工程目录</h2><blockquote><p><a class="link"   href="https://goframe.org/pages/viewpage.action?pageId=30740166" >https://goframe.org/pages/viewpage.action?pageId=30740166<i class="fas fa-external-link-alt"></i></a></p></blockquote><p>基本的工程目录结构</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">/</span><br><span class="line">├── api</span><br><span class="line">├── hack</span><br><span class="line">├── internal</span><br><span class="line">│   ├── cmd</span><br><span class="line">│   ├── consts</span><br><span class="line">│   ├── controller</span><br><span class="line">│   ├── dao</span><br><span class="line">│   ├── logic</span><br><span class="line">│   ├── model</span><br><span class="line">│   |   ├── do</span><br><span class="line">│   │   └── entity</span><br><span class="line">│   └── service</span><br><span class="line">├── manifest</span><br><span class="line">├── resource</span><br><span class="line">├── utility</span><br><span class="line">├── go.mod</span><br><span class="line">└── main.go </span><br></pre></td></tr></table></figure><p>一个大体的目录结构如上，当然可以根据需要增减<br>goframe官方提供的一个示例项目focus-single目录如下：<br><img   src="https://raw.githubusercontent.com/miller-star/picture/master/20240909102833.png"  alt="image.png"></p><p>整体流程<br><img   src="https://goframe.org/download/attachments/30740166/image2022-6-22_16-2-37.png?version=1&modificationDate=1655884751621&api=v2" ></p><h2 id="架构"><a href="#架构" class="headerlink" title="架构"></a>架构</h2><p>这里着重讲一下model目录，数据结构管理模块，管理数据实体对象，以及输入与输出数据结构定义。<br><img   src="https://goframe.org/download/attachments/30740166/image2022-1-18_0-47-31.png?version=1&modificationDate=1642437918159&api=v2" ></p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;h2 id=&quot;工程目录&quot;&gt;&lt;a href=&quot;#工程目录&quot; class=&quot;headerlink&quot; title=&quot;工程目录&quot;&gt;&lt;/a&gt;工程目录&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;&lt;a class=&quot;link&quot;   href=&quot;https://goframe.org/pages</summary>
-      
-    
-    
-    
-    <category term="goframe框架" scheme="http://example.com/categories/goframe%E6%A1%86%E6%9E%B6/"/>
-    
-    
-    <category term="goframe" scheme="http://example.com/tags/goframe/"/>
     
   </entry>
   
