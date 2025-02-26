@@ -9,7 +9,7 @@
     
     <title>
         
-            cobra实践 |
+            三剑客（pflag、viper、cobra）实践 |
         
         Sirius的博客
     </title>
@@ -200,7 +200,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        cobra实践
+                        三剑客（pflag、viper、cobra）实践
                     </div>
                 
 
@@ -233,7 +233,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Fri Sep 13 2024 19:00:10 GMT+0800">2024-09-13 19:00:10</span>
+                <span class="datetime" data-updated="Fri Feb 21 2025 17:48:55 GMT+0800">2025-02-21 17:48:55</span>
             </span>
         
 
@@ -261,6 +261,10 @@
 
         
         
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>136 字</span>
+            </span>
+        
         
             <span class="meta-info-item post-min2read">
                 <i class="icon fas fa-clock"></i>&nbsp;<span>1 分钟</span>
@@ -284,7 +288,13 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+                    <h2 id="pflag"><a href="#pflag" class="headerlink" title="pflag"></a>pflag</h2><p>比较推荐使用pflag默认提供的flagset-&gt;CommandLine</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// String defines a string flag with specified name, default value, and usage string.</span></span><br><span class="line"><span class="comment">// The return value is the address of a string variable that stores the value of the flag.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">String</span><span class="params">(name <span class="type">string</span>, value <span class="type">string</span>, usage <span class="type">string</span>)</span></span> *<span class="type">string</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> CommandLine.StringP(name, <span class="string">&quot;&quot;</span>, value, usage)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>定义方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">	name   = pflag.String(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;pcas-aim-be&quot;</span>, <span class="string">&quot;name of the service&quot;</span>)</span><br><span class="line">	help   = pflag.Bool(<span class="string">&quot;help&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;if print help&quot;</span>)</span><br><span class="line">	config = pflag.String(<span class="string">&quot;config&quot;</span>, <span class="string">&quot;/etc/pcas-aim-be/config.yaml&quot;</span>, <span class="string">&quot;config file&quot;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>因此直接使用变量即可<br>同样也可以自定义flagset</p>
+<h2 id="Viper"><a href="#Viper" class="headerlink" title="Viper"></a>Viper</h2>
                 </div>
                 
 
@@ -444,7 +454,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pflag"><span class="nav-number">1.</span> <span class="nav-text">pflag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Viper"><span class="nav-number">2.</span> <span class="nav-text">Viper</span></a></li></ol>
     </div>
 </div>
 
@@ -626,7 +636,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text"></span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#pflag"><span class="nav-number">1.</span> <span class="nav-text">pflag</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Viper"><span class="nav-number">2.</span> <span class="nav-text">Viper</span></a></li></ol>
     </div>
 </div>
 

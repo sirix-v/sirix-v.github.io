@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-02-06T04:13:24.305Z</updated>
+  <updated>2025-02-07T02:28:18.982Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -17,12 +17,22 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>协程与线程｜协程池是否必要</title>
-    <link href="http://example.com/2025/02/06/golang/%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%EF%BD%9C%E5%8D%8F%E7%A8%8B%E6%B1%A0%E6%98%AF%E5%90%A6%E5%BF%85%E8%A6%81/"/>
-    <id>http://example.com/2025/02/06/golang/%E5%8D%8F%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%EF%BD%9C%E5%8D%8F%E7%A8%8B%E6%B1%A0%E6%98%AF%E5%90%A6%E5%BF%85%E8%A6%81/</id>
+    <title>进程、线程、协程｜协程池是否必要</title>
+    <link href="http://example.com/2025/02/06/golang/%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%EF%BD%9C%E5%8D%8F%E7%A8%8B%E6%B1%A0%E6%98%AF%E5%90%A6%E5%BF%85%E8%A6%81/"/>
+    <id>http://example.com/2025/02/06/golang/%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%EF%BD%9C%E5%8D%8F%E7%A8%8B%E6%B1%A0%E6%98%AF%E5%90%A6%E5%BF%85%E8%A6%81/</id>
     <published>2025-02-06T04:12:59.648Z</published>
-    <updated>2025-02-06T04:13:24.305Z</updated>
+    <updated>2025-02-07T02:28:18.982Z</updated>
     
+    <content type="html"><![CDATA[<p>首先分别看下进程、线程、协程的定义：</p><ol><li>进程：每个进程都有自己的独立内存空间，拥有自己独立的地址空间、独立的堆和栈，既不共享堆，亦不共享栈。一个程序至少有一个进程，一个进程至少有一个线程。进程切换只发生在内核态。</li><li>线程：拥有自己独立的栈，共享堆内存数据。</li></ol>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;p&gt;首先分别看下进程、线程、协程的定义：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;进程：每个进程都有自己的独立内存空间，拥有自己独立的地址空间、独立的堆和栈，既不共享堆，亦不共享栈。一个程序至少有一个进程，一个进程至少有一个线程。进程切换只发生在内核态。&lt;/li&gt;
+&lt;li&gt;线程：拥有自己独立</summary>
+      
     
     
     
@@ -36,8 +46,15 @@
     <link href="http://example.com/2024/12/23/%E9%A1%B9%E7%9B%AE/rpc%E7%9B%B8%E8%BE%83%E4%BA%8Ehttp%E7%9A%84%E4%BC%98%E5%8A%BF/"/>
     <id>http://example.com/2024/12/23/%E9%A1%B9%E7%9B%AE/rpc%E7%9B%B8%E8%BE%83%E4%BA%8Ehttp%E7%9A%84%E4%BC%98%E5%8A%BF/</id>
     <published>2024-12-23T03:58:09.082Z</published>
-    <updated>2024-12-23T03:58:24.132Z</updated>
+    <updated>2025-02-20T07:57:16.197Z</updated>
     
+    <content type="html"><![CDATA[<h1 id="rpc介绍"><a href="#rpc介绍" class="headerlink" title="rpc介绍"></a>rpc介绍</h1>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h1 id=&quot;rpc介绍&quot;&gt;&lt;a href=&quot;#rpc介绍&quot; class=&quot;headerlink&quot; title=&quot;rpc介绍&quot;&gt;&lt;/a&gt;rpc介绍&lt;/h1&gt;</summary>
+      
     
     
     
@@ -66,7 +83,7 @@
     <link href="http://example.com/2024/12/18/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AEhttps%E5%8D%8F%E8%AE%AE/"/>
     <id>http://example.com/2024/12/18/%E9%A1%B9%E7%9B%AE/%E9%A1%B9%E7%9B%AEhttps%E5%8D%8F%E8%AE%AE/</id>
     <published>2024-12-18T13:09:17.665Z</published>
-    <updated>2024-12-19T01:22:47.300Z</updated>
+    <updated>2025-02-21T06:09:59.096Z</updated>
     
     <content type="html"><![CDATA[<p>证书：</p>]]></content>
     
@@ -113,7 +130,7 @@
     <link href="http://example.com/2024/12/11/%E6%95%B0%E6%8D%AE%E5%BA%93/gorm%E7%AC%94%E8%AE%B0/"/>
     <id>http://example.com/2024/12/11/%E6%95%B0%E6%8D%AE%E5%BA%93/gorm%E7%AC%94%E8%AE%B0/</id>
     <published>2024-12-11T02:53:04.019Z</published>
-    <updated>2024-12-11T02:53:15.702Z</updated>
+    <updated>2025-02-14T07:20:25.509Z</updated>
     
     
     
@@ -243,15 +260,13 @@
     <link href="http://example.com/2024/11/19/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%EF%BD%9C%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
     <id>http://example.com/2024/11/19/%E6%95%B0%E6%8D%AE%E5%BA%93/mysql%E6%98%AF%E6%80%8E%E6%A0%B7%E8%BF%90%E8%A1%8C%E7%9A%84%EF%BD%9C%E7%AC%AC%E4%B8%80%E7%AB%A0/</id>
     <published>2024-11-19T10:56:32.561Z</published>
-    <updated>2024-11-19T10:57:17.981Z</updated>
+    <updated>2025-02-14T07:20:47.436Z</updated>
     
     
     
     
     <category term="mysql" scheme="http://example.com/categories/mysql/"/>
     
-    
-    <category term="mysql" scheme="http://example.com/tags/mysql/"/>
     
   </entry>
   
@@ -260,7 +275,7 @@
     <link href="http://example.com/2024/11/16/golang/Go%E7%9A%84slice/"/>
     <id>http://example.com/2024/11/16/golang/Go%E7%9A%84slice/</id>
     <published>2024-11-16T04:58:43.992Z</published>
-    <updated>2024-11-16T04:59:35.579Z</updated>
+    <updated>2025-02-21T09:33:32.361Z</updated>
     
     <content type="html"><![CDATA[<p>go的切片，slice[2:4],左闭右开</p>]]></content>
     
@@ -285,14 +300,15 @@
     <link href="http://example.com/2024/10/22/%E9%9A%8F%E7%AC%94/IDE%E9%85%8D%E7%BD%AE/"/>
     <id>http://example.com/2024/10/22/%E9%9A%8F%E7%AC%94/IDE%E9%85%8D%E7%BD%AE/</id>
     <published>2024-10-22T07:27:41.884Z</published>
-    <updated>2024-11-29T10:49:06.347Z</updated>
+    <updated>2025-02-21T11:05:40.160Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="vscode"><a href="#vscode" class="headerlink" title="vscode"></a>vscode</h2><p>打开github copilot chat ：cmd+ctrl+I<br>cw 快速修改文本<br><img   src="https://raw.githubusercontent.com/miller-star/picture/master/20241022164151.png"  alt="image.png"></p><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Cmd+D(gb)</td><td>选择下一个匹配项，也是选择光标所在单词</td></tr><tr><td>Cmd+K Cmd+D</td><td>跳过当前选择项</td></tr><tr><td>cmd+u</td><td>回到上一个</td></tr><tr><td>cmd+shift+space</td><td>函数提示</td></tr><tr><td>cmd+option+i</td><td>结构体字段提示</td></tr><tr><td>cmd+shift+L</td><td>多选</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<h2 id="vscode"><a href="#vscode" class="headerlink" title="vscode"></a>vscode</h2><p>打开github copilot chat ：cmd+ctrl+I<br>cw 快速修改文本</p><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Cmd+D(gb)</td><td>选择下一个匹配项，也是选择光标所在单词</td></tr><tr><td>Cmd+K Cmd+D</td><td>跳过当前选择项</td></tr><tr><td>cmd+u</td><td>回到上一个</td></tr><tr><td>cmd+shift+space</td><td>函数提示</td></tr><tr><td>cmd+option+i</td><td>结构体字段提示</td></tr><tr><td>shift+方向键</td><td>分屏跳转</td></tr><tr><td>cmd+shift+L</td><td>多选</td></tr></tbody></table><h2 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h2><p>同时选中修改cmd+f<br>聚焦到编辑器 esc<br>聚焦到project：cmd+1</p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;vscode&quot;&gt;&lt;a href=&quot;#vscode&quot; class=&quot;headerlink&quot; title=&quot;vscode&quot;&gt;&lt;/a&gt;vscode&lt;/h2&gt;&lt;p&gt;打开github copilot chat ：cmd+ctrl+I&lt;br&gt;cw 快速修改文本&lt;br&gt;&lt;img</summary>
+    <summary type="html">&lt;h2 id=&quot;vscode&quot;&gt;&lt;a href=&quot;#vscode&quot; class=&quot;headerlink&quot; title=&quot;vscode&quot;&gt;&lt;/a&gt;vscode&lt;/h2&gt;&lt;p&gt;打开github copilot chat ：cmd+ctrl+I&lt;br&gt;cw 快速修改文本&lt;/p&gt;
+&lt;ta</summary>
       
     
     
@@ -353,18 +369,19 @@
   </entry>
   
   <entry>
-    <title>cobra实践</title>
-    <link href="http://example.com/2024/09/13/golang/cobra%E5%AE%9E%E8%B7%B5/"/>
-    <id>http://example.com/2024/09/13/golang/cobra%E5%AE%9E%E8%B7%B5/</id>
+    <title>三剑客（pflag、viper、cobra）实践</title>
+    <link href="http://example.com/2024/09/13/golang/%E4%B8%89%E5%89%91%E5%AE%A2%EF%BC%88pflag%E3%80%81viper%E3%80%81cobra%EF%BC%89%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://example.com/2024/09/13/golang/%E4%B8%89%E5%89%91%E5%AE%A2%EF%BC%88pflag%E3%80%81viper%E3%80%81cobra%EF%BC%89%E5%AE%9E%E8%B7%B5/</id>
     <published>2024-09-13T10:59:43.715Z</published>
-    <updated>2024-09-13T11:00:10.670Z</updated>
+    <updated>2025-02-21T09:48:55.400Z</updated>
     
-    <content type="html"><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
+    <content type="html"><![CDATA[<h2 id="pflag"><a href="#pflag" class="headerlink" title="pflag"></a>pflag</h2><p>比较推荐使用pflag默认提供的flagset-&gt;CommandLine</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// String defines a string flag with specified name, default value, and usage string.</span></span><br><span class="line"><span class="comment">// The return value is the address of a string variable that stores the value of the flag.</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">String</span><span class="params">(name <span class="type">string</span>, value <span class="type">string</span>, usage <span class="type">string</span>)</span></span> *<span class="type">string</span> &#123;</span><br><span class="line"><span class="keyword">return</span> CommandLine.StringP(name, <span class="string">&quot;&quot;</span>, value, usage)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>定义方法：</p><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> (</span><br><span class="line">name   = pflag.String(<span class="string">&quot;name&quot;</span>, <span class="string">&quot;pcas-aim-be&quot;</span>, <span class="string">&quot;name of the service&quot;</span>)</span><br><span class="line">help   = pflag.Bool(<span class="string">&quot;help&quot;</span>, <span class="literal">false</span>, <span class="string">&quot;if print help&quot;</span>)</span><br><span class="line">config = pflag.String(<span class="string">&quot;config&quot;</span>, <span class="string">&quot;/etc/pcas-aim-be/config.yaml&quot;</span>, <span class="string">&quot;config file&quot;</span>)</span><br><span class="line">)</span><br></pre></td></tr></table></figure><p>因此直接使用变量即可<br>同样也可以自定义flagset</p><h2 id="Viper"><a href="#Viper" class="headerlink" title="Viper"></a>Viper</h2>]]></content>
     
     
       
       
-    <summary type="html">&lt;h2 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;&quot;&gt;&lt;/a&gt;&lt;/h2&gt;</summary>
+    <summary type="html">&lt;h2 id=&quot;pflag&quot;&gt;&lt;a href=&quot;#pflag&quot; class=&quot;headerlink&quot; title=&quot;pflag&quot;&gt;&lt;/a&gt;pflag&lt;/h2&gt;&lt;p&gt;比较推荐使用pflag默认提供的flagset-&amp;gt;CommandLine&lt;/p&gt;
+&lt;figure class=</summary>
       
     
     
@@ -407,15 +424,15 @@
     <link href="http://example.com/2024/09/05/golang/go%E5%8C%85%E7%AE%A1%E7%90%86/"/>
     <id>http://example.com/2024/09/05/golang/go%E5%8C%85%E7%AE%A1%E7%90%86/</id>
     <published>2024-09-05T01:46:45.408Z</published>
-    <updated>2024-09-13T10:58:42.480Z</updated>
+    <updated>2025-02-21T09:51:11.311Z</updated>
     
-    <content type="html"><![CDATA[<p>总结一下go moudle相关内容</p><h2 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h2><h3 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h3><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p><p>1、go get：</p><p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p><p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p><p>通常，go get 会自动安装依赖项，无需手动执行 go install。</p><p>2、go install：</p><p>go install 用于编译并安装 Go 语言的可执行程序。它将 Go 代码编译成二进制文件，并将其安装到 GOPATH 或 GOMOD 的 bin 目录中，以供后续执行。</p><p>当您执行 go install 命令时，它会在当前包的目录中执行编译过程，并将生成的可执行文件放置在 bin 目录中。</p><p>通过 go install 安装的可执行文件可以通过命令行直接运行，无需指定文件路径。</p><p>golang的1.16版本之后，go install可以在模块感知的模式下运行，可忽略当前目录或上层目录的 go.mod 文件。这对于在不影响主模块依赖的情况下（不会修改go.mod文件），安装二进制很方便；</p><ul><li>在将来，go install 被设计为“用于构建和安装二进制文件”， go get 则被设计为 “用于编辑 go.mod 变更依赖”，并且使用时，应该与 <code>-d</code> 参数共用，在将来版本中 <code>-d</code> 可能会默认启用；</li><li>非常的简单直观。需要注意的是 go install &lt;package@<version> 是从 1.16 开始增加的，无论你当前是否在一个模块下，此命令都会在 <code>$GOPATH/bin</code> 下安装指定版本的工具。</li></ul><p>go get 将二进制安装相关的功能都转移到了 <code>go install</code>, 仅作为用于编辑 <code>go.mod</code> 文件的命令存在。在后续版本（计划是 Go 1.17）中删掉 <code>go get</code> 安装二进制的功能，接下来 <code>go get</code> 的行为就等同于我们现在执行 <code>go get -d</code> 命令了，仅需下载源码，并将依赖添加至 <code>go.mod</code> 即可。</p><p>在 Go 1.16 中，另一个行为变更是 <code>go build</code> 和 <code>go test</code> 不会自动编辑 <code>go.mod</code> 了，基于以上信息，Go 1.16 中将进行如下处理：</p><ul><li><p>通过在代码中修改 import 语句，来修改 <code>go.mod</code>：</p><ul><li><code>go get</code> 可用于添加新模块；</li><li><code>go mod tidy</code> 删除掉无用的模块；</li></ul></li><li><p>将未导入的模块写入 <code>go.mod</code>:</p><ul><li><code>go get &lt;package&gt;[@&lt;version&gt;]</code>;</li><li><code>go mod tidy</code> 也可以；</li><li>手动编辑；</li></ul></li></ul><h3 id="go-work"><a href="#go-work" class="headerlink" title="go work"></a>go work</h3><p>go work机制是1.18版本推出的，是go moudle的最后一块拼图</p><p>go work没出来之前的问题：</p><ul><li>当go.mod中引用的moudle未在github发布，那么go mod tidy时候会报错（多moudle开发的时候经常会遇到这个问题）</li></ul>]]></content>
+    <content type="html"><![CDATA[<p>总结一下golang包管理内容</p><h2 id="go-mod"><a href="#go-mod" class="headerlink" title="go mod"></a>go mod</h2><h3 id="go-get与go-install"><a href="#go-get与go-install" class="headerlink" title="go get与go install"></a>go get与go install</h3><p>go get 和 go install 是 Go 语言中的两个常用命令，它们用于获取和安装依赖包或将代码编译为可执行文件。它们的区别如下：</p><p>1、go get：</p><p>go get 用于获取、更新和安装远程依赖包。它会自动从远程代码库（如 GitHub、GitLab）下载依赖包，并将其安装到 GOPATH 或 GOMOD 目录中。</p><p>当您执行 go get 命令时，它会下载指定的包及其依赖项，并将其放置在正确的目录结构中，以供项目引用。</p><p>通常，go get 会自动安装依赖项，无需手动执行 go install。</p><p>2、go install：</p><p>go install 用于编译并安装 Go 语言的可执行程序。它将 Go 代码编译成二进制文件，并将其安装到 GOPATH 或 GOMOD 的 bin 目录中，以供后续执行。</p><p>当您执行 go install 命令时，它会在当前包的目录中执行编译过程，并将生成的可执行文件放置在 bin 目录中。</p><p>通过 go install 安装的可执行文件可以通过命令行直接运行，无需指定文件路径。</p><p>golang的1.16版本之后，go install可以在模块感知的模式下运行，可忽略当前目录或上层目录的 go.mod 文件。这对于在不影响主模块依赖的情况下（不会修改go.mod文件），安装二进制很方便；</p><ul><li>在将来，go install 被设计为“用于构建和安装二进制文件”， go get 则被设计为 “用于编辑 go.mod 变更依赖”，并且使用时，应该与 <code>-d</code> 参数共用，在将来版本中 <code>-d</code> 可能会默认启用；</li><li>非常的简单直观。需要注意的是 go install &lt;package@<version> 是从 1.16 开始增加的，无论你当前是否在一个模块下，此命令都会在 <code>$GOPATH/bin</code> 下安装指定版本的工具。</li></ul><p>go get 将二进制安装相关的功能都转移到了 <code>go install</code>, 仅作为用于编辑 <code>go.mod</code> 文件的命令存在。在后续版本（计划是 Go 1.17）中删掉 <code>go get</code> 安装二进制的功能，接下来 <code>go get</code> 的行为就等同于我们现在执行 <code>go get -d</code> 命令了，仅需下载源码，并将依赖添加至 <code>go.mod</code> 即可。</p><p>在 Go 1.16 中，另一个行为变更是 <code>go build</code> 和 <code>go test</code> 不会自动编辑 <code>go.mod</code> 了，基于以上信息，Go 1.16 中将进行如下处理：</p><ul><li><p>通过在代码中修改 import 语句，来修改 <code>go.mod</code>：</p><ul><li><code>go get</code> 可用于添加新模块；</li><li><code>go mod tidy</code> 删除掉无用的模块；</li></ul></li><li><p>将未导入的模块写入 <code>go.mod</code>:</p><ul><li><code>go get &lt;package&gt;[@&lt;version&gt;]</code>;</li><li><code>go mod tidy</code> 也可以；</li><li>手动编辑；</li></ul></li></ul><h3 id="go-work"><a href="#go-work" class="headerlink" title="go work"></a>go work</h3><p>go work机制是1.18版本推出的，是go moudle的最后一块拼图</p><p>go work没出来之前的问题：</p><ul><li>当go.mod中引用的moudle未在github发布，那么go mod tidy时候会报错（多moudle开发的时候经常会遇到这个问题）</li></ul>]]></content>
     
     
       
       
-    <summary type="html">&lt;p&gt;总结一下go moudle相关内容&lt;/p&gt;
-&lt;h2 id=&quot;go-mod&quot;&gt;&lt;a href=&quot;#go-mod&quot; class=&quot;headerlink&quot; title=&quot;go mod&quot;&gt;&lt;/a&gt;go mod&lt;/h2&gt;&lt;h3 id=&quot;go-get与go-install&quot;&gt;&lt;a hr</summary>
+    <summary type="html">&lt;p&gt;总结一下golang包管理内容&lt;/p&gt;
+&lt;h2 id=&quot;go-mod&quot;&gt;&lt;a href=&quot;#go-mod&quot; class=&quot;headerlink&quot; title=&quot;go mod&quot;&gt;&lt;/a&gt;go mod&lt;/h2&gt;&lt;h3 id=&quot;go-get与go-install&quot;&gt;&lt;a href</summary>
       
     
     
