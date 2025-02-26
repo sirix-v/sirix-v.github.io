@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://example.com/2024/11/25/golang/%E5%A0%86%E5%AE%9E%E7%8E%B0/</loc>
+    
+    <lastmod>2025-02-26</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://example.com/2024/10/22/%E9%9A%8F%E7%AC%94/IDE%E9%85%8D%E7%BD%AE/</loc>
     
     <lastmod>2025-02-21</lastmod>
@@ -104,15 +113,6 @@
     <loc>http://example.com/2024/12/16/golang/%E6%8E%92%E5%BA%8F%E6%8A%80%E5%B7%A7/</loc>
     
     <lastmod>2024-12-16</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/2024/11/25/golang/%E5%A0%86%E5%AE%9E%E7%8E%B0/</loc>
-    
-    <lastmod>2024-12-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

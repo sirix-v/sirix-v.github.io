@@ -1,3 +1,4 @@
+http://example.com/2024/11/25/golang/%E5%A0%86%E5%AE%9E%E7%8E%B0/
 http://example.com/2024/10/22/%E9%9A%8F%E7%AC%94/IDE%E9%85%8D%E7%BD%AE/
 http://example.com/2024/09/05/golang/go%E5%8C%85%E7%AE%A1%E7%90%86/
 http://example.com/2024/09/13/golang/%E4%B8%89%E5%89%91%E5%AE%A2%EF%BC%88pflag%E3%80%81viper%E3%80%81cobra%EF%BC%89%E5%AE%9E%E8%B7%B5/
@@ -10,7 +11,6 @@ http://example.com/2025/02/06/golang/%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%
 http://example.com/2024/12/20/kubernetes/docker%E9%95%9C%E5%83%8F%E4%BD%93%E7%A7%AF%E4%BC%98%E5%8C%96/
 http://example.com/2024/09/09/golang/golang%E5%8C%85%E7%AE%A1%E7%90%86/
 http://example.com/2024/12/16/golang/%E6%8E%92%E5%BA%8F%E6%8A%80%E5%B7%A7/
-http://example.com/2024/11/25/golang/%E5%A0%86%E5%AE%9E%E7%8E%B0/
 http://example.com/2024/12/01/web%E5%BC%80%E5%8F%91/kafka%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/
 http://example.com/2024/11/23/redis%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%80%E8%87%B4%E6%80%A7/
 http://example.com/2024/11/25/%E9%9A%8F%E7%AC%94/git%E7%AC%94%E8%AE%B0/
