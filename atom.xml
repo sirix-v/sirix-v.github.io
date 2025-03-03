@@ -6,7 +6,7 @@
   <link href="http://example.com/atom.xml" rel="self"/>
   
   <link href="http://example.com/"/>
-  <updated>2025-02-07T02:28:18.982Z</updated>
+  <updated>2025-03-03T07:12:09.011Z</updated>
   <id>http://example.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://example.com/2025/02/06/golang/%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%EF%BD%9C%E5%8D%8F%E7%A8%8B%E6%B1%A0%E6%98%AF%E5%90%A6%E5%BF%85%E8%A6%81/"/>
     <id>http://example.com/2025/02/06/golang/%E8%BF%9B%E7%A8%8B%E3%80%81%E7%BA%BF%E7%A8%8B%E3%80%81%E5%8D%8F%E7%A8%8B%EF%BD%9C%E5%8D%8F%E7%A8%8B%E6%B1%A0%E6%98%AF%E5%90%A6%E5%BF%85%E8%A6%81/</id>
     <published>2025-02-06T04:12:59.648Z</published>
-    <updated>2025-02-07T02:28:18.982Z</updated>
+    <updated>2025-03-03T07:12:09.011Z</updated>
     
     <content type="html"><![CDATA[<p>首先分别看下进程、线程、协程的定义：</p><ol><li>进程：每个进程都有自己的独立内存空间，拥有自己独立的地址空间、独立的堆和栈，既不共享堆，亦不共享栈。一个程序至少有一个进程，一个进程至少有一个线程。进程切换只发生在内核态。</li><li>线程：拥有自己独立的栈，共享堆内存数据。</li></ol>]]></content>
     
@@ -300,9 +300,9 @@
     <link href="http://example.com/2024/10/22/%E9%9A%8F%E7%AC%94/IDE%E9%85%8D%E7%BD%AE/"/>
     <id>http://example.com/2024/10/22/%E9%9A%8F%E7%AC%94/IDE%E9%85%8D%E7%BD%AE/</id>
     <published>2024-10-22T07:27:41.884Z</published>
-    <updated>2025-02-21T11:05:40.160Z</updated>
+    <updated>2025-03-03T07:11:46.924Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="vscode"><a href="#vscode" class="headerlink" title="vscode"></a>vscode</h2><p>打开github copilot chat ：cmd+ctrl+I<br>cw 快速修改文本</p><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Cmd+D(gb)</td><td>选择下一个匹配项，也是选择光标所在单词</td></tr><tr><td>Cmd+K Cmd+D</td><td>跳过当前选择项</td></tr><tr><td>cmd+u</td><td>回到上一个</td></tr><tr><td>cmd+shift+space</td><td>函数提示</td></tr><tr><td>cmd+option+i</td><td>结构体字段提示</td></tr><tr><td>shift+方向键</td><td>分屏跳转</td></tr><tr><td>cmd+shift+L</td><td>多选</td></tr></tbody></table><h2 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h2><p>同时选中修改cmd+f<br>聚焦到编辑器 esc<br>聚焦到project：cmd+1</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="vscode"><a href="#vscode" class="headerlink" title="vscode"></a>vscode</h2><p>打开github copilot chat ：cmd+ctrl+I<br>cw 快速修改文本</p><table><thead><tr><th></th><th></th></tr></thead><tbody><tr><td>Cmd+D(gb)</td><td>选择下一个匹配项，也是选择光标所在单词</td></tr><tr><td>Cmd+K Cmd+D</td><td>跳过当前选择项</td></tr><tr><td>cmd+u</td><td>回到上一个</td></tr><tr><td>cmd+shift+space</td><td>函数提示</td></tr><tr><td>cmd+option+i</td><td>结构体字段提示</td></tr><tr><td>shift+方向键</td><td>分屏跳转</td></tr><tr><td>cmd+shift+L</td><td>多选</td></tr><tr><td>cmd+K cmd+O</td><td>显示悬停</td></tr></tbody></table><h2 id="idea"><a href="#idea" class="headerlink" title="idea"></a>idea</h2><p>同时选中修改cmd+f<br>聚焦到编辑器 esc<br>聚焦到project：cmd+1</p>]]></content>
     
     
       
